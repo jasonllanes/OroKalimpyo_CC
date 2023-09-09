@@ -242,7 +242,8 @@ public class firebase_crud {
 
     }
 
-
+    //Fetch Waste Generator
+    public void retrieveGeneratorProfile(Activity activity, Context context,)
 
     //Getting profile
     public void retrieveCollectorProfileAll(Activity activity, Context context,String id, TextView name, TextView collector_type,TextView contact_person,TextView number){
