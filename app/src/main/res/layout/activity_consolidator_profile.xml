@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:id="@+id/mainLayout"
+    tools:context=".profile.consolidator_profile">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/circle_person"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Profile"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:fontFamily="@font/pbold"
+            android:layout_marginTop="13dp"
+            android:layout_marginLeft="5dp"/>
+
+    </LinearLayout>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/profile_image"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:src="@drawable/qr_code_sample"
+                android:layout_marginBottom="-50dp"
+                android:layout_gravity="center"
+                android:elevation="30dp"
+                app:civ_border_width="2dp"
+                app:civ_border_color="@color/green"/>
+
+            <TextView
+                android:id="@+id/tvQRCode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tap to show QR Code"
+                android:layout_gravity="center"
+                android:textStyle="italic"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:layout_marginTop="50dp"
+                android:paddingTop="10dp"
+                android:fontFamily="@font/pmedium"
+                android:layout_marginHorizontal="15dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:background="@drawable/card_layout">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="10dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Waste Consolidator Info"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/pbold"
+                        android:layout_marginHorizontal="15dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Name: "
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        android:fontFamily="@font/pbold"
+                        android:layout_marginTop="13dp"
+                        android:layout_marginHorizontal="15dp" />
+
+
+                    <TextView
+                        android:id="@+id/tvName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="[Name]"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        android:fontFamily="@font/pmedium"
+                        android:layout_marginHorizontal="15dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Type of User: "
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        android:fontFamily="@font/pbold"
+                        android:layout_marginTop="13dp"
+                        android:layout_marginHorizontal="15dp" />
+
+                    <TextView
+                        android:id="@+id/tvConsolidatorType"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="[User Type]"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        android:fontFamily="@font/pmedium"
+                        android:layout_marginHorizontal="15dp" />
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:background="@color/black"
+                        android:layout_marginTop="20dp"/>
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Contact Details"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        android:layout_marginTop="10dp"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/pbold"
+                        android:layout_marginHorizontal="15dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Contact Person: "
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        android:fontFamily="@font/pbold"
+                        android:layout_marginTop="13dp"
+                        android:layout_marginHorizontal="15dp" />
+
+                    <TextView
+                        android:id="@+id/tvContactPerson"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="[Number]"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        android:fontFamily="@font/pmedium"
+                        android:layout_marginHorizontal="15dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Mobile Number: "
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        android:fontFamily="@font/pbold"
+                        android:layout_marginTop="13dp"
+                        android:layout_marginHorizontal="15dp" />
+
+                    <TextView
+                        android:id="@+id/tvNumber"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="[Number]"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        android:fontFamily="@font/pmedium"
+                        android:layout_marginHorizontal="15dp" />
+
+                </LinearLayout>
+            </LinearLayout>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnBack"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Go Back"
+                android:textSize="15sp"
+                android:padding="15dp"
+                app:cornerRadius="25dp"
+                app:strokeWidth="2dp"
+                app:strokeColor="@color/green"
+                android:textColor="@color/white"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
+                android:backgroundTint="@color/green"
+                android:layout_marginHorizontal="50dp" />
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

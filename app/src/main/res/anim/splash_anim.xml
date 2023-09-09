@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--<set xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    android:interpolator="@android:anim/accelerate_interpolator">-->
+
+<!--    &lt;!&ndash; duration is the time for which animation will work&ndash;&gt;-->
+<!--    <alpha-->
+<!--        android:duration="1000"-->
+<!--        android:fromAlpha="0"-->
+<!--        android:toAlpha="1" />-->
+
+<!--    <alpha-->
+<!--        android:duration="3000"-->
+<!--        android:fromAlpha="1"-->
+<!--        android:startOffset="2000"-->
+<!--        android:toAlpha="0" />-->
+
+<!--</set>-->
+
+<set
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:interpolator="@android:anim/linear_interpolator"
+    android:fillAfter="true">
+
+    <translate
+        android:fromYDelta="-20%p"
+        android:toYDelta="0%p"
+        android:duration="2000" />
+
+</set>

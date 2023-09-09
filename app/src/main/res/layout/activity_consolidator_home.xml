@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context=".home.consolidator_home">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/circle_person"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Waste Consolidator App"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:fontFamily="@font/pbold"
+            android:layout_marginTop="13dp"
+            android:layout_marginLeft="5dp"/>
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/green" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Maayong Adlaw!"
+                android:textColor="@color/green"
+                android:textSize="25sp"
+                android:layout_gravity="center"
+                android:fontFamily="@font/pbold"
+                android:layout_marginLeft="5dp"/>
+
+
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/green"
+                android:layout_marginBottom="20dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:orientation="horizontal">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnScan"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="150dp"
+                    android:text="Scanner"
+                    android:fontFamily="@font/pmedium"
+                    android:textSize="15sp"
+                    android:textColor="@color/white"
+                    android:padding="15dp"
+                    app:icon="@drawable/scan"
+                    app:iconTint="@color/white"
+                    app:iconGravity="top"
+                    app:iconSize="50dp"
+                    app:backgroundTint="@color/green"
+                    app:cornerRadius="15dp" />
+
+                <View
+                    android:layout_width="10dp"
+                    android:layout_height="wrap_content" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnShowScanned"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="150dp"
+                    android:text="Scanned "
+                    android:fontFamily="@font/pmedium"
+                    android:textSize="15sp"
+                    android:textColor="@color/white"
+                    android:padding="15dp"
+                    app:icon="@drawable/edit"
+                    app:iconTint="@color/white"
+                    app:iconGravity="top"
+                    app:iconSize="50dp"
+                    app:backgroundTint="@color/green"
+                    app:cornerRadius="15dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:orientation="horizontal">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnAddRecord"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="150dp"
+                    android:text="Add Segregation Data"
+                    android:fontFamily="@font/pmedium"
+                    android:textSize="15sp"
+                    android:textColor="@color/white"
+                    android:padding="15dp"
+                    app:icon="@drawable/note"
+                    app:iconTint="@color/white"
+                    app:iconGravity="top"
+                    app:iconSize="50dp"
+                    app:backgroundTint="@color/green"
+                    app:cornerRadius="15dp" />
+
+<!--                <View-->
+<!--                    android:layout_width="10dp"-->
+<!--                    android:layout_height="wrap_content" />-->
+
+<!--                <com.google.android.material.button.MaterialButton-->
+<!--                    android:id="@+id/btnShowRecord"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:layout_height="150dp"-->
+<!--                    android:text="View Records"-->
+<!--                    android:fontFamily="@font/pmedium"-->
+<!--                    android:textSize="15sp"-->
+<!--                    android:textColor="@color/white"-->
+<!--                    android:padding="15dp"-->
+<!--                    app:icon="@drawable/edit"-->
+<!--                    app:iconTint="@color/white"-->
+<!--                    app:iconGravity="top"-->
+<!--                    app:iconSize="50dp"-->
+<!--                    app:backgroundTint="@color/green"-->
+<!--                    app:cornerRadius="15dp" />-->
+
+            </LinearLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnShowProfile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Show Profile"
+                android:fontFamily="@font/pmedium"
+                android:textSize="15sp"
+                android:textColor="@color/white"
+                android:padding="15dp"
+                app:icon="@drawable/profile"
+                app:iconTint="@color/white"
+                app:iconSize="25dp"
+                app:backgroundTint="@color/green"
+                app:cornerRadius="15dp"
+                android:layout_marginHorizontal="50dp"
+                />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnLogout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Logout"
+                android:fontFamily="@font/pmedium"
+                android:textSize="15sp"
+                android:textColor="@color/white"
+                android:padding="15dp"
+                app:icon="@drawable/log_out"
+                app:iconTint="@color/white"
+                app:iconSize="25dp"
+                app:backgroundTint="@color/green"
+                app:cornerRadius="15dp"
+                android:layout_marginHorizontal="50dp"
+                android:layout_marginBottom="90dp" />
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</LinearLayout>

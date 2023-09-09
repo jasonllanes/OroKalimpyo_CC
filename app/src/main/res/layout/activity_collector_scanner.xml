@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/green"
+    android:id="@+id/mainLayout"
+    tools:context=".scanner.collector_scanner">
+
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:textColor="@color/white"
+        android:fontFamily="@font/pbolditalic"
+        android:textAlignment="center"
+        android:text="Searching QR Code..."/>
+
+    <FrameLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.budiyev.android.codescanner.CodeScannerView
+            android:id="@+id/scanner_view"
+            android:layout_width="match_parent"
+            app:frameColor="@color/green"
+            app:frameCornersRadius="40dp"
+            app:frameThickness="5dp"
+            app:frameCornersSize="100dp"
+            android:layout_height="match_parent"/>
+    </FrameLayout>
+
+</LinearLayout>

@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">Oro Kalimpyo Collector</string>
+
+    <string name="terms_of_service"><u>Terms of Service</u></string>
+    <string name="data_policy"><u>Data Policy</u>.</string>
+
+    <string name="screen1">Recycle</string>
+    <string name="screen2">Record</string>
+    <string name="screen3">Track</string>
+    <string name="screen1desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+        et dolore magna aliqua.</string>
+    <string name="screen2desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+        et dolore magna aliqua.</string>
+    <string name="screen3desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+        et dolore magna aliqua.</string>
+    <string name="startDesc">Salamat sa pag-download ani nga app ug unta gamiton ninyo kani para makatabang
+        mo dili lang para sa syudad peru para pud sa usag ka tao.</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <string name="note">Don\'t know what type of plastic? Try using the following: </string>
+    <string name="version">1.0.1</string>
+
+    <string name="ra_description"> ▶ declares the policy of the state in adopting a systematic, comprehensive and ecological solid waste management program that ensures the protection of public health and the environment and the proper segregation, collection, transport, storage, treatment and disposal of solid waste through the formulation and adoption of best environmental practices.</string>
+
+
+</resources>

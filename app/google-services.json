@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "267363004626",
+    "project_id": "orokalimpyo-ok",
+    "storage_bucket": "orokalimpyo-ok.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:267363004626:android:cdafdca3d5e8801e87fd0b",
+        "android_client_info": {
+          "package_name": "sldevs.cdo.orokalimpyo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "267363004626-8vcan3032pnd1liff1garcv18vl7t4nn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB2HYBp5JMfsp8Cav2I4V2IdfqlGgupOKU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "267363004626-8vcan3032pnd1liff1garcv18vl7t4nn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:267363004626:android:f448d9a07ba9953a87fd0b",
+        "android_client_info": {
+          "package_name": "sldevs.cdo.orokalimpyocollector"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "267363004626-8vcan3032pnd1liff1garcv18vl7t4nn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB2HYBp5JMfsp8Cav2I4V2IdfqlGgupOKU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "267363004626-8vcan3032pnd1liff1garcv18vl7t4nn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

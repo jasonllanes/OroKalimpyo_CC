@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        tools:ignore="ScopedStorage" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@drawable/logo"
+        android:label="@string/app_name"
+        android:roundIcon="@drawable/logo"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.MaterialComponents.NoActionBar"
+        tools:targetApi="31">
+        <activity
+            android:name=".scanner.collector_capture_proof"
+            android:exported="false" />
+        <activity
+            android:name=".profile.show_qr_collector"
+            android:exported="false" />
+        <activity
+            android:name=".records.consolidator_add_record_summary"
+            android:exported="false" />
+        <activity
+            android:name=".records.consolidator_add_record_2"
+            android:exported="false" />
+        <activity
+            android:name=".records.consolidator_add_record"
+            android:exported="false" />
+        <activity
+            android:name=".scanner.view_segregated_contributions"
+            android:exported="false" />
+        <activity
+            android:name=".scanner.view_collected_contributions"
+            android:exported="false" />
+        <activity
+            android:name=".records.edit_contribution"
+            android:exported="false" />
+        <activity
+            android:name=".records.scanned_contributions"
+            android:exported="false" />
+        <activity
+            android:name=".scanner.consolidator_scanner_result"
+            android:exported="false" />
+        <activity
+            android:name=".scanner.collector_scanner_result"
+            android:exported="false" />
+        <activity
+            android:name=".scanner.consolidator_scanner"
+            android:exported="false" />
+        <activity
+            android:name=".scanner.collector_scanner"
+            android:exported="false" />
+        <activity
+            android:name=".authentication.log_in"
+            android:exported="false" />
+        <activity
+            android:name=".authentication.choose_user_type"
+            android:exported="false" />
+        <activity
+            android:name=".profile.show_qr_consolidator"
+            android:exported="false" />
+        <activity
+            android:name=".profile.consolidator_profile"
+            android:exported="false" />
+        <activity
+            android:name=".profile.collector_profile"
+            android:exported="false" />
+        <activity
+            android:name=".home.consolidator_home"
+            android:exported="false" />
+        <activity
+            android:name=".home.collector_home"
+            android:exported="false" />
+        <activity
+            android:name=".SplashActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
