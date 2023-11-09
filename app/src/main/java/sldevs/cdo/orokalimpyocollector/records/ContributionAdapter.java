@@ -54,7 +54,7 @@ public class ContributionAdapter extends RecyclerView.Adapter<ContributionAdapte
         holder.tvTotalKilo.setText("Kilo: " + scanned_contributions.kilo);
 
 
-        storageReference = FirebaseStorage.getInstance().getReference("QR Codes/").child(scanned_contributions.user_type+"/"+ scanned_contributions.name+"_"+ scanned_contributions.user_id+".png");
+        storageReference = FirebaseStorage.getInstance().getReference("Waste Contribution Proof/").child(scanned_contributions.contribution_id+".png");
         GlideApp.with(context).load(storageReference).into(ivQR);
 
 

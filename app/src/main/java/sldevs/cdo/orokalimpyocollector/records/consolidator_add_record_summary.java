@@ -17,7 +17,7 @@ public class consolidator_add_record_summary extends AppCompatActivity implement
     TextView tvSegregationId,tvSegregationIdO,tvWasteType,tvWasteTypeO,tvPlasticType,tvPlasticWasteName,tvBrand,tvBrandO,tvKilo,tvKiloO;
     Button btnUpload,btnEdit;
 
-    String segregated_id,waste_type,plastic_type,plastic_name,brand,kilo;
+    String segregated_id,waste_type,plastic_type,plastic_name,brand,kilo,date,time;
     LinearLayout llPlastic,llOther;
 
 
@@ -55,6 +55,8 @@ public class consolidator_add_record_summary extends AppCompatActivity implement
         plastic_name = getIntent().getStringExtra("plastic_name");
         brand = getIntent().getStringExtra("brand");
         kilo = getIntent().getStringExtra("kilo");
+        date = getIntent().getStringExtra("date");
+        time = getIntent().getStringExtra("time");
 
         setSummaryValues();
 
@@ -69,7 +71,7 @@ public class consolidator_add_record_summary extends AppCompatActivity implement
         int id = v.getId();
 
         if(id == R.id.btnUpload){
-            fc.sendSegregatedWasteData(this,getApplicationContext(),segregated_id,waste_type,plastic_type,plastic_name,brand,kilo);
+            fc.sendSegregatedWasteData(this,getApplicationContext(),segregated_id,waste_type,plastic_type,plastic_name,brand,kilo,date,time);
         }else if(id == R.id.btnEdit){
             finish();
         }

@@ -59,7 +59,7 @@ public class collector_scanner extends AppCompatActivity {
                             for (int i=0; i < details_split.length; i++){
                                 user_id = details_split[0];
                             }
-
+//                            Toast.makeText(collector_scanner.this, details, Toast.LENGTH_SHORT).show();
                             fc.retrieveHouseholdType(collector_scanner.this,getApplicationContext(),user_id,linearLayout);
 
 //                            if(household_type.equalsIgnoreCase("Household")){

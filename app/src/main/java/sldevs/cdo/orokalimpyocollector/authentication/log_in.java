@@ -99,7 +99,7 @@ public class log_in extends AppCompatActivity implements View.OnClickListener {
                 pbLoading.setVisibility(View.GONE);
                 etPassword.setError("Password should be more 6 characters.");
             } else {
-                fc.logInCollector(this, getApplicationContext(),user_type,email,password,pbLoading,btnLogin);
+                fc.logInCollector(this, getApplicationContext(),user_type,etEmail.getText().toString(),password,pbLoading,btnLogin);
             }
         }else if (id == R.id.tvForgotPassword) {
             Dialog builder = new Dialog(log_in.this);

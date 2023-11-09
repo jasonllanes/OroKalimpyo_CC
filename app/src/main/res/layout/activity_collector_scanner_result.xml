@@ -586,9 +586,25 @@
                 app:strokeColor="@color/green"
                 android:textColor="@color/green"
                 android:layout_marginTop="10dp"
-                android:layout_marginBottom="50dp"
+
                 android:backgroundTint="@color/white"
                 android:layout_marginHorizontal="50dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnBack"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Cancel"
+                android:fontFamily="@font/pmedium"
+                android:textSize="15sp"
+                android:textColor="@color/white"
+                android:padding="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="50dp"
+                app:backgroundTint="@color/green"
+                app:cornerRadius="15dp"
+                android:layout_marginHorizontal="50dp"
+                />
 
 
         </LinearLayout>

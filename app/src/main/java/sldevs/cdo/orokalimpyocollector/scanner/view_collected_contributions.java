@@ -60,7 +60,7 @@ public class view_collected_contributions extends AppCompatActivity implements V
 
     LinearLayout llEmpty;
     Button btnUpdate;
-    String collector_id;
+    String collector_id,consolidator_name;
     ProgressBar pbLoading;
     TextView tvLoading;
     ContributionAdapter adapter;
@@ -94,6 +94,8 @@ public class view_collected_contributions extends AppCompatActivity implements V
 //        ivBack.setOnClickListener(this);
 
         collector_id = getIntent().getStringExtra("collector_id");
+        consolidator_name = getIntent().getStringExtra("consolidator_name");
+
 
         recyclerView = findViewById(R.id.lvContributions);
         recyclerView.setHasFixedSize(true);
@@ -174,7 +176,10 @@ public class view_collected_contributions extends AppCompatActivity implements V
                         String contributionId = document.getString("contribution_id");
                         DocumentReference documentRef = contributionsRef.document(contributionId);
                         batch.update(documentRef, "status", "Waste Segregated");
+                        batch.update(documentRef, "consolidator_name", consolidator_name);
+                        batch.update(documentRef, "consolidator_id", mAuth.getUid());
                         scanned_contributionsArrayList.clear();
+
                     }
 
                     batch.commit()
@@ -188,6 +193,9 @@ public class view_collected_contributions extends AppCompatActivity implements V
                                         .setTextColor(getResources().getColor(R.color.white))
                                         .setBackgroundTint(getResources().getColor(R.color.green));
                                 snackbar.show();
+                                Intent i = new Intent(view_collected_contributions.this, consolidator_scanner.class);
+                                startActivity(i);
+                                finish();
 
 
                             })

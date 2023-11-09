@@ -207,6 +207,8 @@ public class consolidator_add_record_2 extends AppCompatActivity implements View
                     Intent i = new Intent(consolidator_add_record_2.this, consolidator_add_record_summary.class);
                     i.putExtra("segregated_id",mAuth.getUid().substring(0,10)+""+currentMonth+currentDay+currentYear+currentHour+currentMinute+currentSeconds);
                     i.putExtra("waste_type",waste_type);
+                    i.putExtra("date", date);
+                    i.putExtra("time", time);
                     if(sPlasticWasteType.getText().toString().equalsIgnoreCase("Other...")){
                         i.putExtra("plastic_type",etOtherTypes.getText().toString());
                     }else{
@@ -236,6 +238,8 @@ public class consolidator_add_record_2 extends AppCompatActivity implements View
                         Intent i = new Intent(consolidator_add_record_2.this, consolidator_add_record_summary.class);
                         i.putExtra("segregated_id",mAuth.getUid().substring(0,10)+""+currentMonth+currentDay+currentYear+currentHour+currentMinute+currentSeconds);
                         i.putExtra("waste_type",waste_type);
+                        i.putExtra("date", date);
+                        i.putExtra("time", time);
                         if(sBrandO.getText().toString().equalsIgnoreCase("Other...")){
                             i.putExtra("brand",etOtherBrandO.getText().toString());
                         }else{

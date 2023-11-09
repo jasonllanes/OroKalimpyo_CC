@@ -72,8 +72,12 @@ public class consolidator_scanner_result extends AppCompatActivity implements Vi
 //        email = getIntent().getStringExtra("email");
 
         retrieveDate();
-//        fc.retriveConsolidatorProfile(this,consolidator_scanner_result.this,mAuth.getUid(),tvConsolidatorName,tvConsolidatorType);
+
+        fc.retriveConsolidatorProfile(this,consolidator_scanner_result.this,mAuth.getUid(),tvConsolidatorName,tvConsolidatorType);
+        fc.retrieveCollectorProfile(this,consolidator_scanner_result.this,user_id,tvCollectorName,tvCollectorType,tvContactPerson,tvCollectorNumber,tvCollectorEmail);
+
         tvConsolidatorID.setText(mAuth.getUid());
+
         tvDate.setText(currentDate + " " + currentTime);
 
 
@@ -97,6 +101,7 @@ public class consolidator_scanner_result extends AppCompatActivity implements Vi
         }else if(id == R.id.btnShowCollected){
             Intent i = new Intent(consolidator_scanner_result.this, view_collected_contributions.class);
             i.putExtra("collector_id",tvCollectorID.getText().toString());
+            i.putExtra("consolidator_name",tvConsolidatorName.getText().toString());
             startActivity(i);
         }
 

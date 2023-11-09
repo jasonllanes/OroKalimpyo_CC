@@ -51,7 +51,6 @@ public class scanned_contributions extends AppCompatActivity implements View.OnC
 
     StorageReference storageReference;
 
-
     String user_type,user_name,user_id;
     ContributionAdapter adapter;
     FirebaseFirestore db;
@@ -67,9 +66,10 @@ public class scanned_contributions extends AppCompatActivity implements View.OnC
         fc = new firebase_crud();
 
 
-    //        ivBack = findViewById(R.id.ivBack);
+        ivBack = findViewById(R.id.ivBack);
 //        ivBack.setOnClickListener(this);
         llEmpty = findViewById(R.id.llEmpty);
+
 
         recyclerView = findViewById(R.id.lvContributions);
         recyclerView.setHasFixedSize(true);
@@ -95,7 +95,7 @@ public class scanned_contributions extends AppCompatActivity implements View.OnC
 
 
 
-
+        ivBack.setOnClickListener(this);
 
 
     }
@@ -138,6 +138,9 @@ public class scanned_contributions extends AppCompatActivity implements View.OnC
 
     @Override
     public void onClick(View v) {
-
+        int id = v.getId();
+        if (id == R.id.ivBack) {
+            finish();
+        }
     }
 }

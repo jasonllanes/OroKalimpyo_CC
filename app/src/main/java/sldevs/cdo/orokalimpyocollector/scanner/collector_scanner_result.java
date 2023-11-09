@@ -32,7 +32,7 @@ public class collector_scanner_result extends AppCompatActivity implements View.
     MaterialSpinner sWaste;
 
     EditText etKilo;
-    Button btnNext;
+    Button btnNext,btnBack;
 
     firebase_crud fc;
     other_functions of;
@@ -80,6 +80,7 @@ public class collector_scanner_result extends AppCompatActivity implements View.
         etKilo = findViewById(R.id.etKilo);
 
         btnNext = findViewById(R.id.btnNext);
+        btnBack = findViewById(R.id.btnBack);
 
 
         user_id = getIntent().getStringExtra("user_id");
@@ -87,11 +88,15 @@ public class collector_scanner_result extends AppCompatActivity implements View.
         household_type = getIntent().getStringExtra("household_type");
 
 
-//        retrieveDate();
-//        sWaste.setItems(of.populateWasteType());
-//        fc.retrieveCollectorProfile(this,collector_scanner_result.this,mAuth.getUid(),tvCollectorName,tvCollectorType);
-//        tvCollectorID.setText(mAuth.getUid());
-//        tvDate.setText(currentDate + " " + currentTime);
+        retrieveDate();
+        sWaste.setItems(of.populateWasteType());
+        tvDate.setText(currentDate + " " + currentTime);
+
+        tvCollectorID.setText(mAuth.getUid());
+        fc.retrieveCollectorProfile(this,collector_scanner_result.this,mAuth.getUid(),tvCollectorName,tvCollectorType);
+        fc.retrieveUserDetails(this,collector_scanner_result.this,user_id,user_type,household_type,
+                tvUserID,tvName,tvHouseholdType,tvBarangay,tvLocation,tvNumber,tvEmail,
+                tvUserIDN,tvNameN,tvHouseholdTypeN,tvEstablishmentType,tvBarangayN,tvLocationN,tvNumberN,tvEmailN);
 
         if(household_type.equalsIgnoreCase("Household")){
             llNH.setVisibility(View.GONE);
@@ -106,6 +111,8 @@ public class collector_scanner_result extends AppCompatActivity implements View.
 
 
         btnNext.setOnClickListener(this);
+        btnBack.setOnClickListener(this);
+
 
 
     }
@@ -124,12 +131,12 @@ public class collector_scanner_result extends AppCompatActivity implements View.
                 i.putExtra("collector_type",tvCollectorType.getText().toString().trim());
                 i.putExtra("date_time",tvDate.getText().toString());
                 i.putExtra("user_id", user_id);
-                i.putExtra("name",name);
+                i.putExtra("name",tvName.getText().toString());
                 i.putExtra("user_type",user_type);
                 i.putExtra("household_type",household_type);
                 i.putExtra("establishment_type",establishment_type);
                 i.putExtra("others",others);
-                i.putExtra("barangay",barangay);
+                i.putExtra("barangay",tvBarangay.getText().toString());
                 i.putExtra("location",location);
                 i.putExtra("number",number);
                 i.putExtra("email",email);
@@ -138,6 +145,8 @@ public class collector_scanner_result extends AppCompatActivity implements View.
                 startActivity(i);
 
             }
+        } else if (id == R.id.btnBack) {
+            finish();
         }
 
 

@@ -52,6 +52,7 @@ import sldevs.cdo.orokalimpyocollector.home.collector_home;
 import sldevs.cdo.orokalimpyocollector.home.consolidator_home;
 import sldevs.cdo.orokalimpyocollector.records.consolidator_add_record;
 import sldevs.cdo.orokalimpyocollector.scanner.collector_scanner_result;
+import sldevs.cdo.orokalimpyocollector.scanner.consolidator_scanner_result;
 
 public class firebase_crud {
 
@@ -87,7 +88,6 @@ public class firebase_crud {
 
                                         activity.finish();
                                     }else if(user_type.equalsIgnoreCase("Waste Consolidators")){
-
                                         Intent i = new Intent(context, consolidator_home.class)
                                                 .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                         context.startActivity(i);
@@ -209,7 +209,7 @@ public class firebase_crud {
 
 
     //Sending Waste Segregation Data
-    public void sendSegregatedWasteData(Activity activity,Context context,String segregation_id,String waste_type,String plastic_type,String plastic_name,String brand,String kilo){
+    public void sendSegregatedWasteData(Activity activity,Context context,String segregation_id,String waste_type,String plastic_type,String plastic_name,String brand,String kilo,String date,String time){
         waste_segregation = new HashMap<>();
 
         if(waste_type.equalsIgnoreCase("Plastic Waste")){
@@ -219,11 +219,15 @@ public class firebase_crud {
             waste_segregation.put("plastic_name",plastic_name);
             waste_segregation.put("brand",brand);
             waste_segregation.put("kilo",kilo);
+            waste_segregation.put("date",date);
+            waste_segregation.put("time",time);
         }else{
             waste_segregation.put("segregation_id",segregation_id);
             waste_segregation.put("waste_type",waste_type);
             waste_segregation.put("brand",brand);
             waste_segregation.put("kilo",kilo);
+            waste_segregation.put("date",date);
+            waste_segregation.put("time",time);
         }
 
         db.collection("Segregated Waste").document(segregation_id).set(waste_segregation).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -246,83 +250,88 @@ public class firebase_crud {
     }
     public void retrieveHouseholdType(Activity activity, Context context, String id, LinearLayout linearLayout){
 //        DocumentReference docRef = db.collection("Waste Generator").document(id);
-        db.collection("Waste Generator").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        db.collection("Waste Generator").document(id).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                boolean isFound = false;
-                if(task.isSuccessful()){
-                    for(QueryDocumentSnapshot document : task.getResult()){
-                        if(document.getId().equalsIgnoreCase(id)){
-                            isFound = true;
-                            if(document.get("household_type").toString().equalsIgnoreCase("Household")){
-                                Toast.makeText(activity, "Household", Toast.LENGTH_SHORT).show();
-                                Intent i = new Intent(context, collector_scanner_result.class);
-                                i.putExtra("user_id",id);
-                                i.putExtra("household_type","Household");
-                                activity.startActivity(i);
-                            }else if (document.get("household_type").toString().equalsIgnoreCase("Non-Household")){
-                                Toast.makeText(activity, "Non-Household", Toast.LENGTH_SHORT).show();
-                                Intent i = new Intent(context, collector_scanner_result.class);
-                                i.putExtra("user_id",id);
-                                i.putExtra("household_type","Non-Household");
-                                activity.startActivity(i);
-                            }else{
-                                Snackbar snackbar = Snackbar
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+
+                    } else {
+
+                    }
+//                    household_type.setText(document.get("household_type").toString());
+
+                    if(document.get("household_type").toString().equalsIgnoreCase("Household")){
+                        Toast.makeText(activity, "Household", Toast.LENGTH_SHORT).show();
+                        Intent i = new Intent(context, collector_scanner_result.class);
+                        i.putExtra("user_id",id);
+                        i.putExtra("user_type","Waste Generator");
+                        i.putExtra("household_type","Household");
+                        activity.startActivity(i);
+                    }else if (document.get("household_type").toString().equalsIgnoreCase("Non-Household")){
+                        Toast.makeText(activity, "Non-Household", Toast.LENGTH_SHORT).show();
+
+                        Intent i = new Intent(context, collector_scanner_result.class);
+                        i.putExtra("user_id",id);
+                        i.putExtra("user_type","Waste Generator");
+                        i.putExtra("household_type","Non-Household");
+                        activity.startActivity(i);
+                    }else{
+                        Snackbar snackbar = Snackbar
                                         .make(linearLayout, "Please scan a Waste Generator QR Code.", Snackbar.LENGTH_LONG).setTextColor(activity.getResources().getColor(R.color.white)).setBackgroundTint(activity.getResources().getColor(R.color.green));
                                 snackbar.show();
-                            }
-                        }
                     }
-                    if(!isFound){
-                        Snackbar snackbar = Snackbar
-                                .make(linearLayout, "Please scan a Waste Generator QR Code.", Snackbar.LENGTH_LONG).setTextColor(activity.getResources().getColor(R.color.white)).setBackgroundTint(activity.getResources().getColor(R.color.green));
-                        snackbar.show();
-                    }
+
+                } else {
+                    Log.d(TAG, "get failed with ", task.getException());
                 }
             }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+
+            }
         });
-
-
-
-//                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+//                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
 //            @Override
-//            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-//                if (task.isSuccessful()) {
-//                    DocumentSnapshot document = task.getResult();
-//                    if (document.exists()) {
-//
-//
-//                    } else {
-//
-//                    }
-////                    household_type.setText(document.get("household_type").toString());
-//
-//                    if(document.get("household_type").toString().equalsIgnoreCase("Household")){
-//                        Toast.makeText(activity, "Household", Toast.LENGTH_SHORT).show();
-//                        Intent i = new Intent(context, collector_scanner_result.class);
-//                        i.putExtra("household_type","Household");
-//                        activity.startActivity(i);
-//                    }else if (document.get("household_type").toString().equalsIgnoreCase("Non-Household")){
-//                        Toast.makeText(activity, "Non-Household", Toast.LENGTH_SHORT).show();
-//                        Intent i = new Intent(context, collector_scanner_result.class);
-//                        i.putExtra("household_type","Non-Household");
-//                        activity.startActivity(i);
-//                    }else{
-//                        Snackbar snackbar = Snackbar
+//            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                boolean isFound = false;
+//                if(task.isSuccessful()){
+//                    for(QueryDocumentSnapshot document : task.getResult()){
+//                        if(document.getId().equalsIgnoreCase(id)){
+//                            isFound = true;
+//                            if(document.get("household_type").toString().equalsIgnoreCase("Household")){
+//                                Toast.makeText(activity, "Household", Toast.LENGTH_SHORT).show();
+//                                Intent i = new Intent(context, collector_scanner_result.class);
+//                                i.putExtra("user_id",id);
+//                                i.putExtra("household_type","Household");
+//                                activity.startActivity(i);
+//                            }else if (document.get("household_type").toString().equalsIgnoreCase("Non-Household")){
+//                                Toast.makeText(activity, "Non-Household", Toast.LENGTH_SHORT).show();
+//                                Intent i = new Intent(context, collector_scanner_result.class);
+//                                i.putExtra("user_id",id);
+//                                i.putExtra("household_type","Non-Household");
+//                                activity.startActivity(i);
+//                            }else{
+//                                Snackbar snackbar = Snackbar
 //                                        .make(linearLayout, "Please scan a Waste Generator QR Code.", Snackbar.LENGTH_LONG).setTextColor(activity.getResources().getColor(R.color.white)).setBackgroundTint(activity.getResources().getColor(R.color.green));
 //                                snackbar.show();
+//                            }
+//                        }
 //                    }
-//
-//                } else {
-//                    Log.d(TAG, "get failed with ", task.getException());
+//                    if(!isFound){
+//                        Snackbar snackbar = Snackbar
+//                                .make(linearLayout, "Please scan a Waste Generator QR Code.", Snackbar.LENGTH_LONG).setTextColor(activity.getResources().getColor(R.color.white)).setBackgroundTint(activity.getResources().getColor(R.color.green));
+//                        snackbar.show();
+//                    }
 //                }
 //            }
-//        }).addOnFailureListener(new OnFailureListener() {
-//            @Override
-//            public void onFailure(@NonNull Exception e) {
-//
-//            }
 //        });
+
+
+
+//
     }
 
     public void retrieveCollectorType(Activity activity, Context context, String id, LinearLayout linearLayout) {
@@ -336,9 +345,10 @@ public class firebase_crud {
                         if (document.getId().equalsIgnoreCase(id)) {
                             isFound = true;
                             if (document.get("role").toString().equalsIgnoreCase("Collector")) {
-                                Toast.makeText(activity, "Household", Toast.LENGTH_SHORT).show();
-                                Intent i = new Intent(context, collector_scanner_result.class);
-                                i.putExtra("uid", id);
+                                Toast.makeText(activity, "Collector", Toast.LENGTH_SHORT).show();
+                                Intent i = new Intent(context, consolidator_scanner_result.class);
+                                i.putExtra("user_id", id);
+                                i.putExtra("user_type", "Waste Collector");
                                 activity.startActivity(i);
                             } else {
                                 Snackbar snackbar = Snackbar
@@ -359,7 +369,7 @@ public class firebase_crud {
 
     //Getting profile
     public void retrieveCollectorProfileAll(Activity activity, Context context,String id, TextView name, TextView collector_type,TextView contact_person,TextView number){
-        DocumentReference docRef = db.collection("Waste Collector").document(id);
+        DocumentReference docRef = db.collection("Waste Collectors").document(id);
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -372,10 +382,10 @@ public class firebase_crud {
                     } else {
 
                     }
-                    name.setText(document.get("name").toString());
-                    collector_type.setText(document.get("collector_type").toString());
-                    contact_person.setText(document.get("contact_person").toString());
-                    number.setText(document.get("number").toString());
+                    name.setText(document.get("fullname").toString());
+                    collector_type.setText(document.get("selectType").toString());
+                    contact_person.setText(document.get("contactPersonsFullname").toString());
+                    number.setText(document.get("contactNumber").toString());
                 } else {
                     Log.d(TAG, "get failed with ", task.getException());
                 }
@@ -384,7 +394,7 @@ public class firebase_crud {
     }
 
     public void retrieveConsolidatorProfileAll(Activity activity, Context context,String id, TextView name, TextView collector_type,TextView contact_person,TextView number){
-        DocumentReference docRef = db.collection("Waste Consolidator").document(id);
+        DocumentReference docRef = db.collection("Waste Consolidators").document(id);
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -397,10 +407,10 @@ public class firebase_crud {
                     } else {
 
                     }
-                    name.setText(document.get("name").toString());
-                    collector_type.setText(document.get("consolidator_type").toString());
-                    contact_person.setText(document.get("contact_person").toString());
-                    number.setText(document.get("number").toString());
+                    name.setText(document.get("fullname").toString());
+                    collector_type.setText(document.get("selectType").toString());
+                    contact_person.setText(document.get("contactPersonsFullname").toString());
+                    number.setText(document.get("contactNumber").toString());
                 } else {
                     Log.d(TAG, "get failed with ", task.getException());
                 }
@@ -408,7 +418,7 @@ public class firebase_crud {
         });
     }
     public void retrieveCollectorProfile(Activity activity, Context context,String id, TextView name, TextView collector_type){
-        DocumentReference docRef = db.collection("Waste Collector").document(id);
+        DocumentReference docRef = db.collection("Waste Collectors").document(id);
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -420,8 +430,8 @@ public class firebase_crud {
                     } else {
 
                     }
-                    name.setText(document.get("name").toString());
-                    collector_type.setText(document.get("collector_type").toString());
+                    name.setText(document.get("fullname").toString());
+                    collector_type.setText(document.get("selectType").toString());
                 } else {
                     Log.d(TAG, "get failed with ", task.getException());
                 }
@@ -430,7 +440,7 @@ public class firebase_crud {
     }
 
     public void retriveConsolidatorProfile(Activity activity, Context context,String id, TextView name, TextView consolidator_type){
-        DocumentReference docRef = db.collection("Waste Consolidator").document(id);
+        DocumentReference docRef = db.collection("Waste Consolidators").document(id);
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -443,8 +453,8 @@ public class firebase_crud {
                     } else {
 
                     }
-                    name.setText(document.get("name").toString());
-                    consolidator_type.setText(document.get("user_type").toString());
+                    name.setText(document.get("fullname").toString());
+                    consolidator_type.setText(document.get("selectType").toString());
                 } else {
                     Log.d(TAG, "get failed with ", task.getException());
                 }
@@ -520,4 +530,62 @@ public class firebase_crud {
         activity.finish();
     }
 
+    public void retrieveUserDetails(collector_scanner_result collector_scanner_result, collector_scanner_result collector_scanner_result1, String user_id, String user_type, String household_type, TextView tvUserID, TextView tvName, TextView tvHouseholdType, TextView tvBarangay, TextView tvLocation, TextView tvNumber, TextView tvEmail, TextView tvUserIDN, TextView tvNameN, TextView tvHouseholdTypeN, TextView tvEstablishmentType, TextView tvBarangayN, TextView tvLocationN, TextView tvNumberN, TextView tvEmailN) {
+        DocumentReference docRef = db.collection("Waste Generator").document(user_id);
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot document = task.getResult();
+                        if (document.exists()) {
+                            if(household_type.equalsIgnoreCase("Household")){
+                                tvUserID.setText(document.get("user_id").toString());
+                                tvName.setText(document.get("name").toString());
+                                tvHouseholdType.setText(document.get("household_type").toString());
+                                tvBarangay.setText(document.get("barangay").toString());
+                                tvLocation.setText(document.get("location").toString());
+                                tvNumber.setText(document.get("number").toString());
+                                tvEmail.setText(document.get("email").toString());
+                            }else if(household_type.equalsIgnoreCase("Non-Household")){
+                                tvUserIDN.setText(document.get("user_id").toString());
+                                tvNameN.setText(document.get("name").toString());
+                                tvHouseholdTypeN.setText(document.get("household_type").toString());
+                                tvEstablishmentType.setText(document.get("establishment_type").toString());
+                                tvBarangayN.setText(document.get("barangay").toString());
+                                tvLocationN.setText(document.get("location").toString());
+                                tvNumberN.setText(document.get("number").toString());
+                                tvEmailN.setText(document.get("email").toString());
+                            }
+                        } else {
+
+                        }
+                    } else {
+                        Log.d(TAG, "get failed with ", task.getException());
+                    }
+                }
+        });
+    }
+
+    public void retrieveCollectorProfile(consolidator_scanner_result consolidator_scanner_result, consolidator_scanner_result consolidator_scanner_result1, String user_id, TextView tvCollectorName, TextView tvCollectorType, TextView tvContactPerson, TextView tvCollectorNumber, TextView tvCollectorEmail) {
+        DocumentReference docRef = db.collection("Waste Collectors").document(user_id);
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot document = task.getResult();
+                        if (document.exists()) {
+                            tvCollectorName.setText(document.get("fullname").toString());
+                            tvCollectorType.setText(document.get("selectType").toString());
+                            tvContactPerson.setText(document.get("contactPersonsFullname").toString());
+                            tvCollectorNumber.setText(document.get("contactNumber").toString());
+                            tvCollectorEmail.setText(document.get("email").toString());
+                        } else {
+
+                        }
+                    } else {
+                        Log.d(TAG, "get failed with ", task.getException());
+                    }
+                }
+        });
+    }
 }
