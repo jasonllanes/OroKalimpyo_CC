@@ -63,4 +63,10 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.14.2'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.14.2'
 
+    //QR Generator
+    implementation 'com.github.androidmads:QRGenerator:1.0.1'
+
+    //QR Code Scanner
+    implementation 'com.github.yuriy-budiyev:code-scanner:2.3.2'
+    implementation 'com.journeyapps:zxing-android-embedded:4.3.0'
 }

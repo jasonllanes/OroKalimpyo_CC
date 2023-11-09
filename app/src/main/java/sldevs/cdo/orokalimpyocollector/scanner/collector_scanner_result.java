@@ -85,19 +85,13 @@ public class collector_scanner_result extends AppCompatActivity implements View.
         user_id = getIntent().getStringExtra("user_id");
         user_type = getIntent().getStringExtra("user_type");
         household_type = getIntent().getStringExtra("household_type");
-        establishment_type = getIntent().getStringExtra("establishment_type");
-        others = getIntent().getStringExtra("others");
-        name = getIntent().getStringExtra("name");
-        barangay = getIntent().getStringExtra("barangay");
-        location = getIntent().getStringExtra("location");
-        number = getIntent().getStringExtra("number");
-        email = getIntent().getStringExtra("email");
 
-        retrieveDate();
-        sWaste.setItems(of.populateWasteType());
-        fc.retrieveCollectorProfile(this,collector_scanner_result.this,mAuth.getUid(),tvCollectorName,tvCollectorType);
-        tvCollectorID.setText(mAuth.getUid());
-        tvDate.setText(currentDate + " " + currentTime);
+
+//        retrieveDate();
+//        sWaste.setItems(of.populateWasteType());
+//        fc.retrieveCollectorProfile(this,collector_scanner_result.this,mAuth.getUid(),tvCollectorName,tvCollectorType);
+//        tvCollectorID.setText(mAuth.getUid());
+//        tvDate.setText(currentDate + " " + currentTime);
 
         if(household_type.equalsIgnoreCase("Household")){
             llNH.setVisibility(View.GONE);

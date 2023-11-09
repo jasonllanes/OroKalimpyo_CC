@@ -19,6 +19,7 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.zxing.Result;
 
 import sldevs.cdo.orokalimpyocollector.R;
+import sldevs.cdo.orokalimpyocollector.firebase.firebase_crud;
 
 public class consolidator_scanner extends AppCompatActivity {
 
@@ -26,6 +27,7 @@ public class consolidator_scanner extends AppCompatActivity {
     private static final int MY_CAMERA_REQUEST_CODE = 100;
     String user_id,name,user_type,collector_type,contact_person,number,email;
     LinearLayout linearLayout;
+    firebase_crud fc;
 
 
     @Override
@@ -33,7 +35,10 @@ public class consolidator_scanner extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_consolidator_scanner);
 
+        fc = new firebase_crud();
+
         linearLayout = (LinearLayout) findViewById(R.id.mainLayout);
+
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
@@ -58,36 +63,38 @@ public class consolidator_scanner extends AppCompatActivity {
                             String[] details_split = details.split("\n");
                             for (int i=0; i < details_split.length; i++){
                                 user_id = details_split[0];
-                                name = details_split[1];
-                                user_type = details_split[2];
-                                collector_type = details_split[3];
-                                if(collector_type.equalsIgnoreCase("Private Collector")){
-                                    contact_person = details_split[5];
-                                    number = details_split[6];
-                                    email = details_split[7];
-                                }else{
-                                    contact_person = details_split[4];
-                                    number = details_split[5];
-                                    email = details_split[6];
-                                }
+//                                name = details_split[1];
+//                                user_type = details_split[2];
+//                                collector_type = details_split[3];
+//                                if(collector_type.equalsIgnoreCase("Private Collector")){
+//                                    contact_person = details_split[5];
+//                                    number = details_split[6];
+//                                    email = details_split[7];
+//                                }else{
+//                                    contact_person = details_split[4];
+//                                    number = details_split[5];
+//                                    email = details_split[6];
+//                                }
 
                             }
+                            fc.retrieveCollectorType(consolidator_scanner.this,getApplicationContext(),user_id,linearLayout);
 
-                            if(user_type.equalsIgnoreCase("Waste Collector")){
-                                Intent i = new Intent(consolidator_scanner.this, consolidator_scanner_result.class);
-                                i.putExtra("user_id", user_id);
-                                i.putExtra("name",name);
-                                i.putExtra("user_type",user_type);
-                                i.putExtra("collector_type",collector_type);
-                                i.putExtra("contact_person",contact_person);
-                                i.putExtra("number",number);
-                                i.putExtra("email",email);
-                                startActivity(i);
-                            }else{
-                                Snackbar snackbar = Snackbar
-                                        .make(linearLayout, "Please scan a Waste Collector QR Code.", Snackbar.LENGTH_LONG).setTextColor(getResources().getColor(R.color.white)).setBackgroundTint(getResources().getColor(R.color.green));
-                                snackbar.show();
-                            }
+
+//                            if(user_type.equalsIgnoreCase("Waste Collector")){
+//                                Intent i = new Intent(consolidator_scanner.this, consolidator_scanner_result.class);
+//                                i.putExtra("user_id", user_id);
+//                                i.putExtra("name",name);
+//                                i.putExtra("user_type",user_type);
+//                                i.putExtra("collector_type",collector_type);
+//                                i.putExtra("contact_person",contact_person);
+//                                i.putExtra("number",number);
+//                                i.putExtra("email",email);
+//                                startActivity(i);
+//                            }else{
+//                                Snackbar snackbar = Snackbar
+//                                        .make(linearLayout, "Please scan a Waste Collector QR Code.", Snackbar.LENGTH_LONG).setTextColor(getResources().getColor(R.color.white)).setBackgroundTint(getResources().getColor(R.color.green));
+//                                snackbar.show();
+//                            }
                         } catch (ArrayIndexOutOfBoundsException e){
                             Snackbar snackbar = Snackbar
                                     .make(linearLayout, "Please scan a Waste Generator QR Code.", Snackbar.LENGTH_LONG).setTextColor(getResources().getColor(R.color.white)).setBackgroundTint(getResources().getColor(R.color.green));

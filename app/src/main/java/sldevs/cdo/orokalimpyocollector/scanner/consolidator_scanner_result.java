@@ -66,13 +66,13 @@ public class consolidator_scanner_result extends AppCompatActivity implements Vi
         user_id = getIntent().getStringExtra("user_id");
         user_type = getIntent().getStringExtra("user_type");
         collector_type = getIntent().getStringExtra("collector_type");
-        name = getIntent().getStringExtra("name");
-        contact_person = getIntent().getStringExtra("contact_person");
-        number = getIntent().getStringExtra("number");
-        email = getIntent().getStringExtra("email");
+//        name = getIntent().getStringExtra("name");
+//        contact_person = getIntent().getStringExtra("contact_person");
+//        number = getIntent().getStringExtra("number");
+//        email = getIntent().getStringExtra("email");
 
         retrieveDate();
-        fc.retriveConsolidatorProfile(this,consolidator_scanner_result.this,mAuth.getUid(),tvConsolidatorName,tvConsolidatorType);
+//        fc.retriveConsolidatorProfile(this,consolidator_scanner_result.this,mAuth.getUid(),tvConsolidatorName,tvConsolidatorType);
         tvConsolidatorID.setText(mAuth.getUid());
         tvDate.setText(currentDate + " " + currentTime);
 
