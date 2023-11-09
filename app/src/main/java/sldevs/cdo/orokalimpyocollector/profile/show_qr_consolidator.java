@@ -36,7 +36,7 @@ public class show_qr_consolidator extends AppCompatActivity {
         fc = new firebase_crud();
 
         generateQRCode();
-        fc.retrieveQRCodeConsolidator(this,getApplicationContext(),mAuth.getUid(),ivQR);
+//        fc.retrieveQRCodeConsolidator(this,getApplicationContext(),mAuth.getUid(),ivQR);
 
 
         btnBack.setOnClickListener(new View.OnClickListener() {

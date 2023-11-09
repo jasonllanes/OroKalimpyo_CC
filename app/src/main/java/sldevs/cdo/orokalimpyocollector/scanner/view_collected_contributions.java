@@ -188,6 +188,7 @@ public class view_collected_contributions extends AppCompatActivity implements V
                                 tvLoading.setVisibility(View.GONE);
                                 pbLoading.setVisibility(View.GONE);
                                 btnUpdate.setVisibility(View.VISIBLE);
+                                Toast.makeText(this, "Successfully Updated!", Toast.LENGTH_SHORT).show();
                                 Snackbar snackbar = Snackbar
                                         .make(linearLayout, "Successfully Updated!", Snackbar.LENGTH_LONG)
                                         .setTextColor(getResources().getColor(R.color.white))
@@ -206,6 +207,7 @@ public class view_collected_contributions extends AppCompatActivity implements V
                 })
                 .addOnFailureListener(e -> {
                     // Handle query failure
+
                     Snackbar snackbar = Snackbar
                             .make(linearLayout, "Something went wrong!", Snackbar.LENGTH_LONG)
                             .setTextColor(getResources().getColor(R.color.white))

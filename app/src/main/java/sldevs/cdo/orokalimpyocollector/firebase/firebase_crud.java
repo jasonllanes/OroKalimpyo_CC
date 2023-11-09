@@ -144,6 +144,8 @@ public class firebase_crud {
             waste_contribution.put("barangay", barangay);
             waste_contribution.put("collector_id", mAuth.getUid());
             waste_contribution.put("collector_name", collector_name);
+            waste_contribution.put("consolidator_id", "N/A");
+            waste_contribution.put("consolidator_name", "N/A");
             waste_contribution.put("collector_type", collector_type);
             waste_contribution.put("status","Waste Collected");
             waste_contribution.put("waste_type",waste_type);
@@ -161,6 +163,8 @@ public class firebase_crud {
             waste_contribution.put("establishment_type", establishment_type);
             waste_contribution.put("collector_id", mAuth.getUid());
             waste_contribution.put("collector_name", collector_name);
+            waste_contribution.put("consolidator_id", "N/A");
+            waste_contribution.put("consolidator_name", "N/A");
             waste_contribution.put("collector_type", collector_type);
             waste_contribution.put("status","Waste Collected");
             waste_contribution.put("waste_type",waste_type);
