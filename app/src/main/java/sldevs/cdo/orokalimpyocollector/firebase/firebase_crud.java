@@ -327,7 +327,7 @@ public class firebase_crud {
 
     public void retrieveCollectorType(Activity activity, Context context, String id, LinearLayout linearLayout) {
 //        DocumentReference docRef = db.collection("Waste Generator").document(id);
-        db.collection("Waste Collector").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        db.collection("Waste Collectors").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 boolean isFound = false;
