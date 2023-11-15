@@ -270,15 +270,18 @@ public class firebase_crud {
                         Toast.makeText(activity, "Household", Toast.LENGTH_SHORT).show();
                         Intent i = new Intent(context, collector_scanner_result.class);
                         i.putExtra("user_id",id);
+                        i.putExtra("name",document.get("name").toString());
+                        i.putExtra("barangay",document.get("barangay").toString());
                         i.putExtra("user_type","Waste Generator");
                         i.putExtra("household_type","Household");
                         activity.startActivity(i);
                     }else if (document.get("household_type").toString().equalsIgnoreCase("Non-Household")){
                         Toast.makeText(activity, "Non-Household", Toast.LENGTH_SHORT).show();
-
                         Intent i = new Intent(context, collector_scanner_result.class);
                         i.putExtra("user_id",id);
+                        i.putExtra("name",document.get("name").toString());
                         i.putExtra("user_type","Waste Generator");
+                        i.putExtra("barangay",document.get("barangay").toString());
                         i.putExtra("household_type","Non-Household");
                         activity.startActivity(i);
                     }else{

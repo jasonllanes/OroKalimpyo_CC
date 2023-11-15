@@ -175,7 +175,7 @@ public class view_collected_contributions extends AppCompatActivity implements V
                     for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
                         String contributionId = document.getString("contribution_id");
                         DocumentReference documentRef = contributionsRef.document(contributionId);
-                        batch.update(documentRef, "status", "Waste Segregated");
+                        batch.update(documentRef, "status", "Waste Consolidated");
                         batch.update(documentRef, "consolidator_name", consolidator_name);
                         batch.update(documentRef, "consolidator_id", mAuth.getUid());
                         scanned_contributionsArrayList.clear();

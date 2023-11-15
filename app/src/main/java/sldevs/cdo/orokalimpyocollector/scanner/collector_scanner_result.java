@@ -85,7 +85,10 @@ public class collector_scanner_result extends AppCompatActivity implements View.
 
         user_id = getIntent().getStringExtra("user_id");
         user_type = getIntent().getStringExtra("user_type");
+        name = getIntent().getStringExtra("name");
         household_type = getIntent().getStringExtra("household_type");
+        barangay = getIntent().getStringExtra("barangay");
+        establishment_type = getIntent().getStringExtra("household_type");
 
 
         retrieveDate();
@@ -125,24 +128,46 @@ public class collector_scanner_result extends AppCompatActivity implements View.
             if(etKilo.getText().toString().isEmpty()){
                 etKilo.setError("Please input the kilo.");
             }else{
-                Intent i = new Intent(collector_scanner_result.this, collector_capture_proof.class);
-                i.putExtra("collector_id",tvCollectorID.getText().toString().trim());
-                i.putExtra("collector_name",tvCollectorName.getText().toString().trim());
-                i.putExtra("collector_type",tvCollectorType.getText().toString().trim());
-                i.putExtra("date_time",tvDate.getText().toString());
-                i.putExtra("user_id", user_id);
-                i.putExtra("name",tvName.getText().toString());
-                i.putExtra("user_type",user_type);
-                i.putExtra("household_type",household_type);
-                i.putExtra("establishment_type",establishment_type);
-                i.putExtra("others",others);
-                i.putExtra("barangay",tvBarangay.getText().toString());
-                i.putExtra("location",location);
-                i.putExtra("number",number);
-                i.putExtra("email",email);
-                i.putExtra("waste_type",sWaste.getText().toString());
-                i.putExtra("kilo",etKilo.getText().toString().trim());
-                startActivity(i);
+                if(tvHouseholdType.getText().toString().equalsIgnoreCase("Household")){
+                    Intent i = new Intent(collector_scanner_result.this, collector_capture_proof.class);
+                    i.putExtra("collector_id",tvCollectorID.getText().toString().trim());
+                    i.putExtra("collector_name",tvCollectorName.getText().toString().trim());
+                    i.putExtra("collector_type",tvCollectorType.getText().toString().trim());
+                    i.putExtra("date_time",tvDate.getText().toString());
+                    i.putExtra("user_id", user_id);
+                    i.putExtra("name",name);
+                    i.putExtra("user_type",user_type);
+                    i.putExtra("household_type",household_type);
+                    i.putExtra("establishment_type",establishment_type);
+                    i.putExtra("others",others);
+                    i.putExtra("barangay",barangay);
+                    i.putExtra("location",location);
+                    i.putExtra("number",number);
+                    i.putExtra("email",email);
+                    i.putExtra("waste_type",sWaste.getText().toString());
+                    i.putExtra("kilo",etKilo.getText().toString().trim());
+                    startActivity(i);
+                }else{
+                    Intent i = new Intent(collector_scanner_result.this, collector_capture_proof.class);
+                    i.putExtra("collector_id",tvCollectorID.getText().toString().trim());
+                    i.putExtra("collector_name",tvCollectorName.getText().toString().trim());
+                    i.putExtra("collector_type",tvCollectorType.getText().toString().trim());
+                    i.putExtra("date_time",tvDate.getText().toString());
+                    i.putExtra("user_id", user_id);
+                    i.putExtra("name",name);
+                    i.putExtra("user_type",user_type);
+                    i.putExtra("household_type",household_type);
+                    i.putExtra("establishment_type",establishment_type);
+                    i.putExtra("others",others);
+                    i.putExtra("barangay",barangay);
+                    i.putExtra("location",location);
+                    i.putExtra("number",number);
+                    i.putExtra("email",email);
+                    i.putExtra("waste_type",sWaste.getText().toString());
+                    i.putExtra("kilo",etKilo.getText().toString().trim());
+                    startActivity(i);
+                }
+
 
             }
         } else if (id == R.id.btnBack) {

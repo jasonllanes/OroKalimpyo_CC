@@ -26,7 +26,7 @@ public class other_functions {
         waste_type.add("Biodegradable");
         waste_type.add("Residual");
         waste_type.add("Special Waste");
-        waste_type.add("Unsegregated");
+        waste_type.add("Non-compliant");
         return waste_type;
     }
 
@@ -38,6 +38,7 @@ public class other_functions {
         consolidator_waste_type.add("Paper");
         consolidator_waste_type.add("Other...");
         return consolidator_waste_type;
+
     }
 
     public List<String> populateConsolidatorPlasticType(){
