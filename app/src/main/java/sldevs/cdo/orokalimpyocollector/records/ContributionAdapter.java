@@ -91,6 +91,7 @@ public class ContributionAdapter extends RecyclerView.Adapter<ContributionAdapte
             ivQR = itemView.findViewById(R.id.ivQR);
 
 
+
         }
     }
 

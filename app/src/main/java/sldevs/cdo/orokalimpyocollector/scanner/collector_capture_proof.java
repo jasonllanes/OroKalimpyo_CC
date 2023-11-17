@@ -15,6 +15,7 @@ import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -29,7 +30,7 @@ public class collector_capture_proof extends AppCompatActivity implements View.O
 
     ImageView ivProof;
     Bitmap image;
-
+ProgressBar pbLoading;
     Button btnCapture,btnBack,btnSend;
 
     String collector_id,collector_name,collector_type,user_id,user_type,household_type,establishment_type,others,name,barangay,location,number,email,waste_type,kilo;
@@ -49,6 +50,7 @@ public class collector_capture_proof extends AppCompatActivity implements View.O
         btnCapture = findViewById(R.id.btnCapture);
         btnBack = findViewById(R.id.btnBack);
         btnSend = findViewById(R.id.btnSend);
+        pbLoading = findViewById(R.id.pbLoading);
 
         collector_id = getIntent().getStringExtra("collector_id");
         collector_name = getIntent().getStringExtra("collector_name");
@@ -130,8 +132,12 @@ public class collector_capture_proof extends AppCompatActivity implements View.O
         } else if (id == R.id.btnBack) {
             finish();
         } else if (id == R.id.btnSend) {
+            btnCapture.setVisibility(View.GONE);
+            btnBack.setVisibility(View.GONE);
+            btnSend.setVisibility(View.GONE);
+            pbLoading.setVisibility(View.VISIBLE);
             fc.sendWasteContribution(image,collector_capture_proof.this,getApplicationContext(),user_id,user_type,name,household_type,barangay,establishment_type,collector_name,collector_type,waste_type,kilo,
-                    currentMonth,currentDay,currentYear,currentHour,currentMinute,currentSeconds,currentDate,currentTime);
+                    currentMonth,currentDay,currentYear,currentHour,currentMinute,currentSeconds,currentDate,currentTime,pbLoading,btnCapture,btnBack,btnSend);
 
         }
 

@@ -132,47 +132,183 @@ public class firebase_crud {
     }
 
     //Sending Waste Contribution
-    public void sendWasteContribution(Bitmap bitmap,Activity activity, Context context, String user_id, String user_type, String name, String household_type, String barangay,String establishment_type, String collector_name, String collector_type, String waste_type, String kilo, String month, String day, String year, String hour, String minutes, String seconds, String date,String time){
+    public void sendWasteContribution(Bitmap bitmap,Activity activity, Context context, String user_id, String user_type, String name, String household_type,
+                                      String barangay,String establishment_type, String collector_name, String collector_type, String waste_type, String kilo,
+                                      String month, String day, String year, String hour, String minutes, String seconds, String date,String time,
+                                      ProgressBar pbLoading, Button btnCapture,Button btnBack,Button btnSend){
         String contribution_id = user_id.substring(0,5) +month+day+year+hour+minutes+seconds;
         waste_contribution = new HashMap<>();
-        if(household_type.equalsIgnoreCase("Household")){
-            waste_contribution.put("contribution_id",contribution_id);
-            waste_contribution.put("user_id",user_id);
-            waste_contribution.put("name", name);
-            waste_contribution.put("user_type", user_type);
-            waste_contribution.put("household_type", household_type);
-            waste_contribution.put("barangay", barangay);
-            waste_contribution.put("collector_id", mAuth.getUid());
-            waste_contribution.put("collector_name", collector_name);
-            waste_contribution.put("consolidator_id", "N/A");
-            waste_contribution.put("consolidator_name", "N/A");
-            waste_contribution.put("collector_type", collector_type);
-            waste_contribution.put("status","Waste Collected");
-            waste_contribution.put("waste_type",waste_type);
-            waste_contribution.put("kilo",kilo);
-            waste_contribution.put("date", date);
-            waste_contribution.put("time", time);
-            waste_contribution.put("contribution_proof_url", "https://firebasestorage.googleapis.com/v0/b/orokalimpyo-ok.appspot.com/o/Waste%20Contribution%20Proof%2F"+user_id.substring(0,5)+month+day+year+hour+minutes+seconds+".png?alt=media");
-        }else if(household_type.equalsIgnoreCase("Non-Household")){
-            waste_contribution.put("contribution_id",contribution_id);
-            waste_contribution.put("user_id",user_id);
-            waste_contribution.put("name", name);
-            waste_contribution.put("user_type", user_type);
-            waste_contribution.put("household_type", household_type);
-            waste_contribution.put("barangay", barangay);
-            waste_contribution.put("establishment_type", establishment_type);
-            waste_contribution.put("collector_id", mAuth.getUid());
-            waste_contribution.put("collector_name", collector_name);
-            waste_contribution.put("consolidator_id", "N/A");
-            waste_contribution.put("consolidator_name", "N/A");
-            waste_contribution.put("collector_type", collector_type);
-            waste_contribution.put("status","Waste Collected");
-            waste_contribution.put("waste_type",waste_type);
-            waste_contribution.put("kilo",kilo);
-            waste_contribution.put("date", date);
-            waste_contribution.put("time", time);
-            waste_contribution.put("contribution_proof_url", "https://firebasestorage.googleapis.com/v0/b/orokalimpyo-ok.appspot.com/o/Waste%20Contribution%20Proof%2F"+user_id.substring(0,5)+month+day+year+hour+minutes+seconds+".png?alt=media");
+        if(waste_type.equalsIgnoreCase("Recyclable")){
+            double current_points = Double.parseDouble(kilo) * 1;
+            if(household_type.equalsIgnoreCase("Household")){
+                waste_contribution.put("contribution_id",contribution_id);
+                waste_contribution.put("user_id",user_id);
+                waste_contribution.put("name", name);
+                waste_contribution.put("user_type", user_type);
+                waste_contribution.put("household_type", household_type);
+                waste_contribution.put("barangay", barangay);
+                waste_contribution.put("collector_id", mAuth.getUid());
+                waste_contribution.put("collector_name", collector_name);
+                waste_contribution.put("consolidator_id", "N/A");
+                waste_contribution.put("consolidator_name", "N/A");
+                waste_contribution.put("collector_type", collector_type);
+                waste_contribution.put("status","Waste Collected");
+                waste_contribution.put("waste_type",waste_type);
+                waste_contribution.put("current_points", current_points);
+                waste_contribution.put("kilo",kilo);
+                waste_contribution.put("date", date);
+                waste_contribution.put("time", time);
+                waste_contribution.put("contribution_proof_url", "https://firebasestorage.googleapis.com/v0/b/orokalimpyo-ok.appspot.com/o/Waste%20Contribution%20Proof%2F"+user_id.substring(0,5)+month+day+year+hour+minutes+seconds+".png?alt=media");
+            }else if(household_type.equalsIgnoreCase("Non-Household")){
+
+                waste_contribution.put("contribution_id",contribution_id);
+                waste_contribution.put("user_id",user_id);
+                waste_contribution.put("name", name);
+                waste_contribution.put("user_type", user_type);
+                waste_contribution.put("household_type", household_type);
+                waste_contribution.put("barangay", barangay);
+                waste_contribution.put("establishment_type", establishment_type);
+                waste_contribution.put("collector_id", mAuth.getUid());
+                waste_contribution.put("collector_name", collector_name);
+                waste_contribution.put("consolidator_id", "N/A");
+                waste_contribution.put("consolidator_name", "N/A");
+                waste_contribution.put("collector_type", collector_type);
+                waste_contribution.put("status","Waste Collected");
+                waste_contribution.put("waste_type",waste_type);
+                waste_contribution.put("current_points", current_points);
+                waste_contribution.put("kilo",kilo);
+                waste_contribution.put("date", date);
+                waste_contribution.put("time", time);
+                waste_contribution.put("contribution_proof_url", "https://firebasestorage.googleapis.com/v0/b/orokalimpyo-ok.appspot.com/o/Waste%20Contribution%20Proof%2F"+user_id.substring(0,5)+month+day+year+hour+minutes+seconds+".png?alt=media");
+            }
+        } else if (waste_type.equalsIgnoreCase("Biodigradable")) {
+            double current_points = Double.parseDouble(kilo) * 0.5;
+            if(household_type.equalsIgnoreCase("Household")){
+                waste_contribution.put("contribution_id",contribution_id);
+                waste_contribution.put("user_id",user_id);
+                waste_contribution.put("name", name);
+                waste_contribution.put("user_type", user_type);
+                waste_contribution.put("household_type", household_type);
+                waste_contribution.put("barangay", barangay);
+                waste_contribution.put("collector_id", mAuth.getUid());
+                waste_contribution.put("collector_name", collector_name);
+                waste_contribution.put("consolidator_id", "N/A");
+                waste_contribution.put("consolidator_name", "N/A");
+                waste_contribution.put("collector_type", collector_type);
+                waste_contribution.put("status","Waste Collected");
+                waste_contribution.put("waste_type",waste_type);
+                waste_contribution.put("current_points", current_points);
+                waste_contribution.put("kilo",kilo);
+                waste_contribution.put("date", date);
+                waste_contribution.put("time", time);
+                waste_contribution.put("contribution_proof_url", "https://firebasestorage.googleapis.com/v0/b/orokalimpyo-ok.appspot.com/o/Waste%20Contribution%20Proof%2F"+user_id.substring(0,5)+month+day+year+hour+minutes+seconds+".png?alt=media");
+            }else if(household_type.equalsIgnoreCase("Non-Household")){
+                waste_contribution.put("contribution_id",contribution_id);
+                waste_contribution.put("user_id",user_id);
+                waste_contribution.put("name", name);
+                waste_contribution.put("user_type", user_type);
+                waste_contribution.put("household_type", household_type);
+                waste_contribution.put("barangay", barangay);
+                waste_contribution.put("establishment_type", establishment_type);
+                waste_contribution.put("collector_id", mAuth.getUid());
+                waste_contribution.put("collector_name", collector_name);
+                waste_contribution.put("consolidator_id", "N/A");
+                waste_contribution.put("consolidator_name", "N/A");
+                waste_contribution.put("collector_type", collector_type);
+                waste_contribution.put("status","Waste Collected");
+                waste_contribution.put("waste_type",waste_type);
+                waste_contribution.put("current_points", current_points);
+                waste_contribution.put("kilo",kilo);
+                waste_contribution.put("date", date);
+                waste_contribution.put("time", time);
+                waste_contribution.put("contribution_proof_url", "https://firebasestorage.googleapis.com/v0/b/orokalimpyo-ok.appspot.com/o/Waste%20Contribution%20Proof%2F"+user_id.substring(0,5)+month+day+year+hour+minutes+seconds+".png?alt=media");
+            }
+        } else if (waste_type.equalsIgnoreCase("Residual")) {
+            double current_points = Double.parseDouble(kilo) * 0.2;
+            if(household_type.equalsIgnoreCase("Household")){
+                waste_contribution.put("contribution_id",contribution_id);
+                waste_contribution.put("user_id",user_id);
+                waste_contribution.put("name", name);
+                waste_contribution.put("user_type", user_type);
+                waste_contribution.put("household_type", household_type);
+                waste_contribution.put("barangay", barangay);
+                waste_contribution.put("collector_id", mAuth.getUid());
+                waste_contribution.put("collector_name", collector_name);
+                waste_contribution.put("consolidator_id", "N/A");
+                waste_contribution.put("consolidator_name", "N/A");
+                waste_contribution.put("collector_type", collector_type);
+                waste_contribution.put("status","Waste Collected");
+                waste_contribution.put("waste_type",waste_type);
+                waste_contribution.put("current_points", current_points);
+                waste_contribution.put("kilo",kilo);
+                waste_contribution.put("date", date);
+                waste_contribution.put("time", time);
+                waste_contribution.put("contribution_proof_url", "https://firebasestorage.googleapis.com/v0/b/orokalimpyo-ok.appspot.com/o/Waste%20Contribution%20Proof%2F"+user_id.substring(0,5)+month+day+year+hour+minutes+seconds+".png?alt=media");
+            }else if(household_type.equalsIgnoreCase("Non-Household")){
+                waste_contribution.put("contribution_id",contribution_id);
+                waste_contribution.put("user_id",user_id);
+                waste_contribution.put("name", name);
+                waste_contribution.put("user_type", user_type);
+                waste_contribution.put("household_type", household_type);
+                waste_contribution.put("barangay", barangay);
+                waste_contribution.put("establishment_type", establishment_type);
+                waste_contribution.put("collector_id", mAuth.getUid());
+                waste_contribution.put("collector_name", collector_name);
+                waste_contribution.put("consolidator_id", "N/A");
+                waste_contribution.put("consolidator_name", "N/A");
+                waste_contribution.put("collector_type", collector_type);
+                waste_contribution.put("status","Waste Collected");
+                waste_contribution.put("waste_type",waste_type);
+                waste_contribution.put("current_points", current_points);
+                waste_contribution.put("kilo",kilo);
+                waste_contribution.put("date", date);
+                waste_contribution.put("time", time);
+                waste_contribution.put("contribution_proof_url", "https://firebasestorage.googleapis.com/v0/b/orokalimpyo-ok.appspot.com/o/Waste%20Contribution%20Proof%2F"+user_id.substring(0,5)+month+day+year+hour+minutes+seconds+".png?alt=media");
+            }
+        } else if (waste_type.equalsIgnoreCase("Special Waste")) {
+            double current_points = Double.parseDouble(kilo) * 0.3;
+            if(household_type.equalsIgnoreCase("Household")){
+                waste_contribution.put("contribution_id",contribution_id);
+                waste_contribution.put("user_id",user_id);
+                waste_contribution.put("name", name);
+                waste_contribution.put("user_type", user_type);
+                waste_contribution.put("household_type", household_type);
+                waste_contribution.put("barangay", barangay);
+                waste_contribution.put("collector_id", mAuth.getUid());
+                waste_contribution.put("collector_name", collector_name);
+                waste_contribution.put("consolidator_id", "N/A");
+                waste_contribution.put("consolidator_name", "N/A");
+                waste_contribution.put("collector_type", collector_type);
+                waste_contribution.put("status","Waste Collected");
+                waste_contribution.put("waste_type",waste_type);
+                waste_contribution.put("current_points", current_points);
+                waste_contribution.put("kilo",kilo);
+                waste_contribution.put("date", date);
+                waste_contribution.put("time", time);
+                waste_contribution.put("contribution_proof_url", "https://firebasestorage.googleapis.com/v0/b/orokalimpyo-ok.appspot.com/o/Waste%20Contribution%20Proof%2F"+user_id.substring(0,5)+month+day+year+hour+minutes+seconds+".png?alt=media");
+            }else if(household_type.equalsIgnoreCase("Non-Household")){
+                waste_contribution.put("contribution_id",contribution_id);
+                waste_contribution.put("user_id",user_id);
+                waste_contribution.put("name", name);
+                waste_contribution.put("user_type", user_type);
+                waste_contribution.put("household_type", household_type);
+                waste_contribution.put("barangay", barangay);
+                waste_contribution.put("establishment_type", establishment_type);
+                waste_contribution.put("collector_id", mAuth.getUid());
+                waste_contribution.put("collector_name", collector_name);
+                waste_contribution.put("consolidator_id", "N/A");
+                waste_contribution.put("consolidator_name", "N/A");
+                waste_contribution.put("collector_type", collector_type);
+                waste_contribution.put("status","Waste Collected");
+                waste_contribution.put("waste_type",waste_type);
+                waste_contribution.put("current_points", current_points);
+                waste_contribution.put("kilo",kilo);
+                waste_contribution.put("date", date);
+                waste_contribution.put("time", time);
+                waste_contribution.put("contribution_proof_url", "https://firebasestorage.googleapis.com/v0/b/orokalimpyo-ok.appspot.com/o/Waste%20Contribution%20Proof%2F"+user_id.substring(0,5)+month+day+year+hour+minutes+seconds+".png?alt=media");
+            }
         }
+
         db.collection("Waste Contribution").document(user_id.substring(0,5)+month+day+year+hour+minutes+seconds).set(waste_contribution).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
@@ -195,6 +331,10 @@ public class firebase_crud {
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
+                        btnCapture.setVisibility(View.VISIBLE);
+                        btnBack.setVisibility(View.VISIBLE);
+                        btnSend.setVisibility(View.VISIBLE);
+                        pbLoading.setVisibility(View.GONE);
                         Toast.makeText(context, "Something went wrong.", Toast.LENGTH_SHORT).show();
 
                     }
@@ -203,6 +343,10 @@ public class firebase_crud {
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
+                btnCapture.setVisibility(View.VISIBLE);
+                btnBack.setVisibility(View.VISIBLE);
+                btnSend.setVisibility(View.VISIBLE);
+                pbLoading.setVisibility(View.GONE);
                 Toast.makeText(context, "Please try again...", Toast.LENGTH_SHORT).show();
 
 //                Toast.makeText(final_sign_up.this, "Something went wrong.", Toast.LENGTH_SHORT).show();
