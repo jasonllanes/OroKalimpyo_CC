@@ -25,7 +25,7 @@ public class collector_scanner_result extends AppCompatActivity implements View.
 
     TextView tvUserID,tvName,tvHouseholdType,tvBarangay,tvLocation,tvNumber,tvEmail,
             tvUserIDN,tvNameN,tvHouseholdTypeN,tvEstablishmentType,tvBarangayN,tvLocationN,tvNumberN,tvEmailN,
-            tvCollectorID,tvCollectorName,tvCollectorType,tvDate;
+            tvCollectorID,tvCollectorName,tvCollectorType,tvDate,tvKiloL;
 
     LinearLayout llH,llNH;
 
@@ -72,6 +72,8 @@ public class collector_scanner_result extends AppCompatActivity implements View.
         tvCollectorType = findViewById(R.id.tvCollectorType);
         tvDate = findViewById(R.id.tvDate);
 
+        tvKiloL = findViewById(R.id.tvKiloL);
+
         llH = findViewById(R.id.llH);
         llNH = findViewById(R.id.llNH);
 
@@ -111,6 +113,20 @@ public class collector_scanner_result extends AppCompatActivity implements View.
             setDataNonHousehold();
         }
 
+        sWaste.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(MaterialSpinner view, int position, long id, Object item) {
+                if(item.toString().equalsIgnoreCase("Non-compliant") ){
+                    etKilo.setText("0");
+                    tvKiloL.setVisibility(View.GONE);
+                    etKilo.setVisibility(View.GONE);
+                }else{
+                    etKilo.setText("");
+                    tvKiloL.setVisibility(View.VISIBLE);
+                    etKilo.setVisibility(View.VISIBLE);
+                }
+            }
+        });
 
 
         btnNext.setOnClickListener(this);
@@ -144,8 +160,13 @@ public class collector_scanner_result extends AppCompatActivity implements View.
                     i.putExtra("location",location);
                     i.putExtra("number",number);
                     i.putExtra("email",email);
+                    if(sWaste.getText().toString().equalsIgnoreCase("Non-compliant")){
+                        i.putExtra("kilo","0");
+                    }else{
+                        i.putExtra("kilo",etKilo.getText().toString().trim());
+
+                    }
                     i.putExtra("waste_type",sWaste.getText().toString());
-                    i.putExtra("kilo",etKilo.getText().toString().trim());
                     startActivity(i);
                 }else{
                     Intent i = new Intent(collector_scanner_result.this, collector_capture_proof.class);
@@ -164,7 +185,12 @@ public class collector_scanner_result extends AppCompatActivity implements View.
                     i.putExtra("number",number);
                     i.putExtra("email",email);
                     i.putExtra("waste_type",sWaste.getText().toString());
-                    i.putExtra("kilo",etKilo.getText().toString().trim());
+                    if(sWaste.getText().toString().equalsIgnoreCase("Non-compliant")){
+                        i.putExtra("kilo","0");
+                    }else{
+                        i.putExtra("kilo",etKilo.getText().toString().trim());
+
+                    }
                     startActivity(i);
                 }
 
