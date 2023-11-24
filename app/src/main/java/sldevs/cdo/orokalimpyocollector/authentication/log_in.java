@@ -55,7 +55,7 @@ public class log_in extends AppCompatActivity implements View.OnClickListener {
         etEmail = findViewById(R.id.etEmail);
         etPassword = findViewById(R.id.etPassword);
         btnLogin = findViewById(R.id.btnLogin);
-        tvForgotPassword = findViewById(R.id.tvForgotPassword);
+
         pbLoading = findViewById(R.id.pbLoading);
 
         ivLogo = findViewById(R.id.ivLogo);
@@ -69,7 +69,6 @@ public class log_in extends AppCompatActivity implements View.OnClickListener {
 
         btnLogin.setOnClickListener(this);
 
-        tvForgotPassword.setOnClickListener(this);
 
 
     }
@@ -101,42 +100,6 @@ public class log_in extends AppCompatActivity implements View.OnClickListener {
             } else {
                 fc.logInCollector(this, getApplicationContext(),user_type,etEmail.getText().toString(),password,pbLoading,btnLogin);
             }
-        }else if (id == R.id.tvForgotPassword) {
-            Dialog builder = new Dialog(log_in.this);
-            builder.requestWindowFeature(Window.FEATURE_NO_TITLE);
-            builder.setContentView(R.layout.forgot_password_pop);
-            builder.setCancelable(true);
-            builder.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-            EditText etEmail = builder.findViewById(R.id.etEmail);
-            Button btnSend = builder.findViewById(R.id.btnSend);
-
-            btnSend.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if(etEmail.getText().toString().isEmpty()){
-                        etEmail.setError("Please input your email.");
-                    }else{
-                        String send_email = etEmail.getText().toString().trim();
-                        FirebaseAuth.getInstance().sendPasswordResetEmail(send_email).addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                if (task.isSuccessful()) {
-//                                    UserRecords userRecord = FirebaseAuth.getInstance()..get(send_email);
-//// See the UserRecord reference doc for the contents of userRecord.
-//                                    System.out.println("Successfully fetched user data: " + userRecord);
-                                    Toast.makeText(log_in.this, "Successfully sent! Please check your email.", Toast.LENGTH_SHORT).show();
-                                    builder.dismiss();
-                                } else {
-                                    Toast.makeText(log_in.this, "Something went wrong! Please try again...", Toast.LENGTH_SHORT).show();
-                                    builder.dismiss();
-                                }
-                            }
-                        });
-                    }
-
-                }
-            });
-            builder.show();
         }
     }
     public static boolean isValidEmail(String email) {

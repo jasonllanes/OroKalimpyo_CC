@@ -55,11 +55,11 @@ public class consolidator_add_record extends AppCompatActivity implements View.O
             startActivity(i);
         }else if(id == R.id.btnBottle){
             Intent i = new Intent(consolidator_add_record.this,consolidator_add_record_2.class);
-            i.putExtra("waste_type","Bottle");
+            i.putExtra("waste_type","Glass Bottle");
             startActivity(i);
         }else if(id == R.id.btnPaper){
             Intent i = new Intent(consolidator_add_record.this,consolidator_add_record_2.class);
-            i.putExtra("waste_type","Paper");
+            i.putExtra("waste_type","Paper/Carton");
             startActivity(i);
         } else if (id == R.id.ivBack) {
             finish();
