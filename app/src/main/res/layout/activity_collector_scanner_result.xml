@@ -528,16 +528,21 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/edit_text_layout"
-                        android:padding="2dp"
+                        android:padding="3dp"
+                        android:layout_marginTop="13dp"
+                        android:layout_marginBottom="15dp"
                         android:layout_marginHorizontal="10dp">
                         <com.jaredrummler.materialspinner.MaterialSpinner
                             android:id="@+id/sWaste"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            app:ms_padding_left="10dp"
+                            android:layout_height="40dp"
+                            android:layout_margin="1dp"
+                            android:text=""
                             android:textSize="17dp"
+
                             android:gravity="left"
                             android:textColorHint="@color/grey"
+
                             app:ms_hint_color="@color/grey"
                             app:ms_arrow_tint="@color/black"
                             android:textColor="@color/green" />
@@ -561,7 +566,7 @@
                         android:id="@+id/etKilo"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Input the name here..."
+                        android:hint="0.0 kg"
                         android:textColorHint="@color/grey"
                         android:padding="15dp"
                         android:background="@drawable/edit_text_layout"

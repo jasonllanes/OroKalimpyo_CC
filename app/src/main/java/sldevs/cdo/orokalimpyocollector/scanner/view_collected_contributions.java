@@ -153,6 +153,8 @@ public class view_collected_contributions extends AppCompatActivity implements V
                         tvLoading.setVisibility(View.GONE);
                         pbLoading.setVisibility(View.GONE);
                         btnUpdate.setVisibility(View.VISIBLE);
+
+
                     }
                 });
 

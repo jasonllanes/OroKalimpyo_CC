@@ -2,6 +2,7 @@ package sldevs.cdo.orokalimpyocollector.records;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.storage.FirebaseStorage;
@@ -28,6 +30,7 @@ public class ContributionAdapter extends RecyclerView.Adapter<ContributionAdapte
     ImageView ivQR;
     Context context;
     ArrayList<Scanned_Contributions> scanned_contributionsArrayList;
+    Scanned_Contributions scanned_contributions;
 
     public ContributionAdapter(Context context, ArrayList<Scanned_Contributions> scanned_contributionsArrayList) {
         this.context = context;
@@ -44,7 +47,7 @@ public class ContributionAdapter extends RecyclerView.Adapter<ContributionAdapte
     @Override
     public void onBindViewHolder(@NonNull ContributionHolder holder, int position) {
 
-        Scanned_Contributions scanned_contributions = scanned_contributionsArrayList.get(position);
+        scanned_contributions = scanned_contributionsArrayList.get(position);
 
         holder.tvContributionId.setText("Contribution ID: \n" +scanned_contributions.contribution_id);
         holder.tvDateTime.setText("Date and Time: \n" +scanned_contributions.date + " " + scanned_contributions.time);
@@ -78,6 +81,8 @@ public class ContributionAdapter extends RecyclerView.Adapter<ContributionAdapte
 
         TextView tvTotalKilo;
 
+        CardView cardView;
+
 
         public ContributionHolder(@NonNull View itemView) {
             super(itemView);
@@ -90,7 +95,18 @@ public class ContributionAdapter extends RecyclerView.Adapter<ContributionAdapte
             tvTotalKilo = itemView.findViewById(R.id.tvKilo);
             ivQR = itemView.findViewById(R.id.ivQR);
 
+            cardView = itemView.findViewById(R.id.cardView);
 
+            cardView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context,update_contribution.class);
+                    intent.putExtra("contribution_id",scanned_contributions.contribution_id);
+                    intent.putExtra("waste",tvWasteType.getText().toString());
+                    intent.putExtra("kilo",scanned_contributions.kilo);
+                    context.startActivity(intent);
+                }
+            });
 
         }
     }

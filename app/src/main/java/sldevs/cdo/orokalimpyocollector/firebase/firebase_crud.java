@@ -54,6 +54,7 @@ import sldevs.cdo.orokalimpyocollector.home.consolidator_home;
 import sldevs.cdo.orokalimpyocollector.records.consolidator_add_record;
 import sldevs.cdo.orokalimpyocollector.scanner.collector_scanner_result;
 import sldevs.cdo.orokalimpyocollector.scanner.consolidator_scanner_result;
+import sldevs.cdo.orokalimpyocollector.scanner.view_collected_contributions;
 
 public class firebase_crud {
 
@@ -156,6 +157,7 @@ public class firebase_crud {
                 waste_contribution.put("collector_type", collector_type);
                 waste_contribution.put("status","Waste Collected");
                 waste_contribution.put("waste_type",waste_type);
+                waste_contribution.put("gained_points",current_points);
                 waste_contribution.put("current_points", FieldValue.increment(current_points));
                 waste_contribution.put("kilo",kilo);
                 waste_contribution.put("date", date);
@@ -177,6 +179,7 @@ public class firebase_crud {
                 waste_contribution.put("collector_type", collector_type);
                 waste_contribution.put("status","Waste Collected");
                 waste_contribution.put("waste_type",waste_type);
+                waste_contribution.put("gained_points",current_points);
                 waste_contribution.put("current_points", FieldValue.increment(current_points));
                 waste_contribution.put("kilo",kilo);
                 waste_contribution.put("date", date);
@@ -199,6 +202,7 @@ public class firebase_crud {
                 waste_contribution.put("collector_type", collector_type);
                 waste_contribution.put("status","Waste Collected");
                 waste_contribution.put("waste_type",waste_type);
+                waste_contribution.put("gained_points",current_points);
                 waste_contribution.put("current_points", FieldValue.increment(current_points));
                 waste_contribution.put("kilo",kilo);
                 waste_contribution.put("date", date);
@@ -219,6 +223,7 @@ public class firebase_crud {
                 waste_contribution.put("collector_type", collector_type);
                 waste_contribution.put("status","Waste Collected");
                 waste_contribution.put("waste_type",waste_type);
+                waste_contribution.put("gained_points",current_points);
                 waste_contribution.put("current_points", FieldValue.increment(current_points));
                 waste_contribution.put("kilo",kilo);
                 waste_contribution.put("date", date);
@@ -241,6 +246,7 @@ public class firebase_crud {
                 waste_contribution.put("collector_type", collector_type);
                 waste_contribution.put("status","Waste Collected");
                 waste_contribution.put("waste_type",waste_type);
+                waste_contribution.put("gained_points",current_points);
                 waste_contribution.put("current_points", FieldValue.increment(current_points));
                 waste_contribution.put("kilo",kilo);
                 waste_contribution.put("date", date);
@@ -261,6 +267,7 @@ public class firebase_crud {
                 waste_contribution.put("collector_type", collector_type);
                 waste_contribution.put("status","Waste Collected");
                 waste_contribution.put("waste_type",waste_type);
+                waste_contribution.put("gained_points",current_points);
                 waste_contribution.put("current_points", FieldValue.increment(current_points));
                 waste_contribution.put("kilo",kilo);
                 waste_contribution.put("date", date);
@@ -283,6 +290,7 @@ public class firebase_crud {
                 waste_contribution.put("collector_type", collector_type);
                 waste_contribution.put("status","Waste Collected");
                 waste_contribution.put("waste_type",waste_type);
+                waste_contribution.put("gained_points",current_points);
                 waste_contribution.put("current_points", FieldValue.increment(current_points));
                 waste_contribution.put("kilo",kilo);
                 waste_contribution.put("date", date);
@@ -303,6 +311,7 @@ public class firebase_crud {
                 waste_contribution.put("collector_type", collector_type);
                 waste_contribution.put("status","Waste Collected");
                 waste_contribution.put("waste_type",waste_type);
+                waste_contribution.put("gained_points",current_points);
                 waste_contribution.put("current_points", FieldValue.increment(current_points));
                 waste_contribution.put("kilo",kilo);
                 waste_contribution.put("date", date);
@@ -325,6 +334,7 @@ public class firebase_crud {
                 waste_contribution.put("collector_type", collector_type);
                 waste_contribution.put("status", "Waste Collected");
                 waste_contribution.put("waste_type", waste_type);
+                waste_contribution.put("gained_points",0);
                 waste_contribution.put("current_points", FieldValue.increment(current_points));
                 waste_contribution.put("kilo", kilo);
                 waste_contribution.put("date", date);
@@ -578,6 +588,26 @@ public class firebase_crud {
                 }
             }
         });
+    }
+
+    //Updating contribution
+    public void updateContribution(Activity activity,Context context,String new_waste_type,String contribution_id,String waste_type, double points){
+        DocumentReference locationRef = db.collection("Waste Contribution").document(contribution_id);
+
+        locationRef.update("waste_type", new_waste_type);
+        locationRef.update("kilo",FieldValue.increment(-current_points)).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void unused) {
+                    locationRef.update("kilo", FieldValue.increment(Double.parseDouble(etKilo.getText().toString())));
+                    Intent i = new Intent(context, view_collected_contributions.class);
+                    context.startActivity(i);
+                    activity.finish();
+                }
+            });
+
+
+
+
     }
 
     //Getting profile
