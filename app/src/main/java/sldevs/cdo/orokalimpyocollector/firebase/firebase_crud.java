@@ -52,6 +52,7 @@ import sldevs.cdo.orokalimpyocollector.authentication.log_in;
 import sldevs.cdo.orokalimpyocollector.home.collector_home;
 import sldevs.cdo.orokalimpyocollector.home.consolidator_home;
 import sldevs.cdo.orokalimpyocollector.records.consolidator_add_record;
+import sldevs.cdo.orokalimpyocollector.records.scanned_contributions;
 import sldevs.cdo.orokalimpyocollector.scanner.collector_scanner_result;
 import sldevs.cdo.orokalimpyocollector.scanner.consolidator_scanner_result;
 import sldevs.cdo.orokalimpyocollector.scanner.view_collected_contributions;
@@ -591,19 +592,65 @@ public class firebase_crud {
     }
 
     //Updating contribution
-    public void updateContribution(Activity activity,Context context,String new_waste_type,String contribution_id,String waste_type, double points){
-        DocumentReference locationRef = db.collection("Waste Contribution").document(contribution_id);
+    public void updateContribution(ProgressBar progressBar,Button btnUpdate,Activity activity,Context context,String user_id,String contribution_id,String curent_waste_type,String new_waste_type,String new_kilo,String current_kilo, double points_to_update,String current_points){
+        DocumentReference contributionRef = db.collection("Waste Contribution").document(contribution_id);
+        DocumentReference user_contributionRef = db.collection("Waste Generator").document(user_id);
 
-        locationRef.update("waste_type", new_waste_type);
-        locationRef.update("kilo",FieldValue.increment(-current_points)).addOnSuccessListener(new OnSuccessListener<Void>() {
-                @Override
-                public void onSuccess(Void unused) {
-                    locationRef.update("kilo", FieldValue.increment(Double.parseDouble(etKilo.getText().toString())));
-                    Intent i = new Intent(context, view_collected_contributions.class);
-                    context.startActivity(i);
-                    activity.finish();
-                }
-            });
+        contributionRef.update("waste_type", new_waste_type).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                double toDeduct = Double.parseDouble(current_points);
+                contributionRef.update("current_points",FieldValue.increment(-toDeduct)).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        contributionRef.update("current_points", points_to_update);
+                        contributionRef.update("kilo", FieldValue.increment(-Double.parseDouble(current_kilo))).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void unused) {
+                                contributionRef.update("kilo", new_kilo).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void unused) {
+
+                                        user_contributionRef.update("total_points",FieldValue.increment(-toDeduct));
+                                        user_contributionRef.update(curent_waste_type.toLowerCase(),FieldValue.increment(-Double.parseDouble(current_kilo))).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void unused) {
+                                                user_contributionRef.update("total_points",FieldValue.increment(points_to_update));
+                                                user_contributionRef.update(new_waste_type.toLowerCase(),FieldValue.increment(points_to_update)).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                    @Override
+                                                    public void onSuccess(Void unused) {
+
+                                                        Intent i = new Intent(context, scanned_contributions.class);
+                                                        context.startActivity(i);
+                                                        activity.finish();
+                                                    }
+                                                });
+
+                                            }
+                                        });
+
+                                    }
+                                });
+
+
+
+                            }
+                        });
+
+                    }
+                });
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(activity, "Something went wrong.", Toast.LENGTH_SHORT).show();
+                progressBar.setVisibility(View.GONE);
+                btnUpdate.setVisibility(View.VISIBLE);
+            }
+        });
+
+
+
 
 
 

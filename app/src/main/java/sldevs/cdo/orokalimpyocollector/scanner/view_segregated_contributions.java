@@ -89,7 +89,7 @@ public class view_segregated_contributions extends AppCompatActivity implements 
         db = FirebaseFirestore.getInstance();
         scanned_contributionsArrayList = new ArrayList<Scanned_Contributions>();
 
-        adapter = new ContributionAdapter(view_segregated_contributions.this,scanned_contributionsArrayList);
+        adapter = new ContributionAdapter(this,view_segregated_contributions.this,scanned_contributionsArrayList);
 
 
         recyclerView.setAdapter(adapter);

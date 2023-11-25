@@ -80,7 +80,7 @@ public class scanned_contributions extends AppCompatActivity implements View.OnC
         db = FirebaseFirestore.getInstance();
         scanned_contributionsArrayList = new ArrayList<Scanned_Contributions>();
 
-        adapter = new ContributionAdapter(scanned_contributions.this,scanned_contributionsArrayList);
+        adapter = new ContributionAdapter(this,scanned_contributions.this,scanned_contributionsArrayList);
 
 
         recyclerView.setAdapter(adapter);

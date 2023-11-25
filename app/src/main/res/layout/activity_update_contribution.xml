@@ -83,10 +83,8 @@
                         android:layout_margin="1dp"
                         android:text="dada"
                         android:textSize="17dp"
-
                         android:gravity="left"
                         android:textColorHint="@color/grey"
-
                         app:ms_hint_color="@color/grey"
                         app:ms_arrow_tint="@color/black"
                         android:textColor="@color/green" />
@@ -112,7 +110,7 @@
                     android:textColor="@color/black"
                     android:textSize="15sp"
                     android:fontFamily="@font/pregular"
-                    android:inputType="textEmailAddress"
+                    android:inputType="numberDecimal"
                     android:layout_gravity="center"
                     android:hint="0.0 kg"
                     android:padding="12dp"
@@ -133,6 +131,14 @@
                     android:visibility="gone"
                     android:indeterminateTint="@color/green" />
 
+
+                <ProgressBar
+                    android:id="@+id/pbLoading"
+                    android:visibility="gone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:indeterminateTint="@color/green"
+                    android:layout_gravity="center"/>
 
 
                 <com.google.android.material.button.MaterialButton

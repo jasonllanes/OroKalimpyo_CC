@@ -1,6 +1,7 @@
 package sldevs.cdo.orokalimpyocollector.records;
 
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
@@ -29,10 +30,12 @@ public class ContributionAdapter extends RecyclerView.Adapter<ContributionAdapte
 
     ImageView ivQR;
     Context context;
+    Activity activity;
     ArrayList<Scanned_Contributions> scanned_contributionsArrayList;
     Scanned_Contributions scanned_contributions;
 
-    public ContributionAdapter(Context context, ArrayList<Scanned_Contributions> scanned_contributionsArrayList) {
+    public ContributionAdapter(Activity activity,Context context, ArrayList<Scanned_Contributions> scanned_contributionsArrayList) {
+        this.activity = activity;
         this.context = context;
         this.scanned_contributionsArrayList = scanned_contributionsArrayList;
     }
@@ -101,10 +104,14 @@ public class ContributionAdapter extends RecyclerView.Adapter<ContributionAdapte
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(context,update_contribution.class);
+                    intent.putExtra("user_id",scanned_contributions.user_id);
                     intent.putExtra("contribution_id",scanned_contributions.contribution_id);
-                    intent.putExtra("waste",tvWasteType.getText().toString());
+                    intent.putExtra("gained_points",String.valueOf(scanned_contributions.current_points));
+                    intent.putExtra("waste",scanned_contributions.waste_type);
                     intent.putExtra("kilo",scanned_contributions.kilo);
                     context.startActivity(intent);
+                    activity.finish();
+
                 }
             });
 

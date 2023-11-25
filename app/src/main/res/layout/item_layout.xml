@@ -67,6 +67,7 @@
                 android:textColor="@color/black"
                 android:text="Total Kilo: [Loading]"
                 android:textSize="15dp"/>
+
         </LinearLayout>
 
         <LinearLayout

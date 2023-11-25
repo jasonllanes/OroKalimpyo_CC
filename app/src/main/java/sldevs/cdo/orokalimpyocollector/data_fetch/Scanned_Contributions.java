@@ -15,12 +15,13 @@ public class Scanned_Contributions {
     public String date;
 
     public String time;
+    public double current_points;
 
     public Scanned_Contributions(){
 
     }
 
-    public Scanned_Contributions(String contribution_id, String user_id,String name, String barangay, String waste_type, String kilo, String user_type, String date, String time) {
+    public Scanned_Contributions(String contribution_id, String user_id,String name, String barangay, String waste_type, String kilo, String user_type, String date, String time, double current_points) {
         this.contribution_id = contribution_id;
         this.user_id = user_id;
         this.name = name;
@@ -30,6 +31,7 @@ public class Scanned_Contributions {
         this.user_type = user_type;
         this.date = date;
         this.time = time;
+        this.current_points = current_points;
     }
 
     public String getContribution_id() {
@@ -103,4 +105,13 @@ public class Scanned_Contributions {
     public void setTime(String time) {
         this.time = time;
     }
+
+    public double getCurrent_points() {
+        return current_points;
+    }
+
+    public void setCurrent_points(double current_points) {
+        this.current_points = current_points;
+    }
+
 }

@@ -106,7 +106,7 @@ public class view_collected_contributions extends AppCompatActivity implements V
         db = FirebaseFirestore.getInstance();
         scanned_contributionsArrayList = new ArrayList<Scanned_Contributions>();
 
-        adapter = new ContributionAdapter(view_collected_contributions.this,scanned_contributionsArrayList);
+        adapter = new ContributionAdapter(this,view_collected_contributions.this,scanned_contributionsArrayList);
 
 
         recyclerView.setAdapter(adapter);

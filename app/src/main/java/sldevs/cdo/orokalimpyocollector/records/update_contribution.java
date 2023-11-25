@@ -7,8 +7,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.jaredrummler.materialspinner.MaterialSpinner;
@@ -28,14 +31,16 @@ public class update_contribution extends AppCompatActivity implements View.OnCli
     LinearLayout llH,llNH;
 
     MaterialSpinner sWaste;
+    ProgressBar pbLoading;
 
     EditText etKilo;
-    Button btnUpdate,btnBack;
+    Button btnUpdate;
+    ImageView ivBack;
 
     firebase_crud fc;
     other_functions of;
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
-    String contribution_id,waste,kilo,household_type,establishment_type,others,name,barangay,location,number,email;
+    String user_id,contribution_id,waste,kilo,gained_points,establishment_type,others,name,barangay,location,number,email;
 
     SimpleDateFormat month,day,year,week,date,hours,minutes,seconds,time;
     String currentMonth,currentDay,currentYear,currentWeek,currentDate,currentHour,currentMinute,currentSeconds,currentTime;
@@ -53,22 +58,41 @@ public class update_contribution extends AppCompatActivity implements View.OnCli
         sWaste = findViewById(R.id.sWaste);
         etKilo = findViewById(R.id.etKilo);
 
+        pbLoading = findViewById(R.id.pbLoading);
+
+
+        ivBack = findViewById(R.id.ivBack);
         btnUpdate = findViewById(R.id.btnUpdate);
 
 
+        user_id = getIntent().getStringExtra("user_id");
         waste = getIntent().getStringExtra("waste");
         kilo = getIntent().getStringExtra("kilo");
         contribution_id = getIntent().getStringExtra("contribution_id");
+        gained_points = getIntent().getStringExtra("gained_points");
 
+
+        sWaste.setItems(of.populateWasteType());
+        if(waste.equalsIgnoreCase("Recyclable"))
+            sWaste.setSelectedIndex(0);
+        else if(waste.equalsIgnoreCase("Biodegradable"))
+            sWaste.setSelectedIndex(1);
+        else if(waste.equalsIgnoreCase("Residual"))
+            sWaste.setSelectedIndex(2);
+        else if(waste.equalsIgnoreCase("Special Waste"))
+            sWaste.setSelectedIndex(3);
+        else if(waste.equalsIgnoreCase("Non-compliant"))
+            sWaste.setSelectedIndex(4);
         sWaste.setText(waste);
         etKilo.setText(kilo);
 
 
 
         retrieveDate();
-        sWaste.setItems(of.populateWasteType());
 
 
+
+        ivBack.setOnClickListener(this);
         btnUpdate.setOnClickListener(this);
 
         sWaste.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
@@ -97,32 +121,34 @@ public class update_contribution extends AppCompatActivity implements View.OnCli
         int id = v.getId();
 
         if(id == R.id.btnUpdate){
+            pbLoading.setVisibility(View.VISIBLE);
+            btnUpdate.setVisibility(View.GONE);
             if(etKilo.getText().toString().isEmpty()){
                 etKilo.setError("Please input the kilo.");
             }else{
+
                 if(sWaste.getText().toString().equalsIgnoreCase(waste) && etKilo.getText().toString().equalsIgnoreCase(kilo)){
-
-                } else if (sWaste.getText().toString().equalsIgnoreCase(waste) && !etKilo.getText().toString().equalsIgnoreCase(kilo)) {
+                    Toast.makeText(this, "No changes", Toast.LENGTH_SHORT).show();
+                } else{
                     if(sWaste.getText().toString().equalsIgnoreCase("Recyclable")) {
-
-                        fc.updateContribution(this, update_contribution.this,"Recyclable", contribution_id, sWaste.getText().toString(), 0);
+                        double points = Double.parseDouble(etKilo.getText().toString()) * 1.0;
+                        fc.updateContribution(pbLoading, btnUpdate,this, update_contribution.this,user_id,contribution_id,waste,"Recyclable", etKilo.getText().toString(), kilo, points, gained_points);
                     } else if(sWaste.getText().toString().equalsIgnoreCase("Biodegradable")){
-                        fc.updateContribution(this, update_contribution.this,"Biodegradable", contribution_id, sWaste.getText().toString(), 0);
-
+                        double points = Double.parseDouble(etKilo.getText().toString()) * 0.5;
+                        fc.updateContribution(pbLoading,btnUpdate,this, update_contribution.this,user_id,contribution_id,waste,"Biodegradable", etKilo.getText().toString(), kilo, points, gained_points);
                     } else if(sWaste.getText().toString().equalsIgnoreCase("Residual")){
-                        fc.updateContribution(this, update_contribution.this,"Residual", contribution_id, sWaste.getText().toString(), 0);
-
+                        double points = Double.parseDouble(etKilo.getText().toString()) * 0.3;
+                        fc.updateContribution(pbLoading,btnUpdate,this, update_contribution.this,user_id,contribution_id, waste,"Residual", etKilo.getText().toString(), kilo, points,gained_points);
                     } else if(sWaste.getText().toString().equalsIgnoreCase("Special Waste")){
-                        fc.updateContribution(this, update_contribution.this,"Special Waste", contribution_id, sWaste.getText().toString(), 0);
-
+                        double points = Double.parseDouble(etKilo.getText().toString()) * 0.2;
+                        fc.updateContribution(pbLoading,btnUpdate,this, update_contribution.this,user_id,contribution_id,waste,"Special Waste", etKilo.getText().toString(), kilo, points, gained_points);
                     } else if(sWaste.getText().toString().equalsIgnoreCase("Non-compliant")){
-                        fc.updateContribution(this, update_contribution.this,"Non-compliant", contribution_id, sWaste.getText().toString(), 0);
-
+                        fc.updateContribution(pbLoading,btnUpdate,this, update_contribution.this,user_id,contribution_id,waste, "Non-compliant", etKilo.getText().toString(), kilo, 0, gained_points);
                     }
                 }
 
             }
-        } else if (id == R.id.btnBack) {
+        } else if (id == R.id.ivBack) {
             finish();
         }
 
@@ -159,4 +185,9 @@ public class update_contribution extends AppCompatActivity implements View.OnCli
         currentTime = time.format(new Date());
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
 }
