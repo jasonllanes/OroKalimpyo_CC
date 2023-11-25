@@ -158,7 +158,7 @@ public class firebase_crud {
                 waste_contribution.put("collector_type", collector_type);
                 waste_contribution.put("status","Waste Collected");
                 waste_contribution.put("waste_type",waste_type);
-                waste_contribution.put("gained_points",current_points);
+
                 waste_contribution.put("current_points", FieldValue.increment(current_points));
                 waste_contribution.put("kilo",kilo);
                 waste_contribution.put("date", date);
@@ -180,7 +180,7 @@ public class firebase_crud {
                 waste_contribution.put("collector_type", collector_type);
                 waste_contribution.put("status","Waste Collected");
                 waste_contribution.put("waste_type",waste_type);
-                waste_contribution.put("gained_points",current_points);
+
                 waste_contribution.put("current_points", FieldValue.increment(current_points));
                 waste_contribution.put("kilo",kilo);
                 waste_contribution.put("date", date);
@@ -203,7 +203,7 @@ public class firebase_crud {
                 waste_contribution.put("collector_type", collector_type);
                 waste_contribution.put("status","Waste Collected");
                 waste_contribution.put("waste_type",waste_type);
-                waste_contribution.put("gained_points",current_points);
+
                 waste_contribution.put("current_points", FieldValue.increment(current_points));
                 waste_contribution.put("kilo",kilo);
                 waste_contribution.put("date", date);
@@ -224,7 +224,7 @@ public class firebase_crud {
                 waste_contribution.put("collector_type", collector_type);
                 waste_contribution.put("status","Waste Collected");
                 waste_contribution.put("waste_type",waste_type);
-                waste_contribution.put("gained_points",current_points);
+
                 waste_contribution.put("current_points", FieldValue.increment(current_points));
                 waste_contribution.put("kilo",kilo);
                 waste_contribution.put("date", date);
@@ -247,7 +247,7 @@ public class firebase_crud {
                 waste_contribution.put("collector_type", collector_type);
                 waste_contribution.put("status","Waste Collected");
                 waste_contribution.put("waste_type",waste_type);
-                waste_contribution.put("gained_points",current_points);
+
                 waste_contribution.put("current_points", FieldValue.increment(current_points));
                 waste_contribution.put("kilo",kilo);
                 waste_contribution.put("date", date);
@@ -268,7 +268,7 @@ public class firebase_crud {
                 waste_contribution.put("collector_type", collector_type);
                 waste_contribution.put("status","Waste Collected");
                 waste_contribution.put("waste_type",waste_type);
-                waste_contribution.put("gained_points",current_points);
+
                 waste_contribution.put("current_points", FieldValue.increment(current_points));
                 waste_contribution.put("kilo",kilo);
                 waste_contribution.put("date", date);
@@ -291,7 +291,7 @@ public class firebase_crud {
                 waste_contribution.put("collector_type", collector_type);
                 waste_contribution.put("status","Waste Collected");
                 waste_contribution.put("waste_type",waste_type);
-                waste_contribution.put("gained_points",current_points);
+
                 waste_contribution.put("current_points", FieldValue.increment(current_points));
                 waste_contribution.put("kilo",kilo);
                 waste_contribution.put("date", date);
@@ -312,7 +312,7 @@ public class firebase_crud {
                 waste_contribution.put("collector_type", collector_type);
                 waste_contribution.put("status","Waste Collected");
                 waste_contribution.put("waste_type",waste_type);
-                waste_contribution.put("gained_points",current_points);
+
                 waste_contribution.put("current_points", FieldValue.increment(current_points));
                 waste_contribution.put("kilo",kilo);
                 waste_contribution.put("date", date);
@@ -335,7 +335,7 @@ public class firebase_crud {
                 waste_contribution.put("collector_type", collector_type);
                 waste_contribution.put("status", "Waste Collected");
                 waste_contribution.put("waste_type", waste_type);
-                waste_contribution.put("gained_points",0);
+
                 waste_contribution.put("current_points", FieldValue.increment(current_points));
                 waste_contribution.put("kilo", kilo);
                 waste_contribution.put("date", date);
