@@ -50,7 +50,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
-                android:visibility="gone"
+                android:visibility=""
                 android:background="@drawable/card_layout">
 
                 <LinearLayout
@@ -76,6 +76,68 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="[Segregation ID]"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        android:fontFamily="@font/pmedium"
+                        android:layout_marginHorizontal="15dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Consolidator ID: "
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        android:fontFamily="@font/pbold"
+                        android:layout_marginTop="13dp"
+                        android:layout_marginHorizontal="15dp" />
+
+
+                    <TextView
+                        android:id="@+id/tvConsolidatorId"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="[Consolidator ID]"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        android:fontFamily="@font/pmedium"
+                        android:layout_marginHorizontal="15dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Consolidator Name: "
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        android:fontFamily="@font/pbold"
+                        android:layout_marginTop="13dp"
+                        android:layout_marginHorizontal="15dp" />
+
+
+                    <TextView
+                        android:id="@+id/tvConsolidatorName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="[Consolidator Name]"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        android:fontFamily="@font/pmedium"
+                        android:layout_marginHorizontal="15dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Date and Time: "
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        android:fontFamily="@font/pbold"
+                        android:layout_marginTop="13dp"
+                        android:layout_marginHorizontal="15dp" />
+
+                    <TextView
+                        android:id="@+id/tvDateTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="[Date Time]"
                         android:textColor="@color/black"
                         android:textSize="15sp"
                         android:fontFamily="@font/pmedium"
@@ -220,6 +282,68 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="[Segregation ID]"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        android:fontFamily="@font/pmedium"
+                        android:layout_marginHorizontal="15dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Consolidator ID: "
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        android:fontFamily="@font/pbold"
+                        android:layout_marginTop="13dp"
+                        android:layout_marginHorizontal="15dp" />
+
+
+                    <TextView
+                        android:id="@+id/tvConsolidatorIdO"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="[Consolidator ID]"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        android:fontFamily="@font/pmedium"
+                        android:layout_marginHorizontal="15dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Consolidator Name: "
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        android:fontFamily="@font/pbold"
+                        android:layout_marginTop="13dp"
+                        android:layout_marginHorizontal="15dp" />
+
+
+                    <TextView
+                        android:id="@+id/tvConsolidatorNameO"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="[Consolidator Name]"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        android:fontFamily="@font/pmedium"
+                        android:layout_marginHorizontal="15dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Date and Time: "
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        android:fontFamily="@font/pbold"
+                        android:layout_marginTop="13dp"
+                        android:layout_marginHorizontal="15dp" />
+
+                    <TextView
+                        android:id="@+id/tvDateTimeO"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="[Date Time]"
                         android:textColor="@color/black"
                         android:textSize="15sp"
                         android:fontFamily="@font/pmedium"

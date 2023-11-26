@@ -9,18 +9,20 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 import sldevs.cdo.orokalimpyocollector.R;
 import sldevs.cdo.orokalimpyocollector.firebase.firebase_crud;
 
 public class consolidator_add_record_summary extends AppCompatActivity implements View.OnClickListener {
 
-    TextView tvSegregationId,tvSegregationIdO,tvWasteType,tvWasteTypeO,tvPlasticType,tvPlasticWasteName,tvBrand,tvBrandO,tvKilo,tvKiloO;
+    TextView tvSegregationId,tvSegregationIdO,tvConsolidatorId,tvConsolidatorIdO,tvConsolidatorName,tvConsolidatorNameO,tvDateTime,tvDateTimeO,tvWasteType,tvWasteTypeO,tvPlasticType,tvPlasticWasteName,tvBrand,tvBrandO,tvKilo,tvKiloO;
     Button btnUpload,btnEdit;
 
     String segregated_id,waste_type,plastic_type,plastic_name,brand,kilo,date,time;
     LinearLayout llPlastic,llOther;
 
-
+    FirebaseAuth mAuth;
 
     firebase_crud fc;
 
@@ -28,12 +30,18 @@ public class consolidator_add_record_summary extends AppCompatActivity implement
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_consolidator_add_record_summary);
-
+        mAuth = FirebaseAuth.getInstance();
         fc = new firebase_crud();
 
 
         tvSegregationId = findViewById(R.id.tvSegregationId);
         tvSegregationIdO = findViewById(R.id.tvSegregationIdO);
+        tvConsolidatorId = findViewById(R.id.tvConsolidatorId);
+        tvConsolidatorIdO = findViewById(R.id.tvConsolidatorIdO);
+        tvConsolidatorName = findViewById(R.id.tvConsolidatorName);
+        tvConsolidatorNameO = findViewById(R.id.tvConsolidatorNameO);
+        tvDateTime = findViewById(R.id.tvDateTime);
+        tvDateTimeO = findViewById(R.id.tvDateTimeO);
         tvWasteType = findViewById(R.id.tvWasteType);
         tvWasteTypeO = findViewById(R.id.tvWasteTypeO);
         tvPlasticType = findViewById(R.id.tvPlasticType);
@@ -59,6 +67,7 @@ public class consolidator_add_record_summary extends AppCompatActivity implement
         time = getIntent().getStringExtra("time");
 
         setSummaryValues();
+        fc.retrieveName(this,consolidator_add_record_summary.this,mAuth.getUid(),tvConsolidatorName,tvConsolidatorNameO,waste_type);
 
         btnUpload.setOnClickListener(this);
         btnEdit.setOnClickListener(this);
@@ -71,7 +80,12 @@ public class consolidator_add_record_summary extends AppCompatActivity implement
         int id = v.getId();
 
         if(id == R.id.btnUpload){
-            fc.sendSegregatedWasteData(this,getApplicationContext(),segregated_id,waste_type,plastic_type,plastic_name,brand,kilo,date,time);
+            if (waste_type.equalsIgnoreCase("Plastic Waste")){
+                fc.sendSegregatedWasteData(this,consolidator_add_record_summary.this,tvConsolidatorName.getText().toString(),mAuth.getUid(),waste_type,plastic_type,plastic_name,brand,kilo,date,time);
+            }else{
+                fc.sendSegregatedWasteData(this,consolidator_add_record_summary.this,tvConsolidatorNameO.getText().toString(),mAuth.getUid(),waste_type,plastic_type,plastic_name,brand,kilo,date,time);
+
+            }
         }else if(id == R.id.btnEdit){
             finish();
         }
@@ -81,6 +95,8 @@ public class consolidator_add_record_summary extends AppCompatActivity implement
         if(waste_type.equalsIgnoreCase("Plastic Waste")){
             llPlastic.setVisibility(View.VISIBLE);
             tvSegregationId.setText(segregated_id);
+            tvConsolidatorId.setText(mAuth.getUid());
+            tvDateTime.setText(date + " " + time);
             tvWasteType.setText(waste_type);
             tvPlasticType.setText(plastic_type);
             tvPlasticWasteName.setText(plastic_name);
@@ -90,6 +106,8 @@ public class consolidator_add_record_summary extends AppCompatActivity implement
         }else{
             llOther.setVisibility(View.VISIBLE);
             tvSegregationIdO.setText(segregated_id);
+            tvConsolidatorIdO.setText(mAuth.getUid());
+            tvDateTimeO.setText(date + " " + time);
             tvWasteTypeO.setText(waste_type);
             tvBrandO.setText(brand);
             tvKiloO.setText(kilo);

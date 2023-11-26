@@ -17,6 +17,7 @@ import sldevs.cdo.orokalimpyocollector.firebase.firebase_crud;
 import sldevs.cdo.orokalimpyocollector.profile.consolidator_profile;
 import sldevs.cdo.orokalimpyocollector.records.consolidator_add_record;
 import sldevs.cdo.orokalimpyocollector.records.scanned_contributions;
+import sldevs.cdo.orokalimpyocollector.records.segregated_waste;
 import sldevs.cdo.orokalimpyocollector.scanner.collector_scanner;
 import sldevs.cdo.orokalimpyocollector.scanner.consolidator_scanner;
 import sldevs.cdo.orokalimpyocollector.scanner.view_segregated_contributions;
@@ -24,7 +25,7 @@ import sldevs.cdo.orokalimpyocollector.scanner.view_segregated_contributions;
 public class consolidator_home extends AppCompatActivity implements View.OnClickListener {
 
 
-    Button btnScan,btnShowScanned,btnRecords,btnProfile,btnLogout,btnYes,btnNo;
+    Button btnScan,btnShowScanned,btnRecords,btnShowSegregated,btnProfile,btnLogout,btnYes,btnNo;
 
     firebase_crud fc;
 
@@ -38,6 +39,7 @@ public class consolidator_home extends AppCompatActivity implements View.OnClick
         btnScan = findViewById(R.id.btnScan);
         btnShowScanned = findViewById(R.id.btnShowScanned);
         btnRecords = findViewById(R.id.btnAddRecord);
+        btnShowSegregated = findViewById(R.id.btnShowSegregated);
         btnProfile = findViewById(R.id.btnShowProfile);
         btnLogout = findViewById(R.id.btnLogout);
 
@@ -45,6 +47,7 @@ public class consolidator_home extends AppCompatActivity implements View.OnClick
         btnScan.setOnClickListener(this);
         btnShowScanned.setOnClickListener(this);
         btnRecords.setOnClickListener(this);
+        btnShowSegregated.setOnClickListener(this);
         btnProfile.setOnClickListener(this);
         btnLogout.setOnClickListener(this);
 
@@ -63,6 +66,9 @@ public class consolidator_home extends AppCompatActivity implements View.OnClick
             startActivity(i);
         }else if(id == R.id.btnAddRecord){
             Intent i = new Intent(consolidator_home.this, consolidator_add_record.class);
+            startActivity(i);
+        }else if(id == R.id.btnShowSegregated){
+            Intent i = new Intent(consolidator_home.this, segregated_waste.class);
             startActivity(i);
         }else if(id == R.id.btnLogout){
             Dialog builder = new Dialog(consolidator_home.this);

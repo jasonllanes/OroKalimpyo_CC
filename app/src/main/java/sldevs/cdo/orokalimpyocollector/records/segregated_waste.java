@@ -8,24 +8,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListAdapter;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
-import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
-
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.StorageReference;
 
@@ -35,7 +28,7 @@ import sldevs.cdo.orokalimpyocollector.R;
 import sldevs.cdo.orokalimpyocollector.data_fetch.Scanned_Contributions;
 import sldevs.cdo.orokalimpyocollector.firebase.firebase_crud;
 
-public class scanned_contributions extends AppCompatActivity implements View.OnClickListener {
+public class segregated_waste extends AppCompatActivity implements View.OnClickListener {
 
     FirestoreRecyclerAdapter listAdapter;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -54,12 +47,10 @@ public class scanned_contributions extends AppCompatActivity implements View.OnC
     String user_type,user_name,user_id;
     ContributionAdapter adapter;
     FirebaseFirestore db;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_scanned_contributions);
+        setContentView(R.layout.activity_segregated_waste);
 
 
         mAuth = FirebaseAuth.getInstance();
@@ -80,7 +71,7 @@ public class scanned_contributions extends AppCompatActivity implements View.OnC
         db = FirebaseFirestore.getInstance();
         scanned_contributionsArrayList = new ArrayList<Scanned_Contributions>();
 
-        adapter = new ContributionAdapter(this,scanned_contributions.this,scanned_contributionsArrayList);
+        adapter = new ContributionAdapter(this,segregated_waste.this,scanned_contributionsArrayList);
 
 
         recyclerView.setAdapter(adapter);
@@ -102,7 +93,7 @@ public class scanned_contributions extends AppCompatActivity implements View.OnC
 
     public void EventChangeListener(){
 
-        db.collection("Waste Contribution").whereEqualTo("status","Waste Collected").whereEqualTo("collector_id",mAuth.getUid()).orderBy("date",Query.Direction.DESCENDING)
+        db.collection("Segregated Waste").whereEqualTo("status","Waste Collected").whereEqualTo("collector_id",mAuth.getUid())
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {

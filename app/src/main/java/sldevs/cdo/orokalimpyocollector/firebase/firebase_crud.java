@@ -430,11 +430,13 @@ public class firebase_crud {
 
 
     //Sending Waste Segregation Data
-    public void sendSegregatedWasteData(Activity activity,Context context,String segregation_id,String waste_type,String plastic_type,String plastic_name,String brand,String kilo,String date,String time){
+    public void sendSegregatedWasteData(Activity activity,Context context,String consolidator_name,String segregation_id,String waste_type,String plastic_type,String plastic_name,String brand,String kilo,String date,String time){
         waste_segregation = new HashMap<>();
 
         if(waste_type.equalsIgnoreCase("Plastic Waste")){
             waste_segregation.put("segregation_id",segregation_id);
+            waste_segregation.put("consolidator_id",mAuth.getUid());
+            waste_segregation.put("consolidator_name",consolidator_name);
             waste_segregation.put("waste_type",waste_type);
             waste_segregation.put("plastic_type",plastic_type);
             waste_segregation.put("plastic_name",plastic_name);
@@ -444,6 +446,8 @@ public class firebase_crud {
             waste_segregation.put("time",time);
         }else{
             waste_segregation.put("segregation_id",segregation_id);
+            waste_segregation.put("consolidator_id",mAuth.getUid());
+            waste_segregation.put("consolidator_name",consolidator_name);
             waste_segregation.put("waste_type",waste_type);
             waste_segregation.put("brand",brand);
             waste_segregation.put("kilo",kilo);
@@ -658,6 +662,39 @@ public class firebase_crud {
     }
 
     //Getting profile
+
+    public void retrieveName(Activity activity,Context context,String id,TextView name,TextView nameO,String waste_type){
+        DocumentReference docRef = db.collection("Waste Consolidators").document(id);
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+
+
+                    } else {
+
+                    }
+
+                    if(waste_type.equalsIgnoreCase("Plastic Waste")){
+                        name.setText(document.get("name").toString());;
+                    }else{
+                        nameO.setText(document.get("name").toString());;
+                    }
+
+
+                } else {
+                    Log.d(TAG, "get failed with ", task.getException());
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+
+            }
+        });
+    }
     public void retrieveCollectorProfileAll(Activity activity, Context context,String id, TextView name, TextView collector_type,TextView contact_person,TextView number){
         DocumentReference docRef = db.collection("Waste Collectors").document(id);
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {

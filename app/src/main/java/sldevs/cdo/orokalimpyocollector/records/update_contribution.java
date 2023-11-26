@@ -124,10 +124,14 @@ public class update_contribution extends AppCompatActivity implements View.OnCli
             pbLoading.setVisibility(View.VISIBLE);
             btnUpdate.setVisibility(View.GONE);
             if(etKilo.getText().toString().isEmpty()){
+                pbLoading.setVisibility(View.GONE);
+                btnUpdate.setVisibility(View.VISIBLE);
                 etKilo.setError("Please input the kilo.");
             }else{
 
                 if(sWaste.getText().toString().equalsIgnoreCase(waste) && etKilo.getText().toString().equalsIgnoreCase(kilo)){
+                    pbLoading.setVisibility(View.GONE);
+                    btnUpdate.setVisibility(View.VISIBLE);
                     Toast.makeText(this, "No changes", Toast.LENGTH_SHORT).show();
                 } else{
                     if(sWaste.getText().toString().equalsIgnoreCase("Recyclable")) {
