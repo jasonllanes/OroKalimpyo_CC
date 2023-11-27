@@ -16,10 +16,9 @@ import sldevs.cdo.orokalimpyocollector.authentication.choose_user_type;
 import sldevs.cdo.orokalimpyocollector.firebase.firebase_crud;
 import sldevs.cdo.orokalimpyocollector.profile.consolidator_profile;
 import sldevs.cdo.orokalimpyocollector.records.consolidator_add_record;
-import sldevs.cdo.orokalimpyocollector.records.scanned_contributions;
-import sldevs.cdo.orokalimpyocollector.records.segregated_waste;
-import sldevs.cdo.orokalimpyocollector.scanner.collector_scanner;
+import sldevs.cdo.orokalimpyocollector.records.view_consolidated_waste;
 import sldevs.cdo.orokalimpyocollector.scanner.consolidator_scanner;
+import sldevs.cdo.orokalimpyocollector.scanner.view_collected_contributions;
 import sldevs.cdo.orokalimpyocollector.scanner.view_segregated_contributions;
 
 public class consolidator_home extends AppCompatActivity implements View.OnClickListener {
@@ -62,13 +61,13 @@ public class consolidator_home extends AppCompatActivity implements View.OnClick
             Intent i = new Intent(consolidator_home.this, consolidator_scanner.class);
             startActivity(i);
         }else if(id == R.id.btnShowScanned){
-            Intent i = new Intent(consolidator_home.this, view_segregated_contributions.class);
+            Intent i = new Intent(consolidator_home.this, view_consolidated_waste.class);
             startActivity(i);
         }else if(id == R.id.btnAddRecord){
             Intent i = new Intent(consolidator_home.this, consolidator_add_record.class);
             startActivity(i);
         }else if(id == R.id.btnShowSegregated){
-            Intent i = new Intent(consolidator_home.this, segregated_waste.class);
+            Intent i = new Intent(consolidator_home.this, view_segregated_contributions.class);
             startActivity(i);
         }else if(id == R.id.btnLogout){
             Dialog builder = new Dialog(consolidator_home.this);

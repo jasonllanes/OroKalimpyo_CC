@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -24,6 +25,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.WriteBatch;
@@ -33,7 +35,9 @@ import java.util.ArrayList;
 
 import sldevs.cdo.orokalimpyocollector.R;
 import sldevs.cdo.orokalimpyocollector.data_fetch.Scanned_Contributions;
+import sldevs.cdo.orokalimpyocollector.data_fetch.Segregated_Contributions;
 import sldevs.cdo.orokalimpyocollector.firebase.firebase_crud;
+import sldevs.cdo.orokalimpyocollector.home.consolidator_home;
 import sldevs.cdo.orokalimpyocollector.records.ContributionAdapter;
 
 public class view_segregated_contributions extends AppCompatActivity implements View.OnClickListener {
@@ -43,7 +47,7 @@ public class view_segregated_contributions extends AppCompatActivity implements 
 
     public TextView tvID,tvDate;
     RecyclerView recyclerView;
-    ArrayList<Scanned_Contributions> scanned_contributionsArrayList;
+    ArrayList<Segregated_Contributions> segregationAdapterArrayList;
     ImageView ivBack;
     firebase_crud fc;
     FirebaseAuth mAuth;
@@ -52,7 +56,7 @@ public class view_segregated_contributions extends AppCompatActivity implements 
     String collector_id;
     ProgressBar pbLoading;
     TextView tvLoading;
-    ContributionAdapter adapter;
+    SegregationAdapter adapter;
     FirebaseFirestore db;
 
     LinearLayout linearLayout;
@@ -66,8 +70,8 @@ public class view_segregated_contributions extends AppCompatActivity implements 
         mAuth = FirebaseAuth.getInstance();
         fc = new firebase_crud();
 
-        llEmpty = findViewById(R.id.llEmpty);
-        linearLayout = findViewById(R.id.mainLayout);
+//        llEmpty = findViewById(R.id.llEmpty);
+//        linearLayout = findViewById(R.id.mainLayout);
 
         ivBack = findViewById(R.id.ivBack);
         pbLoading = findViewById(R.id.pbLoading);
@@ -87,9 +91,9 @@ public class view_segregated_contributions extends AppCompatActivity implements 
 
 
         db = FirebaseFirestore.getInstance();
-        scanned_contributionsArrayList = new ArrayList<Scanned_Contributions>();
+        segregationAdapterArrayList = new ArrayList<Segregated_Contributions>();
 
-        adapter = new ContributionAdapter(this,view_segregated_contributions.this,scanned_contributionsArrayList);
+        adapter = new SegregationAdapter(this,view_segregated_contributions.this,segregationAdapterArrayList);
 
 
         recyclerView.setAdapter(adapter);
@@ -115,7 +119,7 @@ public class view_segregated_contributions extends AppCompatActivity implements 
     public void EventChangeListener(){
         tvLoading.setVisibility(View.VISIBLE);
         pbLoading.setVisibility(View.VISIBLE);
-        db.collection("Waste Contribution").whereEqualTo("status","Waste Segregated")
+        db.collection("Segregated Waste").whereEqualTo("consolidator_id",mAuth.getUid()).orderBy("date", Query.Direction.DESCENDING).orderBy("time", Query.Direction.DESCENDING)
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
@@ -129,12 +133,12 @@ public class view_segregated_contributions extends AppCompatActivity implements 
                         }
 
                         if(value.size() == 0){
-                            llEmpty.setVisibility(View.VISIBLE);
+//                            llEmpty.setVisibility(View.VISIBLE);
                         }
 
                         for (DocumentChange dc : value.getDocumentChanges()){
                             if(dc.getType() == DocumentChange.Type.ADDED){
-                                scanned_contributionsArrayList.add(dc.getDocument().toObject(Scanned_Contributions.class));
+                                segregationAdapterArrayList.add(dc.getDocument().toObject(Segregated_Contributions.class));
                             }
 
                             adapter.notifyDataSetChanged();
@@ -153,7 +157,17 @@ public class view_segregated_contributions extends AppCompatActivity implements 
         int id = v.getId();
 
         if(id == R.id.ivBack){
+            Intent i = new Intent(view_segregated_contributions.this, consolidator_home.class);
+            startActivity(i);
             finish();
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent i = new Intent(view_segregated_contributions.this, consolidator_home.class);
+        startActivity(i);
+        finish();
     }
 }

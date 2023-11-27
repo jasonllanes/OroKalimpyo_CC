@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import sldevs.cdo.orokalimpyocollector.R;
+import sldevs.cdo.orokalimpyocollector.home.consolidator_home;
 
 public class consolidator_add_record extends AppCompatActivity implements View.OnClickListener {
 
@@ -64,5 +65,13 @@ public class consolidator_add_record extends AppCompatActivity implements View.O
         } else if (id == R.id.ivBack) {
             finish();
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent i = new Intent(consolidator_add_record.this, consolidator_home.class);
+        startActivity(i);
+        finish();
     }
 }

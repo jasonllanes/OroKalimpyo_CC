@@ -28,7 +28,7 @@
         android:theme="@style/Theme.MaterialComponents.NoActionBar"
         tools:targetApi="31">
         <activity
-            android:name=".records.segregated_waste"
+            android:name=".records.view_consolidated_waste"
             android:exported="false" />
         <activity
             android:name=".records.update_contribution"

@@ -81,9 +81,9 @@ public class consolidator_add_record_summary extends AppCompatActivity implement
 
         if(id == R.id.btnUpload){
             if (waste_type.equalsIgnoreCase("Plastic Waste")){
-                fc.sendSegregatedWasteData(this,consolidator_add_record_summary.this,tvConsolidatorName.getText().toString(),mAuth.getUid(),waste_type,plastic_type,plastic_name,brand,kilo,date,time);
+                fc.sendSegregatedWasteData(this,consolidator_add_record_summary.this,tvConsolidatorName.getText().toString(),segregated_id,waste_type,plastic_type,plastic_name,brand,kilo,date,time);
             }else{
-                fc.sendSegregatedWasteData(this,consolidator_add_record_summary.this,tvConsolidatorNameO.getText().toString(),mAuth.getUid(),waste_type,plastic_type,plastic_name,brand,kilo,date,time);
+                fc.sendSegregatedWasteData(this,consolidator_add_record_summary.this,tvConsolidatorNameO.getText().toString(),segregated_id,waste_type,plastic_type,plastic_name,brand,kilo,date,time);
 
             }
         }else if(id == R.id.btnEdit){

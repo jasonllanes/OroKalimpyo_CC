@@ -678,9 +678,9 @@ public class firebase_crud {
                     }
 
                     if(waste_type.equalsIgnoreCase("Plastic Waste")){
-                        name.setText(document.get("name").toString());;
+                        name.setText(document.get("fullname").toString());;
                     }else{
-                        nameO.setText(document.get("name").toString());;
+                        nameO.setText(document.get("fullname").toString());;
                     }
 
 

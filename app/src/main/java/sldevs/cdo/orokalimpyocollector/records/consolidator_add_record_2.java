@@ -29,23 +29,24 @@ import java.util.Date;
 
 import sldevs.cdo.orokalimpyocollector.R;
 import sldevs.cdo.orokalimpyocollector.functions.other_functions;
+import sldevs.cdo.orokalimpyocollector.home.consolidator_home;
 
 public class consolidator_add_record_2 extends AppCompatActivity implements View.OnClickListener {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
-    TextView tvWasteType,tvWasteTypeO;
-    MaterialSpinner sPlasticWasteType,sPlasticWasteName,sBrand,sBrandO;
-    EditText etOtherTypes,etOtherName,etOtherBrand,etOtherBrandO,etKilo,etKiloO;
+    TextView tvWasteType, tvWasteTypeO;
+    MaterialSpinner sPlasticWasteType, sPlasticWasteName, sBrand, sBrandO;
+    EditText etOtherTypes, etOtherName, etOtherBrand, etOtherBrandO, etKilo, etKiloO;
     ImageView ivBack;
 
-    CardView cvPlasticWaste,cvOther;
+    CardView cvPlasticWaste, cvOther;
     Button btnNext;
 
     String waste_type;
 
     other_functions of;
-    SimpleDateFormat month,day,year,week,date,hours,minutes,seconds,time;
-    String currentMonth,currentDay,currentYear,currentWeek,currentDate,currentHour,currentMinute,currentSeconds,currentTime;
+    SimpleDateFormat month, day, year, week, date, hours, minutes, seconds, time;
+    String currentMonth, currentDay, currentYear, currentWeek, currentDate, currentHour, currentMinute, currentSeconds, currentTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,13 +86,13 @@ public class consolidator_add_record_2 extends AppCompatActivity implements View
         waste_type = getIntent().getStringExtra("waste_type");
 
 
-        if(waste_type.equalsIgnoreCase("Plastic Waste")){
+        if (waste_type.equalsIgnoreCase("Plastic Waste")) {
             tvWasteType.setText(waste_type);
             cvOther.setVisibility(View.GONE);
             cvPlasticWaste.setVisibility(View.VISIBLE);
             of.populateBrandList().clear();
             sBrand.setItems(of.populateBrandList());
-        }else{
+        } else {
             tvWasteTypeO.setText(waste_type);
             cvPlasticWaste.setVisibility(View.GONE);
             cvOther.setVisibility(View.VISIBLE);
@@ -103,37 +104,37 @@ public class consolidator_add_record_2 extends AppCompatActivity implements View
         sPlasticWasteType.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
             @Override
             public void onItemSelected(MaterialSpinner view, int position, long id, Object item) {
-                if(view.getText().toString().equalsIgnoreCase("PET (Polyethylene Terephthalate)")){
+                if (view.getText().toString().equalsIgnoreCase("PET (Polyethylene Terephthalate)")) {
                     sPlasticWasteName.setVisibility(View.VISIBLE);
                     etOtherTypes.setVisibility(View.GONE);
                     of.populatePETList().clear();
                     sPlasticWasteName.setItems(of.populatePETList());
-                }else if(view.getText().toString().equalsIgnoreCase("HDPE (High-Density Polyethylene)")){
+                } else if (view.getText().toString().equalsIgnoreCase("HDPE (High-Density Polyethylene)")) {
                     sPlasticWasteName.setVisibility(View.VISIBLE);
                     etOtherTypes.setVisibility(View.GONE);
                     of.populatePETList().clear();
                     sPlasticWasteName.setItems(of.populateHDPEList());
-                }else if(view.getText().toString().equalsIgnoreCase("PVC (Polyvinyl Chloride)")){
+                } else if (view.getText().toString().equalsIgnoreCase("PVC (Polyvinyl Chloride)")) {
                     sPlasticWasteName.setVisibility(View.VISIBLE);
                     etOtherTypes.setVisibility(View.GONE);
                     of.populatePETList().clear();
                     sPlasticWasteName.setItems(of.populatePVCList());
-                }else if(view.getText().toString().equalsIgnoreCase("LDPE (Low-Density Polyethylene)")){
+                } else if (view.getText().toString().equalsIgnoreCase("LDPE (Low-Density Polyethylene)")) {
                     sPlasticWasteName.setVisibility(View.VISIBLE);
                     etOtherTypes.setVisibility(View.GONE);
                     of.populatePETList().clear();
                     sPlasticWasteName.setItems(of.populateLDPEList());
-                }else if(view.getText().toString().equalsIgnoreCase("PP (Polypropylene)")){
+                } else if (view.getText().toString().equalsIgnoreCase("PP (Polypropylene)")) {
                     sPlasticWasteName.setVisibility(View.VISIBLE);
                     etOtherTypes.setVisibility(View.GONE);
                     of.populatePETList().clear();
                     sPlasticWasteName.setItems(of.populatePPList());
-                }else if(view.getText().toString().equalsIgnoreCase("PS (Polystyrene)")){
+                } else if (view.getText().toString().equalsIgnoreCase("PS (Polystyrene)")) {
                     sPlasticWasteName.setVisibility(View.VISIBLE);
                     etOtherTypes.setVisibility(View.GONE);
                     of.populatePETList().clear();
                     sPlasticWasteName.setItems(of.populatePSList());
-                }else if(view.getText().toString().equalsIgnoreCase("Other...")){
+                } else if (view.getText().toString().equalsIgnoreCase("Other...")) {
                     sPlasticWasteName.setVisibility(View.VISIBLE);
                     etOtherTypes.setVisibility(View.VISIBLE);
                     of.populatePETList().clear();
@@ -145,23 +146,21 @@ public class consolidator_add_record_2 extends AppCompatActivity implements View
         sPlasticWasteName.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
             @Override
             public void onItemSelected(MaterialSpinner view, int position, long id, Object item) {
-                if(view.getText().toString().equalsIgnoreCase("Other...")){
+                if (view.getText().toString().equalsIgnoreCase("Other...")) {
                     etOtherName.setVisibility(View.VISIBLE);
-                }else{
+                } else {
                     etOtherName.setVisibility(View.GONE);
                 }
             }
         });
 
 
-
-
         sBrand.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
             @Override
             public void onItemSelected(MaterialSpinner view, int position, long id, Object item) {
-                if(view.getText().toString().equalsIgnoreCase("Other...")){
+                if (view.getText().toString().equalsIgnoreCase("Other...")) {
                     etOtherBrand.setVisibility(View.VISIBLE);
-                }else{
+                } else {
                     etOtherBrand.setVisibility(View.GONE);
                 }
             }
@@ -171,16 +170,15 @@ public class consolidator_add_record_2 extends AppCompatActivity implements View
         sBrandO.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
             @Override
             public void onItemSelected(MaterialSpinner view, int position, long id, Object item) {
-                if(view.getText().toString().equalsIgnoreCase("Other...")){
+                if (view.getText().toString().equalsIgnoreCase("Other...")) {
                     etOtherBrandO.setVisibility(View.VISIBLE);
-                }else{
+                } else {
                     etOtherBrandO.setVisibility(View.GONE);
                 }
             }
         });
 
         btnNext.setOnClickListener(this);
-
 
 
     }
@@ -190,72 +188,72 @@ public class consolidator_add_record_2 extends AppCompatActivity implements View
     public void onClick(View v) {
         int id = v.getId();
 
-        if(id == R.id.btnNext){
-            if(waste_type.equalsIgnoreCase("Plastic Waste")){
-                if(sPlasticWasteType.getText().toString().equalsIgnoreCase("Other...") && etOtherTypes.getText().toString().isEmpty()){
+        if (id == R.id.btnNext) {
+            if (waste_type.equalsIgnoreCase("Plastic Waste")) {
+                if (sPlasticWasteType.getText().toString().equalsIgnoreCase("Other...") && etOtherTypes.getText().toString().isEmpty()) {
                     etOtherTypes.setError("Please specify the type of plastic.");
-                }
-                else if(sPlasticWasteName.getText().toString().equalsIgnoreCase("Other...") && etOtherName.getText().toString().isEmpty()){
+                } else if (sPlasticWasteName.getText().toString().equalsIgnoreCase("Other...") && etOtherName.getText().toString().isEmpty()) {
                     etOtherName.setError("Please specify the name of plastic waste.");
-                }
-                else if(sBrand.getText().toString().equalsIgnoreCase("Other...") && etOtherBrand.getText().toString().isEmpty()){
+                } else if (sBrand.getText().toString().equalsIgnoreCase("Other...") && etOtherBrand.getText().toString().isEmpty()) {
                     etOtherBrand.setError("Please specify the brand.");
-                }
-                else if(etKilo.getText().toString().isEmpty()){
+                } else if (etKilo.getText().toString().isEmpty()) {
                     etKilo.setError("Please input the kilo.");
-                }else{
+                } else {
                     Intent i = new Intent(consolidator_add_record_2.this, consolidator_add_record_summary.class);
-                    i.putExtra("segregated_id",mAuth.getUid().substring(0,10)+""+currentMonth+currentDay+currentYear+currentHour+currentMinute+currentSeconds);
-                    i.putExtra("waste_type",waste_type);
+                    i.putExtra("segregated_id", mAuth.getUid().substring(0, 10) + "" + currentMonth + currentDay + currentYear + currentHour + currentMinute + currentSeconds);
+                    i.putExtra("waste_type", waste_type);
                     i.putExtra("date", currentDate);
                     i.putExtra("time", currentTime);
-                    if(sPlasticWasteType.getText().toString().equalsIgnoreCase("Other...")){
-                        i.putExtra("plastic_type",etOtherTypes.getText().toString());
-                    }else{
-                        i.putExtra("plastic_type",sPlasticWasteType.getText().toString());
+                    if (sPlasticWasteType.getText().toString().equalsIgnoreCase("Other...")) {
+                        i.putExtra("plastic_type", etOtherTypes.getText().toString());
+                    } else {
+                        i.putExtra("plastic_type", sPlasticWasteType.getText().toString());
                     }
-                    if(sPlasticWasteName.getText().toString().equalsIgnoreCase("Other...")){
-                        i.putExtra("plastic_name",etOtherName.getText().toString());
-                    }else{
-                        i.putExtra("plastic_name",sPlasticWasteName.getText().toString());
+                    if (sPlasticWasteName.getText().toString().equalsIgnoreCase("Other...")) {
+                        i.putExtra("plastic_name", etOtherName.getText().toString());
+                    } else {
+                        i.putExtra("plastic_name", sPlasticWasteName.getText().toString());
                     }
-                    if(sBrand.getText().toString().equalsIgnoreCase("Other...")){
-                        i.putExtra("brand",etOtherBrand.getText().toString());
-                    }else{
-                        i.putExtra("brand",sBrand.getText().toString());
+                    if (sBrand.getText().toString().equalsIgnoreCase("Other...")) {
+                        i.putExtra("brand", etOtherBrand.getText().toString());
+                    } else {
+                        i.putExtra("brand", sBrand.getText().toString());
                     }
-                    i.putExtra("kilo",etKilo.getText().toString());
+                    i.putExtra("kilo", etKilo.getText().toString());
                     startActivity(i);
                 }
 
-                }else{
-                    if(sBrandO.getText().toString().equalsIgnoreCase("Other...") && etOtherBrandO.getText().toString().isEmpty()){
-                        etOtherBrandO.setError("Please specify the brand.");
+            } else {
+                if (sBrandO.getText().toString().equalsIgnoreCase("Other...") && etOtherBrandO.getText().toString().isEmpty()) {
+                    etOtherBrandO.setError("Please specify the brand.");
+                } else if (etKiloO.getText().toString().isEmpty()) {
+                    etKiloO.setError("Please input the kilo.");
+                } else {
+                    Intent i = new Intent(consolidator_add_record_2.this, consolidator_add_record_summary.class);
+                    i.putExtra("segregated_id", mAuth.getUid().substring(0, 10) + "" + currentMonth + currentDay + currentYear + currentHour + currentMinute + currentSeconds);
+                    i.putExtra("waste_type", waste_type);
+                    i.putExtra("date", currentDate);
+                    i.putExtra("time", currentTime);
+                    if (sBrandO.getText().toString().equalsIgnoreCase("Other...")) {
+                        i.putExtra("brand", etOtherBrandO.getText().toString());
+                    } else {
+                        i.putExtra("brand", sBrandO.getText().toString());
                     }
-                    else if(etKiloO.getText().toString().isEmpty()){
-                        etKiloO.setError("Please input the kilo.");
-                    }else{
-                        Intent i = new Intent(consolidator_add_record_2.this, consolidator_add_record_summary.class);
-                        i.putExtra("segregated_id",mAuth.getUid().substring(0,10)+""+currentMonth+currentDay+currentYear+currentHour+currentMinute+currentSeconds);
-                        i.putExtra("waste_type",waste_type);
-                        i.putExtra("date", currentDate);
-                        i.putExtra("time", currentTime);
-                        if(sBrandO.getText().toString().equalsIgnoreCase("Other...")){
-                            i.putExtra("brand",etOtherBrandO.getText().toString());
-                        }else{
-                            i.putExtra("brand",sBrandO.getText().toString());
-                        }
-                        i.putExtra("kilo",etKiloO.getText().toString());
-                        startActivity(i);
-                    }
-
+                    i.putExtra("kilo", etKiloO.getText().toString());
+                    startActivity(i);
                 }
-            } else if (id == R.id.ivBack) {
+
+            }
+        } else if (id == R.id.ivBack) {
+
+            Intent i = new Intent(consolidator_add_record_2.this, consolidator_add_record.class);
+            startActivity(i);
             finish();
         }
+
     }
 
-    public void retrieveDate(){
+    public void retrieveDate() {
         month = new SimpleDateFormat("MM");
         day = new SimpleDateFormat("dd");
         year = new SimpleDateFormat("yy");
@@ -283,5 +281,13 @@ public class consolidator_add_record_2 extends AppCompatActivity implements View
         currentSeconds = seconds.format(new Date());
 
         currentTime = time.format(new Date());
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent i = new Intent(consolidator_add_record_2.this, consolidator_add_record.class);
+        startActivity(i);
+        finish();
     }
 }

@@ -50,17 +50,6 @@
             android:background="@color/black" />
 
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginHorizontal="15dp"
-            android:layout_marginTop="13dp"
-            android:fontFamily="@font/pbolditalic"
-            android:text="These are the contributions received by the consolidator."
-            android:textColor="@color/green"
-            android:textSize="12sp" />
-
         <!--            <TextView-->
         <!--                android:id="@+id/tvGetBarangay"-->
         <!--                android:layout_width="wrap_content"-->

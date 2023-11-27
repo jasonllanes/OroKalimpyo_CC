@@ -28,7 +28,7 @@ import sldevs.cdo.orokalimpyocollector.R;
 import sldevs.cdo.orokalimpyocollector.data_fetch.Scanned_Contributions;
 import sldevs.cdo.orokalimpyocollector.firebase.firebase_crud;
 
-public class segregated_waste extends AppCompatActivity implements View.OnClickListener {
+public class view_consolidated_waste extends AppCompatActivity implements View.OnClickListener {
 
     FirestoreRecyclerAdapter listAdapter;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -71,7 +71,7 @@ public class segregated_waste extends AppCompatActivity implements View.OnClickL
         db = FirebaseFirestore.getInstance();
         scanned_contributionsArrayList = new ArrayList<Scanned_Contributions>();
 
-        adapter = new ContributionAdapter(this,segregated_waste.this,scanned_contributionsArrayList);
+        adapter = new ContributionAdapter(this, view_consolidated_waste.this,scanned_contributionsArrayList);
 
 
         recyclerView.setAdapter(adapter);

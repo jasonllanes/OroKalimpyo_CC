@@ -50,7 +50,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
-                android:visibility=""
+                android:visibility="gone"
                 android:background="@drawable/card_layout">
 
                 <LinearLayout

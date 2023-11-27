@@ -122,7 +122,7 @@ public class view_collected_contributions extends AppCompatActivity implements V
         tvLoading.setVisibility(View.VISIBLE);
         pbLoading.setVisibility(View.VISIBLE);
         btnUpdate.setVisibility(View.GONE);
-        db.collection("Waste Contribution").whereEqualTo("status","Waste Collected").whereEqualTo("collector_id",collector_id)
+        db.collection("Waste Contribution").whereEqualTo("status","Waste Consolidated").whereEqualTo("collector_id",collector_id)
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {

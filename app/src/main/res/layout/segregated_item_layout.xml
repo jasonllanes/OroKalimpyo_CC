@@ -24,6 +24,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/green"
+                android:fontFamily="@font/pregular"
                 android:text="Segregation ID: [Loading]"
                 android:textStyle="bold"
                 android:textSize="15dp"/>
@@ -32,6 +33,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/green"
+                android:fontFamily="@font/pregular"
                 android:text="Date and Time: [Loading]"
                 android:textStyle="bold"
                 android:textSize="15dp"/>
@@ -41,7 +43,35 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
+                android:fontFamily="@font/pregular"
                 android:text="Waste Type: [Loading]"
+                android:textSize="15dp"/>
+
+            <TextView
+                android:id="@+id/tvPlasticType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:fontFamily="@font/pregular"
+                android:text="Plastic Type: [Loading]"
+                android:textSize="15dp"/>
+
+            <TextView
+                android:id="@+id/tvPlasticName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:text="Plastic Name: [Loading]"
+                android:fontFamily="@font/pregular"
+                android:textSize="15dp"/>
+
+            <TextView
+                android:id="@+id/tvBrand"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:text="Brand: [Loading]"
+                android:fontFamily="@font/pregular"
                 android:textSize="15dp"/>
 
             <TextView
@@ -49,6 +79,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
+                android:fontFamily="@font/pregular"
                 android:text="Total Kilo: [Loading]"
                 android:textSize="15dp"/>
 
