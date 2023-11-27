@@ -24,6 +24,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/green"
+                android:fontFamily="@font/pregular"
                 android:text="Contribution ID: [Loading]"
                 android:textStyle="bold"
                 android:textSize="15dp"/>
@@ -32,6 +33,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/green"
+                android:fontFamily="@font/pregular"
                 android:text="Date and Time: [Loading]"
                 android:textStyle="bold"
                 android:textSize="15dp"/>
@@ -40,6 +42,7 @@
                 android:id="@+id/tvName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/pregular"
                 android:textColor="@color/black"
                 android:text="Waste Generator Name: [Loading]"
                 android:textSize="15dp"/>
@@ -49,6 +52,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
+                android:fontFamily="@font/pregular"
                 android:text="Barangay: [Loading]"
                 android:textSize="15dp"/>
 
@@ -57,6 +61,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
+                android:fontFamily="@font/pregular"
                 android:text="Waste Type: [Loading]"
                 android:textSize="15dp"/>
 
@@ -65,6 +70,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
+                android:fontFamily="@font/pregular"
                 android:text="Total Kilo: [Loading]"
                 android:textSize="15dp"/>
 

@@ -7,12 +7,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -25,21 +28,31 @@ import sldevs.cdo.orokalimpyocollector.data_fetch.Segregated_Contributions;
 import sldevs.cdo.orokalimpyocollector.records.ContributionAdapter;
 import sldevs.cdo.orokalimpyocollector.records.update_contribution;
 
-public class SegregationAdapter extends RecyclerView.Adapter<SegregationAdapter.SegregationHolder> {
+public class SegregationAdapter extends FirestoreRecyclerAdapter<Segregated_Contributions, SegregationAdapter.SegregationHolder> {
     StorageReference storageReference;
 
     ImageView ivQR;
     Context context;
     Activity activity;
-    ArrayList<Segregated_Contributions> segregated_contributionsArrayList;
+    FirestoreRecyclerOptions<Segregated_Contributions> segregated_contributionsArrayList;
     Segregated_Contributions segregated_contributions;
+    private String searchQuery = "";
 
-    public SegregationAdapter(Activity activity,Context context, ArrayList<Segregated_Contributions> segregated_contributionsArrayList) {
+    public SegregationAdapter(Activity activity,Context context, FirestoreRecyclerOptions<Segregated_Contributions> segregated_contributionsArrayList,String searchQuery) {
+        super(segregated_contributionsArrayList);
         this.activity = activity;
         this.context = context;
         this.segregated_contributionsArrayList = segregated_contributionsArrayList;
+        this.searchQuery = searchQuery;
     }
-
+    public void updateOptions(@NonNull FirestoreRecyclerOptions<Segregated_Contributions> options) {
+        this.searchQuery = "";  // Reset search query when updating options
+        super.updateOptions(options);
+    }
+    public void updateSearchQuery(String searchQuery) {
+        this.searchQuery = searchQuery;
+        notifyDataSetChanged();
+    }
     @NonNull
     @Override
     public SegregationAdapter.SegregationHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -48,26 +61,44 @@ public class SegregationAdapter extends RecyclerView.Adapter<SegregationAdapter.
     }
 
     @Override
-    public void onBindViewHolder(@NonNull SegregationAdapter.SegregationHolder holder, int position) {
+    public void onBindViewHolder(@NonNull SegregationHolder holder, int position, @NonNull Segregated_Contributions model) {
 
-        segregated_contributions = segregated_contributionsArrayList.get(position);
+        Segregated_Contributions segregatedContributions = segregated_contributionsArrayList.getSnapshots().get(position);
 
-        holder.tvSegregatedId.setText("Contribution ID: \n" +segregated_contributions.segregation_id);
-        holder.tvDateTime.setText("Date and Time: \n" +segregated_contributions.date + " " + segregated_contributions.time);
-        holder.tvWasteType.setText("Waste Type: " +segregated_contributions.waste_type);
-        if(segregated_contributions.waste_type.equalsIgnoreCase("Plastic Waste")){
-            holder.tvPlasticType.setVisibility(View.VISIBLE);
-            holder.tvPlasticName.setVisibility(View.VISIBLE);
-            holder.tvPlasticType.setText("Plastic Type: " + segregated_contributions.plastic_type);
-            holder.tvPlasticName.setText("Plastic Name: " + segregated_contributions.plastic_name);
-            holder.tvBrand.setText("Brand: " + segregated_contributions.brand);
-            holder.tvTotalKilo.setText("Kilo: " + segregated_contributions.kilo);
-        }else{
-            holder.tvPlasticType.setVisibility(View.GONE);
-            holder.tvPlasticName.setVisibility(View.GONE);
-            holder.tvBrand.setText("Brand: " + segregated_contributions.brand);
-            holder.tvTotalKilo.setText("Kilo: " + segregated_contributions.kilo);
+        if (model != null) {
+            // Check if the model's field is not null
+            String modelField = model.getWaste_type();
+            if (modelField != null) {
+                if (searchQuery == null || searchQuery.isEmpty() || modelField.toLowerCase().contains(searchQuery.toLowerCase())) {
+                    holder.tvSegregatedId.setText("Contribution ID: \n" +segregatedContributions.getSegregation_id());
+                    holder.tvDateTime.setText("Date and Time: \n" +segregatedContributions.getDate() + " " + segregatedContributions.getTime());
+                    holder.tvWasteType.setText("Waste Type: " +segregatedContributions.getWaste_type());
+                    if(segregatedContributions.getWaste_type().equalsIgnoreCase("Plastic Waste")){
+                        holder.tvPlasticType.setVisibility(View.VISIBLE);
+                        holder.tvPlasticName.setVisibility(View.VISIBLE);
+                        holder.tvPlasticType.setText("Plastic Type: " + segregatedContributions.getPlastic_type());
+                        holder.tvPlasticName.setText("Plastic Name: " + segregatedContributions.getPlastic_name());
+                        holder.tvBrand.setText("Brand: " + segregatedContributions.getBrand());
+                        holder.tvTotalKilo.setText("Kilo: " + segregatedContributions.getKilo());
+                    }else{
+                        holder.tvPlasticType.setVisibility(View.GONE);
+                        holder.tvPlasticName.setVisibility(View.GONE);
+                        holder.tvBrand.setText("Brand: " + segregatedContributions.getBrand());
+                        holder.tvTotalKilo.setText("Kilo: " + segregatedContributions.getKilo());
+                    }
+                    holder.itemView.setVisibility(View.VISIBLE);
+                    holder.itemView.setLayoutParams(new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+                    return; // Exit the method after binding data
+                }
+            }
         }
+
+        // If any condition fails or model is null, hide the ViewHolder
+        holder.itemView.setVisibility(View.GONE);
+        holder.itemView.setLayoutParams(new RecyclerView.LayoutParams(0, 0));
+
+
+
 
 
 //
@@ -79,7 +110,7 @@ public class SegregationAdapter extends RecyclerView.Adapter<SegregationAdapter.
 
     @Override
     public int getItemCount() {
-        return segregated_contributionsArrayList.size();
+        return segregated_contributionsArrayList.getSnapshots().size();
     }
 
     public class SegregationHolder extends RecyclerView.ViewHolder {
@@ -98,7 +129,7 @@ public class SegregationAdapter extends RecyclerView.Adapter<SegregationAdapter.
 
         TextView tvTotalKilo;
 
-        CardView cardView;
+        LinearLayout cardView;
 
 
         public SegregationHolder(@NonNull View itemView) {

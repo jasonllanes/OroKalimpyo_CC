@@ -153,6 +153,8 @@ public class update_contribution extends AppCompatActivity implements View.OnCli
 
             }
         } else if (id == R.id.ivBack) {
+            Intent i = new Intent(this, scanned_contributions.class);
+            startActivity(i);
             finish();
         }
 
@@ -192,6 +194,8 @@ public class update_contribution extends AppCompatActivity implements View.OnCli
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        Intent i = new Intent(this, scanned_contributions.class);
+        startActivity(i);
         finish();
     }
 }

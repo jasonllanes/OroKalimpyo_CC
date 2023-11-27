@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/cardView"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:backgroundTint="@color/white"
+    android:background="@color/white"
     app:cardElevation="8dp"
+    android:elevation="10dp"
     android:layout_margin="10dp"
     android:orientation="vertical">
 
@@ -95,7 +97,10 @@
 
     </LinearLayout>
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/green"/>
 
 
-
-</androidx.cardview.widget.CardView>
+</LinearLayout>

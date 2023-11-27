@@ -21,6 +21,17 @@ public class other_functions {
 
     List<String> brand_list = new ArrayList<String>();
 
+    List<String> sort_list_segregation = new ArrayList<String>();
+
+
+    public List<String> sortSegregationList(){
+        sort_list_segregation.add("Waste Type");
+        sort_list_segregation.add("Plastic Type");
+        sort_list_segregation.add("Plastic Name");
+        sort_list_segregation.add("Date and Time");
+        sort_list_segregation.add("Brand Waste");
+        return sort_list_segregation;
+    }
     public List<String> populateWasteType(){
         waste_type.add("Recyclable");
         waste_type.add("Biodegradable");

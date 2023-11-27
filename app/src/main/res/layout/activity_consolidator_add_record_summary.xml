@@ -415,6 +415,12 @@
 
             </LinearLayout>
 
+            <ProgressBar
+                android:id="@+id/pbLoading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:indeterminateTint="@color/green"
+                android:layout_gravity="center"/>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnUpload"

@@ -13,9 +13,11 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.SearchView;
 import android.widget.TextView;
 
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
@@ -30,6 +32,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.WriteBatch;
 import com.google.firebase.storage.StorageReference;
+import com.jaredrummler.materialspinner.MaterialSpinner;
 
 import java.util.ArrayList;
 
@@ -37,6 +40,7 @@ import sldevs.cdo.orokalimpyocollector.R;
 import sldevs.cdo.orokalimpyocollector.data_fetch.Scanned_Contributions;
 import sldevs.cdo.orokalimpyocollector.data_fetch.Segregated_Contributions;
 import sldevs.cdo.orokalimpyocollector.firebase.firebase_crud;
+import sldevs.cdo.orokalimpyocollector.functions.other_functions;
 import sldevs.cdo.orokalimpyocollector.home.consolidator_home;
 import sldevs.cdo.orokalimpyocollector.records.ContributionAdapter;
 
@@ -53,14 +57,17 @@ public class view_segregated_contributions extends AppCompatActivity implements 
     FirebaseAuth mAuth;
     StorageReference storageReference;
 
-    String collector_id;
+    String collector_id,searchQuery;
     ProgressBar pbLoading;
     TextView tvLoading;
     SegregationAdapter adapter;
     FirebaseFirestore db;
-
+    other_functions of;
+    MaterialSpinner sSort;
+    SearchView searchView;
     LinearLayout linearLayout;
     LinearLayout llEmpty;
+    Query query = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,88 +76,107 @@ public class view_segregated_contributions extends AppCompatActivity implements 
 
         mAuth = FirebaseAuth.getInstance();
         fc = new firebase_crud();
+        of = new other_functions();
 
-//        llEmpty = findViewById(R.id.llEmpty);
-//        linearLayout = findViewById(R.id.mainLayout);
 
         ivBack = findViewById(R.id.ivBack);
         pbLoading = findViewById(R.id.pbLoading);
         tvLoading = findViewById(R.id.tvLoading);
+//        sSort = findViewById(R.id.sSort);
+        searchView = findViewById(R.id.searchView);
 
+//        sSort.setItems(of.sortSegregationList());
 
-
-        //        ivBack = findViewById(R.id.ivBack);
-//        ivBack.setOnClickListener(this);
 
         collector_id = getIntent().getStringExtra("collector_id");
 
-        recyclerView = findViewById(R.id.lvContributions);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-
 
         db = FirebaseFirestore.getInstance();
+
+
+        query = db.collection("Segregated Waste").whereEqualTo("consolidator_id",mAuth.getUid()).orderBy("date", Query.Direction.DESCENDING).orderBy("time", Query.Direction.DESCENDING);
+        FirestoreRecyclerOptions<Segregated_Contributions> options = new FirestoreRecyclerOptions.Builder<Segregated_Contributions>()
+                .setQuery(query, Segregated_Contributions.class)
+                .build();
+
+        adapter = new SegregationAdapter(view_segregated_contributions.this, view_segregated_contributions.this, options, searchQuery);
         segregationAdapterArrayList = new ArrayList<Segregated_Contributions>();
 
-        adapter = new SegregationAdapter(this,view_segregated_contributions.this,segregationAdapterArrayList);
 
-
+        recyclerView = findViewById(R.id.lvContributions);
+        recyclerView.setLayoutManager(new LinearLayoutManager(view_segregated_contributions.this));
         recyclerView.setAdapter(adapter);
 
 
-        EventChangeListener();
+//        sSort.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(MaterialSpinner view, int position, long id, Object item) {
+//                if(view.getText().toString().equalsIgnoreCase("Waste Type")){
+//                    query = db.collection("Segregated Waste").whereEqualTo("consolidator_id",mAuth.getUid()).orderBy("waste_type", Query.Direction.DESCENDING).orderBy("date", Query.Direction.DESCENDING).orderBy("time", Query.Direction.DESCENDING);
+//                    FirestoreRecyclerOptions<Segregated_Contributions> options = new FirestoreRecyclerOptions.Builder<Segregated_Contributions>()
+//                            .setQuery(query, Segregated_Contributions.class)
+//                            .build();
+//
+//                    adapter = new SegregationAdapter(view_segregated_contributions.this, view_segregated_contributions.this, options, searchQuery);
+//                    segregationAdapterArrayList = new ArrayList<Segregated_Contributions>();
+//
+//
+//                    recyclerView = findViewById(R.id.lvContributions);
+//                    recyclerView.setLayoutManager(new LinearLayoutManager(view_segregated_contributions.this));
+//                    recyclerView.setAdapter(adapter);
+//                } else if (view.getText().toString().equalsIgnoreCase("Plastic Type")) {
+//                    query = db.collection("Segregated Waste").whereEqualTo("consolidator_id",mAuth.getUid()).orderBy("plastic_type", Query.Direction.DESCENDING).orderBy("date", Query.Direction.DESCENDING).orderBy("time", Query.Direction.DESCENDING);
+//                    FirestoreRecyclerOptions<Segregated_Contributions> options = new FirestoreRecyclerOptions.Builder<Segregated_Contributions>()
+//                            .setQuery(query, Segregated_Contributions.class)
+//                            .build();
+//
+//                    adapter = new SegregationAdapter(view_segregated_contributions.this, view_segregated_contributions.this, options, searchQuery);
+//                    segregationAdapterArrayList = new ArrayList<Segregated_Contributions>();
+//
+//
+//                    recyclerView = findViewById(R.id.lvContributions);
+//                    recyclerView.setLayoutManager(new LinearLayoutManager(view_segregated_contributions.this));
+//                    recyclerView.setAdapter(adapter);
+//                }
+//            }
+//        });
+
+
+
+
+
+
 
 
         ivBack.setOnClickListener(this);
 
-//        Query query = waste_contribution_ref.orderBy("user_id",Query.Direction.DESCENDING);
-//        FirestoreRecyclerOptions<Scanned_Contributions> options = new FirestoreRecyclerOptions.Builder<Scanned_Contributions>()
-//                .setQuery(query, Scanned_Contributions.class)
-//                .build();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
 
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                searchQuery = newText;
+                // Update the Firestore query based on the search input
+                Query newQuery = db.collection("Segregated Waste").whereEqualTo("consolidator_id",mAuth.getUid()).orderBy("date", Query.Direction.DESCENDING).orderBy("time", Query.Direction.DESCENDING);
+                FirestoreRecyclerOptions<Segregated_Contributions> newOptions =
+                        new FirestoreRecyclerOptions.Builder<Segregated_Contributions>()
+                                .setQuery(newQuery, Segregated_Contributions.class)
+                                .build();
 
+                adapter.updateSearchQuery(newText);
+
+                return true;
+            }
+        });
 
 
 
 
     }
 
-    public void EventChangeListener(){
-        tvLoading.setVisibility(View.VISIBLE);
-        pbLoading.setVisibility(View.VISIBLE);
-        db.collection("Segregated Waste").whereEqualTo("consolidator_id",mAuth.getUid()).orderBy("date", Query.Direction.DESCENDING).orderBy("time", Query.Direction.DESCENDING)
-                .addSnapshotListener(new EventListener<QuerySnapshot>() {
-                    @Override
-                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-
-                        if(error != null){
-
-                            Log.e("Firestore error!",error.getMessage());
-                            return;
-
-
-                        }
-
-                        if(value.size() == 0){
-//                            llEmpty.setVisibility(View.VISIBLE);
-                        }
-
-                        for (DocumentChange dc : value.getDocumentChanges()){
-                            if(dc.getType() == DocumentChange.Type.ADDED){
-                                segregationAdapterArrayList.add(dc.getDocument().toObject(Segregated_Contributions.class));
-                            }
-
-                            adapter.notifyDataSetChanged();
-
-                        }
-                        tvLoading.setVisibility(View.GONE);
-                        pbLoading.setVisibility(View.GONE);
-
-                    }
-                });
-
-    }
 
     @Override
     public void onClick(View v) {
@@ -169,5 +195,18 @@ public class view_segregated_contributions extends AppCompatActivity implements 
         Intent i = new Intent(view_segregated_contributions.this, consolidator_home.class);
         startActivity(i);
         finish();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        adapter.startListening();
+
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        adapter.stopListening();
     }
 }

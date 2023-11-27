@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,6 +22,7 @@ public class consolidator_add_record_summary extends AppCompatActivity implement
 
     String segregated_id,waste_type,plastic_type,plastic_name,brand,kilo,date,time;
     LinearLayout llPlastic,llOther;
+    ProgressBar pbLoading;
 
     FirebaseAuth mAuth;
 
@@ -56,6 +58,8 @@ public class consolidator_add_record_summary extends AppCompatActivity implement
 
         llPlastic = findViewById(R.id.llPlastic);
         llOther = findViewById(R.id.llOther);
+        pbLoading = findViewById(R.id.pbLoading);
+
 
         segregated_id = getIntent().getStringExtra("segregated_id");
         waste_type = getIntent().getStringExtra("waste_type");
@@ -80,10 +84,13 @@ public class consolidator_add_record_summary extends AppCompatActivity implement
         int id = v.getId();
 
         if(id == R.id.btnUpload){
+            pbLoading.setVisibility(View.VISIBLE);
+            btnUpload.setVisibility(View.GONE);
+            btnEdit.setVisibility(View.GONE);
             if (waste_type.equalsIgnoreCase("Plastic Waste")){
-                fc.sendSegregatedWasteData(this,consolidator_add_record_summary.this,tvConsolidatorName.getText().toString(),segregated_id,waste_type,plastic_type,plastic_name,brand,kilo,date,time);
+                fc.sendSegregatedWasteData(this,consolidator_add_record_summary.this,pbLoading,btnUpload,btnEdit,tvConsolidatorName.getText().toString(),segregated_id,waste_type,plastic_type,plastic_name,brand,kilo,date,time);
             }else{
-                fc.sendSegregatedWasteData(this,consolidator_add_record_summary.this,tvConsolidatorNameO.getText().toString(),segregated_id,waste_type,plastic_type,plastic_name,brand,kilo,date,time);
+                fc.sendSegregatedWasteData(this,consolidator_add_record_summary.this,pbLoading,btnUpload,btnEdit,tvConsolidatorNameO.getText().toString(),segregated_id,waste_type,plastic_type,plastic_name,brand,kilo,date,time);
 
             }
         }else if(id == R.id.btnEdit){

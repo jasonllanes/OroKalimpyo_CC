@@ -113,7 +113,7 @@ public class firebase_crud {
                                         }
                                     }
                                 }else {
-                                    Toast.makeText(context, "No result found!", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(context, "Account cannot be logged in here.", Toast.LENGTH_SHORT).show();
                                     progressBar.setVisibility(View.GONE);
                                     btnLogIn.setVisibility(View.VISIBLE);
                                 }
@@ -430,7 +430,7 @@ public class firebase_crud {
 
 
     //Sending Waste Segregation Data
-    public void sendSegregatedWasteData(Activity activity,Context context,String consolidator_name,String segregation_id,String waste_type,String plastic_type,String plastic_name,String brand,String kilo,String date,String time){
+    public void sendSegregatedWasteData(Activity activity,Context context,ProgressBar progressBar, Button btnUpdate,Button btnEdit, String consolidator_name,String segregation_id,String waste_type,String plastic_type,String plastic_name,String brand,String kilo,String date,String time){
         waste_segregation = new HashMap<>();
 
         if(waste_type.equalsIgnoreCase("Plastic Waste")){
@@ -467,6 +467,9 @@ public class firebase_crud {
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
+                progressBar.setVisibility(View.GONE);
+                btnUpdate.setVisibility(View.VISIBLE);
+                btnEdit.setVisibility(View.VISIBLE);
                 Toast.makeText(context, "Something went wrong.", Toast.LENGTH_SHORT).show();
                 activity.finish();
             }

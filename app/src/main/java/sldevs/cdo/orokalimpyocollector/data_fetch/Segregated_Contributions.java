@@ -62,6 +62,22 @@ public class Segregated_Contributions {
         this.waste_type = waste_type;
     }
 
+    public String getPlastic_type() {
+        return plastic_type;
+    }
+
+    public void setPlastic_type(String plastic_type) {
+        this.plastic_type = plastic_type;
+    }
+
+    public String getPlastic_name() {
+        return plastic_name;
+    }
+
+    public void setPlastic_name(String plastic_name) {
+        this.plastic_name = plastic_name;
+    }
+
     public String getBrand() {
         return brand;
     }

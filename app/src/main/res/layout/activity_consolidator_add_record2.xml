@@ -20,21 +20,20 @@
 
             <ImageView
                 android:id="@+id/ivBack"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:background="@drawable/back"
-                android:layout_marginTop="10dp"/>
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/back" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="20dp"
-                android:text="Add Record"
-                android:textColor="@color/black"
-                android:textSize="25sp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="12dp"
                 android:fontFamily="@font/pbold"
-                android:layout_marginTop="15dp"
-                android:layout_marginLeft="5dp"/>
+                android:text="Consolidate Waste"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
 
         </LinearLayout>
 
@@ -234,7 +233,7 @@
                             android:id="@+id/etKilo"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Kilo"
+                            android:hint="0.0 kg"
                             android:textColorHint="@color/grey"
                             android:padding="15dp"
                             android:background="@drawable/edit_text_layout"

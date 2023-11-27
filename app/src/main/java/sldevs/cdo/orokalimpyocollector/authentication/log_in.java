@@ -69,6 +69,12 @@ public class log_in extends AppCompatActivity implements View.OnClickListener {
 
         btnLogin.setOnClickListener(this);
 
+        if(user_type.equalsIgnoreCase("Waste Collector")){
+            user_type = "Waste Collectors";
+        }else{
+            user_type = "Waste Consolidators";
+        }
+
 
 
     }

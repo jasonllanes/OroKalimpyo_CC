@@ -36,11 +36,11 @@ public class choose_user_type extends AppCompatActivity implements View.OnClickL
 
         if(id == R.id.btnCollector){
             Intent i = new Intent(choose_user_type.this,log_in.class);
-            i.putExtra("user_type","Waste Collectors");
+            i.putExtra("user_type","Waste Collector");
             startActivity(i);
         }else if(id == R.id.btnConsolidator){
             Intent i = new Intent(choose_user_type.this,log_in.class);
-            i.putExtra("user_type","Waste Consolidators");
+            i.putExtra("user_type","Waste Consolidator");
             startActivity(i);
         }
     }
