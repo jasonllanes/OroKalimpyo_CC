@@ -24,6 +24,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.Timestamp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.AggregateQuery;
@@ -507,6 +508,7 @@ public class firebase_crud {
                         i.putExtra("user_type","Waste Generator");
                         i.putExtra("barangay",document.get("barangay").toString());
                         i.putExtra("household_type","Non-Household");
+                        i.putExtra("establishment_type",document.get("establishment_type").toString());
                         activity.startActivity(i);
                     }else{
                         Snackbar snackbar = Snackbar
@@ -607,6 +609,8 @@ public class firebase_crud {
             @Override
             public void onSuccess(Void unused) {
                 double toDeduct = Double.parseDouble(current_points);
+                user_contributionRef.update("date", Timestamp.now().toDate());
+                user_contributionRef.update("time", Timestamp.now().toDate().getTime());
                 contributionRef.update("current_points",FieldValue.increment(-toDeduct)).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
@@ -626,7 +630,6 @@ public class firebase_crud {
                                                 user_contributionRef.update(new_waste_type.toLowerCase(),FieldValue.increment(points_to_update)).addOnSuccessListener(new OnSuccessListener<Void>() {
                                                     @Override
                                                     public void onSuccess(Void unused) {
-
                                                         Intent i = new Intent(context, scanned_contributions.class);
                                                         context.startActivity(i);
                                                         activity.finish();

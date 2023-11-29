@@ -90,7 +90,7 @@ public class collector_scanner_result extends AppCompatActivity implements View.
         name = getIntent().getStringExtra("name");
         household_type = getIntent().getStringExtra("household_type");
         barangay = getIntent().getStringExtra("barangay");
-        establishment_type = getIntent().getStringExtra("household_type");
+        establishment_type = getIntent().getStringExtra("establishment_type");
 
 
         retrieveDate();

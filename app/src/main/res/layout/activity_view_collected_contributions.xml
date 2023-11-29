@@ -51,17 +51,6 @@
                 android:background="@color/black" />
 
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginHorizontal="15dp"
-                android:layout_marginTop="13dp"
-                android:fontFamily="@font/pbolditalic"
-                android:text="Verifying contributions changes status to segregated."
-                android:textColor="@color/green"
-                android:textSize="12sp" />
-
             <!--            <TextView-->
             <!--                android:id="@+id/tvGetBarangay"-->
             <!--                android:layout_width="wrap_content"-->
@@ -101,7 +90,7 @@
                 android:id="@+id/btnUpdate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Verify ContributionS"
+                android:text="Verify all contributionS"
                 android:textSize="15sp"
                 android:padding="12dp"
                 app:cornerRadius="25dp"
@@ -149,7 +138,7 @@
                     android:layout_marginHorizontal="15dp"
                     android:layout_marginTop="13dp"
                     android:fontFamily="@font/poppins_semibolditalic"
-                    android:text="Empty Contribution"
+                    android:text="No collection yet..."
                     android:textColor="@color/green"
                     android:textSize="20sp" />
 

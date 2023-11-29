@@ -65,8 +65,8 @@ public class view_segregated_contributions extends AppCompatActivity implements 
     other_functions of;
     MaterialSpinner sSort;
     SearchView searchView;
-    LinearLayout linearLayout;
-    LinearLayout llEmpty;
+    LinearLayout linearLayout,llEmpty;
+
     Query query = null;
 
     @Override
@@ -82,6 +82,7 @@ public class view_segregated_contributions extends AppCompatActivity implements 
         ivBack = findViewById(R.id.ivBack);
         pbLoading = findViewById(R.id.pbLoading);
         tvLoading = findViewById(R.id.tvLoading);
+        llEmpty = findViewById(R.id.llEmpty);
 //        sSort = findViewById(R.id.sSort);
         searchView = findViewById(R.id.searchView);
 
@@ -101,6 +102,7 @@ public class view_segregated_contributions extends AppCompatActivity implements 
 
         adapter = new SegregationAdapter(view_segregated_contributions.this, view_segregated_contributions.this, options, searchQuery);
         segregationAdapterArrayList = new ArrayList<Segregated_Contributions>();
+
 
 
         recyclerView = findViewById(R.id.lvContributions);
@@ -208,5 +210,6 @@ public class view_segregated_contributions extends AppCompatActivity implements 
     public void onStop() {
         super.onStop();
         adapter.stopListening();
+
     }
 }

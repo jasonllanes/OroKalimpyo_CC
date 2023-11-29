@@ -146,22 +146,22 @@ public class SegregationAdapter extends FirestoreRecyclerAdapter<Segregated_Cont
 
             cardView = itemView.findViewById(R.id.cardView);
 
-            cardView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(context, update_contribution.class);
-                    intent.putExtra("segregated_id",segregated_contributions.segregation_id);
-                    intent.putExtra("consolidator_id",segregated_contributions.consolidator_id);
-                    intent.putExtra("brand",String.valueOf(segregated_contributions.brand));
-                    intent.putExtra("plastic_type",segregated_contributions.waste_type);
-                    intent.putExtra("plastic_name",segregated_contributions.waste_type);
-                    intent.putExtra("waste",segregated_contributions.date);
-                    intent.putExtra("kilo",segregated_contributions.kilo);
-                    context.startActivity(intent);
-                    activity.finish();
-
-                }
-            });
+//            cardView.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    Intent intent = new Intent(context, update_contribution.class);
+//                    intent.putExtra("segregated_id",segregated_contributions.segregation_id);
+//                    intent.putExtra("consolidator_id",segregated_contributions.consolidator_id);
+//                    intent.putExtra("brand",String.valueOf(segregated_contributions.brand));
+//                    intent.putExtra("plastic_type",segregated_contributions.waste_type);
+//                    intent.putExtra("plastic_name",segregated_contributions.waste_type);
+//                    intent.putExtra("waste",segregated_contributions.date);
+//                    intent.putExtra("kilo",segregated_contributions.kilo);
+//                    context.startActivity(intent);
+//                    activity.finish();
+//
+//                }
+//            });
 
         }
     }

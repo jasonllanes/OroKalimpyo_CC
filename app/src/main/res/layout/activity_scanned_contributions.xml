@@ -55,6 +55,7 @@
             android:layout_gravity="center"
             android:layout_marginHorizontal="15dp"
             android:layout_marginTop="13dp"
+            android:textAlignment="center"
             android:fontFamily="@font/pbolditalic"
             android:text="These are the contributions coming from waste generators."
             android:textColor="@color/green"
@@ -105,7 +106,7 @@
                 android:layout_marginHorizontal="15dp"
                 android:layout_marginTop="13dp"
                 android:fontFamily="@font/poppins_semibolditalic"
-                android:text="Empty Contribution"
+                android:text="No Waste Collected"
                 android:textColor="@color/green"
                 android:textSize="20sp" />
 

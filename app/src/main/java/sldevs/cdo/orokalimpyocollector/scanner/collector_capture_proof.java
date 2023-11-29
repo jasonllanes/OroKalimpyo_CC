@@ -90,25 +90,16 @@ ProgressBar pbLoading;
         if(resultCode == RESULT_OK){
             if(requestCode == 3){
                 image = (Bitmap) data.getExtras().get("data");
-
-//                    image = (Bitmap) data.getExtras().get("data");
-//                    int dimension = Math.min(image.getWidth(), image.getHeight());
-//                    image = ThumbnailUtils.extractThumbnail(image, dimension, dimension);
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
                 image.compress(Bitmap.CompressFormat.PNG, 100,baos);
                 Bitmap newbitmap= BitmapFactory.decodeStream(new ByteArrayInputStream(baos.toByteArray()));
-//                    newbitmap = Bitmap.createScaledBitmap(newbitmap, imageSize, imageSize, false);
                 ivProof.setImageBitmap(newbitmap);
             }else{
-                Uri dat = data.getData();
-                image = null;
-                try {
-                    image = MediaStore.Images.Media.getBitmap(this.getContentResolver(), dat);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-//                    image = Bitmap.createScaledBitmap(image, imageSize, imageSize, false);
-                ivProof.setImageBitmap(image);
+                image = (Bitmap) data.getExtras().get("data");
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                image.compress(Bitmap.CompressFormat.PNG, 100,baos);
+                Bitmap newbitmap= BitmapFactory.decodeStream(new ByteArrayInputStream(baos.toByteArray()));
+                ivProof.setImageBitmap(newbitmap);
             }
         }else{
             //error message

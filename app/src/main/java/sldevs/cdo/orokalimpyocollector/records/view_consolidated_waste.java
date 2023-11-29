@@ -45,7 +45,7 @@ public class view_consolidated_waste extends AppCompatActivity implements View.O
     StorageReference storageReference;
 
     String user_type,user_name,user_id;
-    ContributionAdapter adapter;
+    ContributionAdapter_Consolidator adapter;
     FirebaseFirestore db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +71,7 @@ public class view_consolidated_waste extends AppCompatActivity implements View.O
         db = FirebaseFirestore.getInstance();
         scanned_contributionsArrayList = new ArrayList<Scanned_Contributions>();
 
-        adapter = new ContributionAdapter(this, view_consolidated_waste.this,scanned_contributionsArrayList);
+        adapter = new ContributionAdapter_Consolidator(this, view_consolidated_waste.this," ",scanned_contributionsArrayList);
 
 
         recyclerView.setAdapter(adapter);
@@ -93,7 +93,7 @@ public class view_consolidated_waste extends AppCompatActivity implements View.O
 
     public void EventChangeListener(){
 
-        db.collection("Segregated Waste").whereEqualTo("status","Waste Collected").whereEqualTo("collector_id",mAuth.getUid())
+        db.collection("Waste Contribution").whereEqualTo("status","Waste Consolidated").whereEqualTo("consolidator_id",mAuth.getUid())
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {

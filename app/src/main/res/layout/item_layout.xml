@@ -20,6 +20,27 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <TextView
+                android:id="@+id/tvGainedPoints"
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/green"
+                android:fontFamily="@font/pregular"
+                android:text="Contribution ID: [Loading]"
+                android:textStyle="bold"
+                android:textSize="15dp"/>
+
+            <TextView
+                android:id="@+id/tvUserId"
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/green"
+                android:fontFamily="@font/pregular"
+                android:text="Contribution ID: [Loading]"
+                android:textStyle="bold"
+                android:textSize="15dp"/>
+            <TextView
                 android:id="@+id/tvID"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

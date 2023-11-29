@@ -2,6 +2,7 @@ package sldevs.cdo.orokalimpyocollector.records;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -94,6 +95,8 @@ public class consolidator_add_record_summary extends AppCompatActivity implement
 
             }
         }else if(id == R.id.btnEdit){
+            Intent i = new Intent(consolidator_add_record_summary.this,consolidator_add_record.class);
+            startActivity(i);
             finish();
         }
     }

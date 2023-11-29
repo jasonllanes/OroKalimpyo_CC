@@ -69,4 +69,8 @@ dependencies {
     //QR Code Scanner
     implementation 'com.github.yuriy-budiyev:code-scanner:2.3.2'
     implementation 'com.journeyapps:zxing-android-embedded:4.3.0'
+
+    //Pop Up dialogue
+    implementation 'com.github.CuteLibs:CuteDialog:2.1'
+    implementation 'com.saadahmedev.popup-dialog:popup-dialog:1.0.5'
 }

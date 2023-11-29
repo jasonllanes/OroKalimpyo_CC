@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
@@ -32,6 +33,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.WriteBatch;
@@ -39,10 +41,12 @@ import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 
+import io.github.cutelibs.cutedialog.CuteDialog;
 import sldevs.cdo.orokalimpyocollector.R;
 import sldevs.cdo.orokalimpyocollector.data_fetch.Scanned_Contributions;
 import sldevs.cdo.orokalimpyocollector.firebase.firebase_crud;
 import sldevs.cdo.orokalimpyocollector.records.ContributionAdapter;
+import sldevs.cdo.orokalimpyocollector.records.ContributionAdapter_Consolidator;
 import sldevs.cdo.orokalimpyocollector.records.scanned_contributions;
 
 public class view_collected_contributions extends AppCompatActivity implements View.OnClickListener {
@@ -63,7 +67,7 @@ public class view_collected_contributions extends AppCompatActivity implements V
     String collector_id,consolidator_name;
     ProgressBar pbLoading;
     TextView tvLoading;
-    ContributionAdapter adapter;
+    ContributionAdapter_Consolidator adapter;
     FirebaseFirestore db;
 
     LinearLayout linearLayout;
@@ -106,7 +110,7 @@ public class view_collected_contributions extends AppCompatActivity implements V
         db = FirebaseFirestore.getInstance();
         scanned_contributionsArrayList = new ArrayList<Scanned_Contributions>();
 
-        adapter = new ContributionAdapter(this,view_collected_contributions.this,scanned_contributionsArrayList);
+        adapter = new ContributionAdapter_Consolidator(this,view_collected_contributions.this,consolidator_name,scanned_contributionsArrayList);
 
 
         recyclerView.setAdapter(adapter);
@@ -122,7 +126,8 @@ public class view_collected_contributions extends AppCompatActivity implements V
         tvLoading.setVisibility(View.VISIBLE);
         pbLoading.setVisibility(View.VISIBLE);
         btnUpdate.setVisibility(View.GONE);
-        db.collection("Waste Contribution").whereEqualTo("status","Waste Consolidated").whereEqualTo("collector_id",collector_id)
+        db.collection("Waste Contribution").whereEqualTo("collector_id", collector_id)
+                .whereEqualTo("status", "Waste Collected")
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
@@ -168,8 +173,8 @@ public class view_collected_contributions extends AppCompatActivity implements V
         pbLoading.setVisibility(View.VISIBLE);
         btnUpdate.setVisibility(View.GONE);
         CollectionReference contributionsRef = db.collection("Waste Contribution");
-        contributionsRef.whereEqualTo("status", "Waste Collected")
-                .whereEqualTo("collector_id", collector_id)
+        contributionsRef.whereEqualTo("collector_id", collector_id)
+                .whereEqualTo("status", "Waste Collected")
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     WriteBatch batch = db.batch();
@@ -222,7 +227,20 @@ public class view_collected_contributions extends AppCompatActivity implements V
         int id = v.getId();
 
         if(id == R.id.btnUpdate){
-            updateAll();
+            new CuteDialog.withIcon(view_collected_contributions.this)
+                    .setIcon(R.drawable.edit)
+                    .setTitle("Redeem Reward").setTitleTextColor(R.color.green)
+                    .setDescription("Are you sure you want to redeem this?").setPositiveButtonColor(R.color.green)
+                    .setPositiveButtonText("Yes", v2 -> {
+                        updateAll();
+
+
+                    })
+                    .setNegativeButtonText("No", v2 -> {
+                        Toast.makeText(view_collected_contributions.this, "Cancelled", Toast.LENGTH_SHORT).show();
+                    })
+                    .show();
+
         } else if (id == R.id.ivBack) {
             finish();
         }
