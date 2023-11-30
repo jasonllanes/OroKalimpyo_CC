@@ -27,6 +27,7 @@ import sldevs.cdo.orokalimpyocollector.data_fetch.Scanned_Contributions;
 import sldevs.cdo.orokalimpyocollector.data_fetch.Segregated_Contributions;
 import sldevs.cdo.orokalimpyocollector.records.ContributionAdapter;
 import sldevs.cdo.orokalimpyocollector.records.update_contribution;
+import sldevs.cdo.orokalimpyocollector.records.update_segregated_waste;
 
 public class SegregationAdapter extends FirestoreRecyclerAdapter<Segregated_Contributions, SegregationAdapter.SegregationHolder> {
     StorageReference storageReference;
@@ -86,6 +87,30 @@ public class SegregationAdapter extends FirestoreRecyclerAdapter<Segregated_Cont
                         holder.tvBrand.setText("Brand: " + segregatedContributions.getBrand());
                         holder.tvTotalKilo.setText("Kilo: " + segregatedContributions.getKilo());
                     }
+                    String kilo = segregatedContributions.getKilo();
+                    String waste_type = segregatedContributions.getWaste_type();
+                    String segregation_id = segregatedContributions.getSegregation_id();
+                    String consolidator_id = segregatedContributions.getConsolidator_id();
+                    String brand = segregatedContributions.getBrand();
+                    String plastic_type = segregatedContributions.getPlastic_type();
+                    String plastic_name = segregatedContributions.getPlastic_name();
+
+                    holder.cardView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent(context, update_segregated_waste.class);
+                            intent.putExtra("segregated_id",segregation_id);
+                            intent.putExtra("consolidator_id",consolidator_id);
+                            intent.putExtra("brand",brand);
+                            intent.putExtra("plastic_type",plastic_type);
+                            intent.putExtra("plastic_name",plastic_name);
+                            intent.putExtra("waste",waste_type);
+                            intent.putExtra("kilo",kilo);
+                            context.startActivity(intent);
+                            activity.finish();
+
+                        }
+                    });
                     holder.itemView.setVisibility(View.VISIBLE);
                     holder.itemView.setLayoutParams(new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
                     return; // Exit the method after binding data
@@ -93,10 +118,12 @@ public class SegregationAdapter extends FirestoreRecyclerAdapter<Segregated_Cont
             }
         }
 
+
+
+
         // If any condition fails or model is null, hide the ViewHolder
         holder.itemView.setVisibility(View.GONE);
         holder.itemView.setLayoutParams(new RecyclerView.LayoutParams(0, 0));
-
 
 
 

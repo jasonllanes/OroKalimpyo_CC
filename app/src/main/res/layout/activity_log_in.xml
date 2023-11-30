@@ -55,6 +55,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Password"
+                android:drawableRight="@drawable/show_password"
                 android:textColorHint="@color/grey"
                 android:padding="15dp"
                 android:background="@drawable/edit_text_layout"

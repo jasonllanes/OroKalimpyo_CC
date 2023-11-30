@@ -45,9 +45,8 @@ public class other_functions {
     public List<String> populateConsolidatorWasteType(){
         consolidator_waste_type.add("Plastic Waste");
         consolidator_waste_type.add("Metal");
-        consolidator_waste_type.add("Bottle");
+        consolidator_waste_type.add("Glass Bottle");
         consolidator_waste_type.add("Paper");
-        consolidator_waste_type.add("Other...");
         return consolidator_waste_type;
 
     }

@@ -8,6 +8,8 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.text.InputType;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.animation.Animation;
@@ -43,6 +45,7 @@ public class log_in extends AppCompatActivity implements View.OnClickListener {
     firebase_crud fc;
 
     String user_type;
+    boolean showPassword = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,7 +78,33 @@ public class log_in extends AppCompatActivity implements View.OnClickListener {
             user_type = "Waste Consolidators";
         }
 
+        etPassword.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                final int DRAWABLE_LEFT = 0;
+                final int DRAWABLE_TOP = 1;
+                final int DRAWABLE_RIGHT = 2;
+                final int DRAWABLE_BOTTOM = 3;
 
+                if(motionEvent.getAction() == MotionEvent.ACTION_UP) {
+                    if(motionEvent.getRawX() >= (etPassword.getRight() - etPassword.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
+                        if(showPassword) {
+                            showPassword = false;
+
+                            etPassword.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD | InputType.TYPE_CLASS_TEXT);
+                            etPassword.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.show_password, 0);
+                        } else {
+                            showPassword = true;
+                            etPassword.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                            etPassword.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.hide_password, 0);
+                        }
+                        // your action here
+                        return true;
+                    }
+                }
+                return false;
+            }
+        });
 
     }
 

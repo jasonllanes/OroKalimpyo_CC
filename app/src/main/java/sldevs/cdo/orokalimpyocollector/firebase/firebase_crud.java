@@ -57,6 +57,7 @@ import sldevs.cdo.orokalimpyocollector.records.scanned_contributions;
 import sldevs.cdo.orokalimpyocollector.scanner.collector_scanner_result;
 import sldevs.cdo.orokalimpyocollector.scanner.consolidator_scanner_result;
 import sldevs.cdo.orokalimpyocollector.scanner.view_collected_contributions;
+import sldevs.cdo.orokalimpyocollector.scanner.view_segregated_contributions;
 
 public class firebase_crud {
 
@@ -608,6 +609,65 @@ public class firebase_crud {
         });
     }
 
+    public void updateSegregation(Activity activity,Context context,Button btnNext,ProgressBar pbloading,String segregtion_id,String waste_type,String plastic_type,String plastic_name,String brand,String brando,String kiloo,String kilo,String date,String time){
+        DocumentReference segregationRef = db.collection("Segregated Waste").document(segregtion_id);
+        if(waste_type.equalsIgnoreCase("Plastic Waste")){
+            segregationRef.update("waste_type",waste_type);
+            segregationRef.update("plastic_type",plastic_type);
+            segregationRef.update("plastic_name",plastic_name);
+            segregationRef.update("brand",brand);
+            segregationRef.update("kilo",kilo).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void unused) {
+
+                    pbloading.setVisibility(View.GONE);
+                    Toast.makeText(context, "Successfully Updated!", Toast.LENGTH_SHORT).show();
+                    Intent i = new Intent(context, view_segregated_contributions.class)
+                            .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.startActivity(i);
+                    activity.finish();
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    btnNext.setVisibility(View.VISIBLE);
+                    pbloading.setVisibility(View.GONE);
+                    Toast.makeText(context, "Something went wrong!", Toast.LENGTH_SHORT).show();
+
+                }
+            });
+        }else{
+            segregationRef.update("waste_type",waste_type);
+            segregationRef.update("plastic_type",plastic_type);
+            segregationRef.update("plastic_name",plastic_name);
+            segregationRef.update("brand",brando);
+            segregationRef.update("kilo",kiloo).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void unused) {
+
+                    pbloading.setVisibility(View.GONE);
+                    Toast.makeText(context, "Successfully Updated!", Toast.LENGTH_SHORT).show();
+                    Intent i = new Intent(context, view_segregated_contributions.class)
+                            .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.startActivity(i);
+                    activity.finish();
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    btnNext.setVisibility(View.VISIBLE);
+                    pbloading.setVisibility(View.GONE);
+                    Toast.makeText(context, "Something went wrong!", Toast.LENGTH_SHORT).show();
+
+                }
+            });
+        }
+
+
+
+
+    }
+
     //Updating contribution
     public void updateContribution(ProgressBar progressBar,Button btnUpdate,Activity activity,Context context,String user_id,String contribution_id,String curent_waste_type,String new_waste_type,String new_kilo,String current_kilo, double points_to_update,String current_points){
         DocumentReference contributionRef = db.collection("Waste Contribution").document(contribution_id);
@@ -929,4 +989,5 @@ public class firebase_crud {
                 }
         });
     }
+
 }
