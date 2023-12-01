@@ -86,7 +86,7 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="150dp"
-                    android:text="Scanned "
+                    android:text="Consolidated "
                     android:fontFamily="@font/pmedium"
                     android:textSize="12sp"
                     android:textColor="@color/white"

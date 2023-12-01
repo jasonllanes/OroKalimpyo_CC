@@ -229,8 +229,8 @@ public class view_collected_contributions extends AppCompatActivity implements V
         if(id == R.id.btnUpdate){
             new CuteDialog.withIcon(view_collected_contributions.this)
                     .setIcon(R.drawable.edit)
-                    .setTitle("Redeem Reward").setTitleTextColor(R.color.green)
-                    .setDescription("Are you sure you want to redeem this?").setPositiveButtonColor(R.color.green)
+                    .setTitle("Verify All").setTitleTextColor(R.color.green)
+                    .setDescription("Are you sure you want to verify all contributions  ?").setPositiveButtonColor(R.color.green)
                     .setPositiveButtonText("Yes", v2 -> {
                         updateAll();
 

@@ -63,6 +63,8 @@ public class consolidator_add_record extends AppCompatActivity implements View.O
             i.putExtra("waste_type","Paper/Carton");
             startActivity(i);
         } else if (id == R.id.ivBack) {
+            Intent i = new Intent(consolidator_add_record.this, consolidator_home.class);
+            startActivity(i);
             finish();
         }
     }

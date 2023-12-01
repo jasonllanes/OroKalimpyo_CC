@@ -159,9 +159,9 @@ public class firebase_crud {
                 waste_contribution.put("collector_type", collector_type);
                 waste_contribution.put("status","Waste Collected");
                 waste_contribution.put("waste_type",waste_type);
-
                 waste_contribution.put("current_points", FieldValue.increment(current_points));
                 waste_contribution.put("kilo",kilo);
+                waste_contribution.put("date_collected", date + " " + time);
                 waste_contribution.put("date", date);
                 waste_contribution.put("time", time);
                 waste_contribution.put("contribution_proof_url", "https://firebasestorage.googleapis.com/v0/b/orokalimpyo-ok.appspot.com/o/Waste%20Contribution%20Proof%2F"+user_id.substring(0,5)+month+day+year+hour+minutes+seconds+".png?alt=media");
@@ -181,9 +181,9 @@ public class firebase_crud {
                 waste_contribution.put("collector_type", collector_type);
                 waste_contribution.put("status","Waste Collected");
                 waste_contribution.put("waste_type",waste_type);
-
                 waste_contribution.put("current_points", FieldValue.increment(current_points));
                 waste_contribution.put("kilo",kilo);
+                waste_contribution.put("date_collected", date + " " + time);
                 waste_contribution.put("date", date);
                 waste_contribution.put("time", time);
                 waste_contribution.put("contribution_proof_url", "https://firebasestorage.googleapis.com/v0/b/orokalimpyo-ok.appspot.com/o/Waste%20Contribution%20Proof%2F"+user_id.substring(0,5)+month+day+year+hour+minutes+seconds+".png?alt=media");
@@ -207,6 +207,7 @@ public class firebase_crud {
 
                 waste_contribution.put("current_points", FieldValue.increment(current_points));
                 waste_contribution.put("kilo",kilo);
+                waste_contribution.put("date_collected", date + " " + time);
                 waste_contribution.put("date", date);
                 waste_contribution.put("time", time);
                 waste_contribution.put("contribution_proof_url", "https://firebasestorage.googleapis.com/v0/b/orokalimpyo-ok.appspot.com/o/Waste%20Contribution%20Proof%2F"+user_id.substring(0,5)+month+day+year+hour+minutes+seconds+".png?alt=media");
@@ -228,6 +229,7 @@ public class firebase_crud {
 
                 waste_contribution.put("current_points", FieldValue.increment(current_points));
                 waste_contribution.put("kilo",kilo);
+                waste_contribution.put("date_collected", date + " " + time);
                 waste_contribution.put("date", date);
                 waste_contribution.put("time", time);
                 waste_contribution.put("contribution_proof_url", "https://firebasestorage.googleapis.com/v0/b/orokalimpyo-ok.appspot.com/o/Waste%20Contribution%20Proof%2F"+user_id.substring(0,5)+month+day+year+hour+minutes+seconds+".png?alt=media");
@@ -251,6 +253,7 @@ public class firebase_crud {
 
                 waste_contribution.put("current_points", FieldValue.increment(current_points));
                 waste_contribution.put("kilo",kilo);
+                waste_contribution.put("date_collected", date + " " + time);
                 waste_contribution.put("date", date);
                 waste_contribution.put("time", time);
                 waste_contribution.put("contribution_proof_url", "https://firebasestorage.googleapis.com/v0/b/orokalimpyo-ok.appspot.com/o/Waste%20Contribution%20Proof%2F"+user_id.substring(0,5)+month+day+year+hour+minutes+seconds+".png?alt=media");
@@ -272,6 +275,7 @@ public class firebase_crud {
 
                 waste_contribution.put("current_points", FieldValue.increment(current_points));
                 waste_contribution.put("kilo",kilo);
+                waste_contribution.put("date_collected", date + " " + time);
                 waste_contribution.put("date", date);
                 waste_contribution.put("time", time);
                 waste_contribution.put("contribution_proof_url", "https://firebasestorage.googleapis.com/v0/b/orokalimpyo-ok.appspot.com/o/Waste%20Contribution%20Proof%2F"+user_id.substring(0,5)+month+day+year+hour+minutes+seconds+".png?alt=media");
@@ -295,6 +299,7 @@ public class firebase_crud {
 
                 waste_contribution.put("current_points", FieldValue.increment(current_points));
                 waste_contribution.put("kilo",kilo);
+                waste_contribution.put("date_collected", date + " " + time);
                 waste_contribution.put("date", date);
                 waste_contribution.put("time", time);
                 waste_contribution.put("contribution_proof_url", "https://firebasestorage.googleapis.com/v0/b/orokalimpyo-ok.appspot.com/o/Waste%20Contribution%20Proof%2F"+user_id.substring(0,5)+month+day+year+hour+minutes+seconds+".png?alt=media");
@@ -316,6 +321,7 @@ public class firebase_crud {
 
                 waste_contribution.put("current_points", FieldValue.increment(current_points));
                 waste_contribution.put("kilo",kilo);
+                waste_contribution.put("date_collected", date + " " + time);
                 waste_contribution.put("date", date);
                 waste_contribution.put("time", time);
                 waste_contribution.put("contribution_proof_url", "https://firebasestorage.googleapis.com/v0/b/orokalimpyo-ok.appspot.com/o/Waste%20Contribution%20Proof%2F"+user_id.substring(0,5)+month+day+year+hour+minutes+seconds+".png?alt=media");
@@ -339,6 +345,7 @@ public class firebase_crud {
 
                 waste_contribution.put("current_points", FieldValue.increment(current_points));
                 waste_contribution.put("kilo", kilo);
+                waste_contribution.put("date_collected", date + " " + time);
                 waste_contribution.put("date", date);
                 waste_contribution.put("time", time);
                 waste_contribution.put("contribution_proof_url", "https://firebasestorage.googleapis.com/v0/b/orokalimpyo-ok.appspot.com/o/Waste%20Contribution%20Proof%2F" + user_id.substring(0, 5) + month + day + year + hour + minutes + seconds + ".png?alt=media");
@@ -359,6 +366,7 @@ public class firebase_crud {
                 waste_contribution.put("waste_type", waste_type);
                 waste_contribution.put("current_points", FieldValue.increment(current_points));
                 waste_contribution.put("kilo", kilo);
+                waste_contribution.put("date_collected", date + " " + time);
                 waste_contribution.put("date", date);
                 waste_contribution.put("time", time);
                 waste_contribution.put("contribution_proof_url", "https://firebasestorage.googleapis.com/v0/b/orokalimpyo-ok.appspot.com/o/Waste%20Contribution%20Proof%2F" + user_id.substring(0, 5) + month + day + year + hour + minutes + seconds + ".png?alt=media");

@@ -14,10 +14,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -74,6 +72,8 @@ public class ContributionAdapter_Consolidator extends RecyclerView.Adapter<Contr
         holder.tvTotalKilo.setText("Total Kilo: " + scanned_contributions.kilo);
 
         String contribution_id = scanned_contributions.contribution_id;
+        String collector_id = scanned_contributions.collector_id;
+
 
         storageReference = FirebaseStorage.getInstance().getReference("Waste Contribution Proof/").child(scanned_contributions.contribution_id + ".png");
         GlideApp.with(context).load(storageReference).into(ivQR);
@@ -81,14 +81,14 @@ public class ContributionAdapter_Consolidator extends RecyclerView.Adapter<Contr
 
         if(consolidator_name.equalsIgnoreCase(" ")){
 
-        }else{
-            holder.cardView.setOnLongClickListener(new View.OnLongClickListener() {
+        } else if (consolidator_name.equalsIgnoreCase("updated")) {
+            holder.cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public boolean onLongClick(View v) {
+                public void onClick(View v) {
                     new CuteDialog.withIcon(context)
                             .setIcon(R.drawable.edit)
-                            .setTitle("Redeem Reward").setTitleTextColor(R.color.green)
-                            .setDescription("Are you sure you want to redeem this?").setPositiveButtonColor(R.color.green)
+                            .setTitle("Verify Contribution").setTitleTextColor(R.color.green)
+                            .setDescription("Are you sure you want to consolidate this one?").setPositiveButtonColor(R.color.green)
                             .setPositiveButtonText("Yes", v2 -> {
                                 db = FirebaseFirestore.getInstance();
                                 mAuth = FirebaseAuth.getInstance();
@@ -96,13 +96,23 @@ public class ContributionAdapter_Consolidator extends RecyclerView.Adapter<Contr
                                 contributionRef.update("status", "Waste Consolidated").addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void unused) {
-                                        contributionRef.update("consolidator_name", consolidator_name);
-                                        contributionRef.update("consolidator_id", mAuth.getUid());
-                                        Intent i = new Intent(context, view_collected_contributions.class);
-                                        context.startActivity(i);
-                                        activity.finish();
-                                        Toast.makeText(context, "Successfully Consolidated", Toast.LENGTH_SHORT).show();
+                                        contributionRef.update("consolidator_name", consolidator_name).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void unused) {
+                                                contributionRef.update("consolidator_id", mAuth.getUid()).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                    @Override
+                                                    public void onSuccess(Void unused) {
+                                                        Toast.makeText(context, "Successfully Consolidated", Toast.LENGTH_SHORT).show();
+                                                        Intent i = new Intent(context, view_collected_contributions.class);
+                                                        i.putExtra("collector_id",collector_id);
+                                                        i.putExtra("consolidator_name","updated");
+                                                        context.startActivity(i);
+                                                        activity.finish();
 
+                                                    }
+                                                });
+                                            }
+                                        });
                                     }
                                 });
 
@@ -112,7 +122,49 @@ public class ContributionAdapter_Consolidator extends RecyclerView.Adapter<Contr
                                 Toast.makeText(context, "Cancelled", Toast.LENGTH_SHORT).show();
                             })
                             .show();
-                    return false;
+                }
+            });
+        } else{
+            holder.cardView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    new CuteDialog.withIcon(context)
+                            .setIcon(R.drawable.edit)
+                            .setTitle("Verify Contribution").setTitleTextColor(R.color.green)
+                            .setDescription("Are you sure you want to consolidate this one?").setPositiveButtonColor(R.color.green)
+                            .setPositiveButtonText("Yes", v2 -> {
+                                db = FirebaseFirestore.getInstance();
+                                mAuth = FirebaseAuth.getInstance();
+                                DocumentReference contributionRef = db.collection("Waste Contribution").document(contribution_id);
+                                contributionRef.update("status", "Waste Consolidated").addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void unused) {
+                                        contributionRef.update("consolidator_name", consolidator_name).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void unused) {
+                                                contributionRef.update("consolidator_id", mAuth.getUid()).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                    @Override
+                                                    public void onSuccess(Void unused) {
+                                                        Toast.makeText(context, "Successfully Consolidated", Toast.LENGTH_SHORT).show();
+                                                        Intent i = new Intent(context, view_collected_contributions.class);
+                                                        i.putExtra("collector_id",collector_id);
+                                                        i.putExtra("consolidator_name","updated");
+                                                        context.startActivity(i);
+                                                        activity.finish();
+
+                                                    }
+                                                });
+                                            }
+                                        });
+                                    }
+                                });
+
+
+                            })
+                            .setNegativeButtonText("No", v2 -> {
+                                Toast.makeText(context, "Cancelled", Toast.LENGTH_SHORT).show();
+                            })
+                            .show();
                 }
             });
         }

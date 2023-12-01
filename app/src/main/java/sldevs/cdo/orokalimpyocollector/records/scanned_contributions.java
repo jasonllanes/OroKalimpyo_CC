@@ -101,8 +101,8 @@ public class scanned_contributions extends AppCompatActivity implements View.OnC
     }
 
     public void EventChangeListener(){
-
-        db.collection("Waste Contribution").whereEqualTo("collector_id",mAuth.getUid()).whereEqualTo("status","Waste Collected").orderBy("date",Query.Direction.DESCENDING)
+//.orderBy("date_collected",Query.Direction.DESCENDING)
+        db.collection("Waste Contribution").whereEqualTo("collector_id",mAuth.getUid()).whereEqualTo("status","Waste Collected")
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {

@@ -64,7 +64,7 @@ public class ContributionAdapter extends RecyclerView.Adapter<ContributionAdapte
 
 
         storageReference = FirebaseStorage.getInstance().getReference("Waste Contribution Proof/").child(scanned_contributions.contribution_id+".png");
-        GlideApp.with(context).load(storageReference).into(ivQR);
+        GlideApp.with(context).load(storageReference).into(holder.ivQR);
 
 
         String kilo = scanned_contributions.kilo;
@@ -87,7 +87,7 @@ public class ContributionAdapter extends RecyclerView.Adapter<ContributionAdapte
 
             }
         });
-        ivQR.setOnClickListener(new View.OnClickListener() {
+        holder.ivQR.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Dialog dialog = new Dialog(context);
@@ -95,7 +95,7 @@ public class ContributionAdapter extends RecyclerView.Adapter<ContributionAdapte
                 dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
                 dialog.setCancelable(true);
                 ImageView ivProof = dialog.findViewById(R.id.ivImage);
-                ivProof.setImageDrawable(ivQR.getDrawable());
+                ivProof.setImageDrawable(holder.ivQR.getDrawable());
                 dialog.show();
 
             }
@@ -122,7 +122,7 @@ public class ContributionAdapter extends RecyclerView.Adapter<ContributionAdapte
         TextView tvWasteType;
 
         TextView tvTotalKilo;
-        ImageView ivProof;
+        ImageView ivQR;
 
         CardView cardView;
 
@@ -138,7 +138,7 @@ public class ContributionAdapter extends RecyclerView.Adapter<ContributionAdapte
             tvBarangay = itemView.findViewById(R.id.tvBarangay);
             tvWasteType = itemView.findViewById(R.id.tvWasteType);
             tvTotalKilo = itemView.findViewById(R.id.tvKilo);
-            ivProof = itemView.findViewById(R.id.ivProof);
+//            ivProof = itemView.findViewById(R.id.ivProof);
             ivQR = itemView.findViewById(R.id.ivQR);
 
             cardView = itemView.findViewById(R.id.cardView);

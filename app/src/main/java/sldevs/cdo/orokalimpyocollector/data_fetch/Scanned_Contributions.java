@@ -3,7 +3,7 @@ package sldevs.cdo.orokalimpyocollector.data_fetch;
 public class Scanned_Contributions {
 
     public String contribution_id;
-
+    public String collector_id;
     public String user_id;
     public String name;
     public String barangay;
@@ -21,8 +21,9 @@ public class Scanned_Contributions {
 
     }
 
-    public Scanned_Contributions(String contribution_id, String user_id,String name, String barangay, String waste_type, String kilo, String user_type, String date, String time, double current_points) {
+    public Scanned_Contributions(String contribution_id, String collector_id, String user_id,String name, String barangay, String waste_type, String kilo, String user_type, String date, String time, double current_points) {
         this.contribution_id = contribution_id;
+        this.collector_id = collector_id;
         this.user_id = user_id;
         this.name = name;
         this.barangay = barangay;
@@ -40,6 +41,14 @@ public class Scanned_Contributions {
 
     public void setContribution_id(String contribution_id) {
         this.contribution_id = contribution_id;
+    }
+
+    public String getCollector_id() {
+        return collector_id;
+    }
+
+    public void setCollector_id(String collector_id) {
+        this.collector_id = collector_id;
     }
 
     public String getUser_id() {
