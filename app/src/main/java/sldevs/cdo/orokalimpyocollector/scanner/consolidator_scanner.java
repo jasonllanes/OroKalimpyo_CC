@@ -1,128 +1,98 @@
-package sldevs.cdo.orokalimpyocollector.scanner;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.Manifest;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.os.Build;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.Toast;
-
-import com.budiyev.android.codescanner.CodeScanner;
-import com.budiyev.android.codescanner.CodeScannerView;
-import com.budiyev.android.codescanner.DecodeCallback;
-import com.google.android.material.snackbar.Snackbar;
-import com.google.zxing.Result;
-
-import sldevs.cdo.orokalimpyocollector.R;
-import sldevs.cdo.orokalimpyocollector.firebase.firebase_crud;
-
-public class consolidator_scanner extends AppCompatActivity {
-
-    private CodeScanner mCodeScanner;
-    private static final int MY_CAMERA_REQUEST_CODE = 100;
-    String user_id,name,user_type,collector_type,contact_person,number,email;
-    LinearLayout linearLayout;
-    firebase_crud fc;
-
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_consolidator_scanner);
-
-        fc = new firebase_crud();
-
-        linearLayout = (LinearLayout) findViewById(R.id.mainLayout);
-
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-                requestPermissions(new String[]{Manifest.permission.CAMERA}, MY_CAMERA_REQUEST_CODE);
-            }
-        }
-
-
-
-        CodeScannerView scannerView = findViewById(R.id.scanner_view);
-        mCodeScanner = new CodeScanner(this, scannerView);
-        mCodeScanner.setDecodeCallback(new DecodeCallback() {
+        package sldevs.cdo.orokalimpyocollector.scanner;
+        
+        import androidx.annotation.NonNull;
+        import androidx.appcompat.app.AppCompatActivity;
+        
+        import android.Manifest;
+        import android.content.Intent;
+        import android.content.pm.PackageManager;
+        import android.os.Build;
+        import android.os.Bundle;
+        import android.view.View;
+        import android.widget.LinearLayout;
+        import android.widget.Toast;
+        
+        import com.budiyev.android.codescanner.CodeScanner;
+        import com.budiyev.android.codescanner.CodeScannerView;
+        import com.budiyev.android.codescanner.DecodeCallback;
+        import com.google.android.material.snackbar.Snackbar;
+        import com.google.zxing.Result;
+        
+        import sldevs.cdo.orokalimpyocollector.R;
+        import sldevs.cdo.orokalimpyocollector.firebase.firebase_crud;
+        
+        public class consolidator_scanner extends AppCompatActivity {
+        
+            private CodeScanner mCodeScanner;
+            private static final int MY_CAMERA_REQUEST_CODE = 100;
+            String user_id,name,user_type,collector_type,contact_person,number,email;
+            LinearLayout linearLayout;
+            firebase_crud fc;
+        
+        
             @Override
-            public void onDecoded(@NonNull final Result result) {
-                runOnUiThread(new Runnable() {
+            protected void onCreate(Bundle savedInstanceState) {
+                super.onCreate(savedInstanceState);
+                setContentView(R.layout.activity_consolidator_scanner);
+        
+                fc = new firebase_crud();
+        
+                linearLayout = (LinearLayout) findViewById(R.id.mainLayout);
+        
+        
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                        requestPermissions(new String[]{Manifest.permission.CAMERA}, MY_CAMERA_REQUEST_CODE);
+                    }
+                }
+        
+        
+        
+                CodeScannerView scannerView = findViewById(R.id.scanner_view);
+                mCodeScanner = new CodeScanner(this, scannerView);
+                mCodeScanner.setDecodeCallback(new DecodeCallback() {
                     @Override
-                    public void run() {
-
-                        try{
-                            String details = result.getText();
-                            Toast.makeText(consolidator_scanner.this, details, Toast.LENGTH_SHORT).show();
-                            String[] details_split = details.split("\n");
-                            for (int i=0; i < details_split.length; i++){
-                                user_id = details_split[0];
-//                                name = details_split[1];
-//                                user_type = details_split[2];
-//                                collector_type = details_split[3];
-//                                if(collector_type.equalsIgnoreCase("Private Collector")){
-//                                    contact_person = details_split[5];
-//                                    number = details_split[6];
-//                                    email = details_split[7];
-//                                }else{
-//                                    contact_person = details_split[4];
-//                                    number = details_split[5];
-//                                    email = details_split[6];
-//                                }
-
+                    public void onDecoded(@NonNull final Result result) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+        
+                                try{
+                                    String details = result.getText();
+                                    Toast.makeText(consolidator_scanner.this, details, Toast.LENGTH_SHORT).show();
+                                    String[] details_split = details.split("\n");
+                                    for (int i=0; i < details_split.length; i++){
+                                        user_id = details_split[0];
+                                    }
+                                    fc.retrieveCollectorType(consolidator_scanner.this,getApplicationContext(),user_id,linearLayout);
+        
+                                } catch (ArrayIndexOutOfBoundsException e){
+                                    Snackbar snackbar = Snackbar
+                                            .make(linearLayout, "Please scan a Waste Generator QR Code.", Snackbar.LENGTH_LONG).setTextColor(getResources().getColor(R.color.white)).setBackgroundTint(getResources().getColor(R.color.green));
+                                    snackbar.show();
+                                }
                             }
-                            fc.retrieveCollectorType(consolidator_scanner.this,getApplicationContext(),user_id,linearLayout);
-
-
-//                            if(user_type.equalsIgnoreCase("Waste Collector")){
-//                                Intent i = new Intent(consolidator_scanner.this, consolidator_scanner_result.class);
-//                                i.putExtra("user_id", user_id);
-//                                i.putExtra("name",name);
-//                                i.putExtra("user_type",user_type);
-//                                i.putExtra("collector_type",collector_type);
-//                                i.putExtra("contact_person",contact_person);
-//                                i.putExtra("number",number);
-//                                i.putExtra("email",email);
-//                                startActivity(i);
-//                            }else{
-//                                Snackbar snackbar = Snackbar
-//                                        .make(linearLayout, "Please scan a Waste Collector QR Code.", Snackbar.LENGTH_LONG).setTextColor(getResources().getColor(R.color.white)).setBackgroundTint(getResources().getColor(R.color.green));
-//                                snackbar.show();
-//                            }
-                        } catch (ArrayIndexOutOfBoundsException e){
-                            Snackbar snackbar = Snackbar
-                                    .make(linearLayout, "Please scan a Waste Generator QR Code.", Snackbar.LENGTH_LONG).setTextColor(getResources().getColor(R.color.white)).setBackgroundTint(getResources().getColor(R.color.green));
-                            snackbar.show();
-                        }
+                        });
+                    }
+                });
+                scannerView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        mCodeScanner.startPreview();
                     }
                 });
             }
-        });
-        scannerView.setOnClickListener(new View.OnClickListener() {
+        
+        
             @Override
-            public void onClick(View view) {
+            protected void onResume() {
+                super.onResume();
                 mCodeScanner.startPreview();
             }
-        });
-    }
-
-
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        mCodeScanner.startPreview();
-    }
-
-    @Override
-    protected void onPause() {
-        mCodeScanner.releaseResources();
-        super.onPause();
-    }
-}
+        
+            @Override
+            protected void onPause() {
+                mCodeScanner.releaseResources();
+                super.onPause();
+            }
+        }

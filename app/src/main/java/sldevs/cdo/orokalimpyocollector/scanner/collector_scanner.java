@@ -59,53 +59,8 @@ public class collector_scanner extends AppCompatActivity {
                             for (int i=0; i < details_split.length; i++){
                                 user_id = details_split[0];
                             }
-//                            Toast.makeText(collector_scanner.this, details, Toast.LENGTH_SHORT).show();
+
                             fc.retrieveHouseholdType(collector_scanner.this,getApplicationContext(),user_id,linearLayout);
-
-//                            if(household_type.equalsIgnoreCase("Household")){
-//                                for (int i=0; i < details_split.length; i++){
-//                                    user_id = details_split[0];
-//
-//                                }
-//                                Toast.makeText(collector_scanner.this, "Household" + details, Toast.LENGTH_SHORT).show();
-//
-//
-//
-//                            }else if(household_type.equalsIgnoreCase("Non-Household")){
-//                                for (int i=0; i < details_split.length; i++){
-//                                    user_id = details_split[0];
-//                                    name = details_split[1];
-//                                    user_type = details_split[2];
-//                                    household_type = details_split[3];
-//                                    establishment_type = details_split[4];
-//                                    others = details_split[5];
-//                                    barangay = details_split[6];
-//                                    location = details_split[7];
-//                                    number = details_split[8];
-//                                    email = details_split[9];
-//                                }
-//                                Toast.makeText(collector_scanner.this, "Non-Household" + details, Toast.LENGTH_SHORT).show();
-//
-//                                Intent i = new Intent(collector_scanner.this, collector_scanner_result.class);
-//                                i.putExtra("user_id", user_id);
-//                                i.putExtra("name",name);
-//                                i.putExtra("user_type",user_type);
-//                                i.putExtra("household_type",household_type);
-//                                i.putExtra("establishment_type",establishment_type);
-//                                i.putExtra("others",others);
-//                                i.putExtra("barangay",barangay);
-//                                i.putExtra("location",location);
-//                                i.putExtra("number",number);
-//                                i.putExtra("email",email);
-//                                startActivity(i);
-//
-//                            }else{
-//                                Snackbar snackbar = Snackbar
-//                                        .make(linearLayout, "Please scan a Waste Generator QR Code.", Snackbar.LENGTH_LONG).setTextColor(getResources().getColor(R.color.white)).setBackgroundTint(getResources().getColor(R.color.green));
-//                                snackbar.show();
-//                            }
-//
-
 
                         } catch (ArrayIndexOutOfBoundsException e){
                             Snackbar snackbar = Snackbar
